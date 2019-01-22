@@ -56,9 +56,9 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-yeshen-adb" class="article article-type-post" itemscope="" itemprop="blogPost">
+    <article id="post-夜神-随机型号、地理位置、IMEI" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2019/01/22/yeshen-adb/" class="article-date">
+    <a href="/2019/01/22/夜神-随机型号、地理位置、IMEI/" class="article-date">
   <time datetime="2019-01-22T11:25:30.000Z" itemprop="datePublished">2019-01-22</time>
 </a>
     
@@ -70,7 +70,46 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/01/22/yeshen-adb/">“夜神支持adb参数参考”</a>
+      <a class="article-title" href="/2019/01/22/夜神-随机型号、地理位置、IMEI/">“利用Shell刷夜神随机型号、地理位置、IMEI等”</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>使用Android模拟器夜神，多开虚拟机同时刷多个。</p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://blog.xiaban666.com/2019/01/22/夜神-随机型号、地理位置、IMEI/" data-id="cjr7q3s1t0000xdhtoms25l42" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/adb/">adb</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-夜神adb参数参考" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/01/22/夜神adb参数参考/" class="article-date">
+  <time datetime="2019-01-22T11:25:30.000Z" itemprop="datePublished">2019-01-22</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/01/22/夜神adb参数参考/">“夜神支持adb参数参考”</a>
     </h1>
   
 
@@ -80,183 +119,11 @@
       
         <p>一、如何找到adb？</p>
 <p>安装夜神安卓模拟器后，电脑桌面会有“夜神模拟器”的启动图标，鼠标右键–打开文件所在的位置，就会进入***\Nox\bin，比如小编的路径是C:\Program Files (x86)\Nox\bin，然后可以在该路径下找到nox_adb.exe</p>
-<p>二、如何连接设备？</p>
-<p>首先需要进入\Nox\bin路径的cmd窗口，如何进入？</p>
-<p>方式一：继续上述的步骤，进入\Nox\bin目录，然后按Shift键的同时，单击鼠标右键，就会看到“在此处打开命令窗口(W)”，点击即可进入\Nox\bin路径的cmd窗口。</p>
-<p>方式二：按Windows+R键，在弹出的“运行”窗口输入cmd，确定，然后输入cd C:\Program Files (x86)\Nox\bin（说明：这是你的夜神模拟器安装路径），即可。说明：如果你的夜神模拟器不是安装在C盘，比如安装在D盘，请在cd前面先输入D: 然后按回车键，再cd …\Nox\bin。</p>
-<pre><code>在连接设备之前，先查看一下在运行的设备：
-
-nox_adb.exe devices
-</code></pre><p>   C:\Program Files (x86)\Nox\bin&gt;nox_adb devices</p>
-<p>   List of devices attached</p>
-<p>   127.0.0.1:62001 device<br>说明：nox_adb.exe 完全等同于nox_adb，也完全等同于adb，下同。比如adb devices。</p>
-<pre><code>如果未启动夜神模拟器，就会得到如下信息：
-</code></pre><p>   C:\Program Files (x86)\Nox\bin&gt;adb devices</p>
-<p>   List of devices attached</p>
-<p>   （这一行是空的，需要我们先把夜神模拟器启动一下）</p>
-<pre><code>如果启动的模拟器不止一个，如果连接设备？
-</code></pre><p>比如小编多开了3个夜神模拟器，adb devices一下，会看到如下信息：</p>
-<pre><code>C:\Program Files (x86)\Nox\bin&gt;nox_adb devices
-
-List of devices attached
-</code></pre><p>   127.0.0.1:62001 device</p>
-<p>   127.0.0.1:62025 device</p>
-<p>   127.0.0.1:62026 device<br>（夜神模拟器的端口是规律的，第一个模拟器端口是62001，第二个模拟器端口是62025，第三个是62025+1，以此类推）</p>
-<p>如果指定在62001 上安装一个apk，那么请输入：adb -s 127.0.0.1:62001 install D:\QQ.apk</p>
-<p>温馨提示：adb -s 127.0.0.1:620<strong> 可连接任意指定的设备，多开模拟器后想怎么连都可以，为方便教程，以下操作都是在单开模拟器下进行，如果多开需要，只需要在adb后面带上-s 127.0.0.1:620</strong> 即可。</p>
-<pre><code>三、常用adb操作
-</code></pre><p>1、如何把电脑上的文件或文件夹传到模拟器里面？</p>
-<p>adb push D:/sex.avi /mnt/avi/</p>
-<p>2、如何把模拟器里面的文件或文件夹传到电脑上？</p>
-<p>adb pull /mnt/avi/sex.avi D:/avi/</p>
-<p>3、安装APK</p>
-<p>adb install d:\qq.apk</p>
-<p>4、卸载APK</p>
-<p>adb uninstall 包名</p>
-<p>比如卸载QQ：adb uninstall com.tencent.mobileqq</p>
-<p>5、PM包命令</p>
-<p>1）获取模拟器所有包名</p>
-<p>adb shell pm list packages</p>
-<p>2）获取模拟器所有包名并且包括APK路径</p>
-<p>adb shell pm list packages -f</p>
-<p>3）获取包名对应的APK路径</p>
-<p>adb shell pm path packageName</p>
-<p>4）清理应用数据</p>
-<p>adb shell pm clear packageName</p>
-<p>6、启动应用</p>
-<p>adb shell am start -n 包名/Activity类名</p>
-<p>例子：启动应用宝：</p>
-<p>adb shell am start -n com.tencent.android.qqdownloader/com.tencent.assistant.activity.SplashActivity</p>
-<p>指定模拟器启动动应用宝：</p>
-<p>adb -s 127.0.0.1:5555 shell am start -n com.tencent.android.qqdownloader/com.tencent.assistant.activity.SplashActivity</p>
-<p>7、关闭应用</p>
-<p>adb shell am force-stop 包名</p>
-<p>8、模拟输入</p>
-<p>adb shell input text 字符串(不支持中文)</p>
-<p>9、模拟按键</p>
-<p>adb shell input keyevent 键值</p>
-<p>10、模拟鼠标点击</p>
-<p>adb shell input tap X Y</p>
-<p>11、模拟鼠标滑动</p>
-<p>adb shell input swipe X1 Y1 X2 Y2</p>
-<p>12、截屏</p>
-<p>adb shell screencap -p /sdcard/screencap.png</p>
-<p>13、设置手机IMEI/IMSI/手机号/SIM卡序列号</p>
-<p>adb shell setprop persist.nox.modem.imei 352462010682470</p>
-<p>adb shell setprop persist.nox.modem.imsi 460000000000000</p>
-<p>adb shell setprop persist.nox.modem.phonumber 15605569000</p>
-<p>adb shell setprop persist.nox.modem.serial 89860000000000000000</p>
-<p>14、nox_adb shell进去然后执行下面的命令修改经纬度</p>
-<p>setprop persist.nox.gps.latitude xxx</p>
-<p>setprop persist.nox.gps.longitude xxx</p>
-<p>15、修改mac地址</p>
-<p>setprop persist.nox.wifimac xxx 修改mac地址</p>
-<p>setprop persist.nox.modem.phonumber 138111111111 手机号，生成一个随机11位数字</p>
-<p>setprop persist.nox.model ABC001 手机型号，英文加数字随机</p>
-<p>setprop persist.nox.manufacturer XiaoMi 手机制造商英文随机</p>
-<p>setprop persist.nox.brand Mi 手机品牌英文随机</p>
-<p>16、adb logcat</p>
-<p>打印log信息</p>
-<p>指令</p>
-<p>说明</p>
-<p>备注</p>
-<p>adb logcat</p>
-<p>打印log</p>
-<p>/</p>
-<p>adb logcat -c</p>
-<p>清除手机的log buffer</p>
-<p>有些手机权限控制, 不支持.</p>
-<p>adb logcat -b</p>
-<p>打印指定buffer的log信息</p>
-<p>buffer有: main(主log区,默认), events(事件相关的log), radio(射频, telephony相关的log)</p>
-<p>adb logcat -v</p>
-<p>格式化输出log</p>
-<p>常用的用adb logcat -v time显示时间</p>
-<p>adb logcat -f</p>
-<p>输出log到指定文件</p>
-<p>17、adb start/kill-server</p>
-<p>启动/杀死adb简介中提到的Server端进程。</p>
-<p>由于adb并不稳定, 有时候莫名的问题掉线时, 可以先kill-server, 然后start-server来确保Server进程启动。往往可以解决问题。</p>
-<p>18、adb shell am</p>
-<p>am即activity manager.<br>该命令用来执行一些系统动作, 例如启动指定activity, 结束进程, 发送广播, 更改屏幕属性等. 调试利器.</p>
-<p>指令</p>
-<p>说明</p>
-<p>备注</p>
-<p>start</p>
-<p>根据intent指向启动Activity</p>
-<p>Intent可以是显示的指向activity, 也可以是ACTION方式, 并且可以添加flag, data等参数信息.</p>
-<p>startservice</p>
-<p>启动Service</p>
-<p>可以添加flag, data等参数信息.</p>
-<p>broadcast</p>
-<p>发送广播</p>
-<p>可以添加flag, data等参数信息.</p>
-<p>monitor</p>
-<p>启动一个Crash和ANR的监听器</p>
-<p>如有Crash或ANR会在控制台输出相关信息.</p>
-<p>force-stop</p>
-<p>强制停止该包相关的一切</p>
-<p>传入package name.</p>
-<p>kill</p>
-<p>杀死该包相关的所有进程</p>
-<p>传入package name.</p>
-<p>kill-all</p>
-<p>杀死所有后台进程</p>
-<p>display-size WxH</p>
-<p>改变显示的分辨率</p>
-<p>例如adb shell am display-size 1280x720, 手机可能不支持.</p>
-<p>display-density</p>
-<p>改变显示的density</p>
-<p>例如adb shell am display-density 320, 手机可能不支持.</p>
-<p>19、adb shell dumpsys</p>
-<p>强大的dump工具, 可以输出很多系统信息. 例如window, activity, task/back stack信息, wifi信息等.</p>
-<p>常用dumpsys:</p>
-<p>指令</p>
-<p>说明</p>
-<p>备注</p>
-<p>细分参数</p>
-<p>activity</p>
-<p>输出app组件相关信息</p>
-<p>还可以用细分参数获得单项内容, 下同. 例如adb shell dumpsys activity activities来获取activity task/back stack信息.</p>
-<p>activites, service, providers, intents, broadcasts, processes</p>
-<p>alarm</p>
-<p>输出当前系统的alarm信息</p>
-<p>/</p>
-<p>/</p>
-<p>cpuinfo</p>
-<p>输出当前的CPU使用情况</p>
-<p>/</p>
-<p>/</p>
-<p>diskstats</p>
-<p>输出当前的磁盘使用状态</p>
-<p>/</p>
-<p>/</p>
-<p>batterystats</p>
-<p>电池使用信息</p>
-<p>/</p>
-<p>/</p>
-<p>package</p>
-<p>package相关信息, 相当于pm功能的集合</p>
-<p>输出诸如libs, features, packages等信息</p>
-<p>/</p>
-<p>meminfo</p>
-<p>输出每个App的内存使用和系统内存状态</p>
-<p>可以指定包名, 例如adb shell dumpsys meminfo com.anly.githubapp</p>
-<p>/</p>
-<p>window</p>
-<p>输出当前窗口相关信息</p>
-<p>/</p>
-<p>policy, animator, tokens, windows</p>
-<p>20.复制 -copy:</p>
-<p>21.删除 -remove:</p>
-<p>22.备份 -backup:</p>
-<p>23.还原 -restore:</p>
-<p>夜神模拟器支持命令行参数列表</p>
-
+        
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://blog.xiaban666.com/2019/01/22/yeshen-adb/" data-id="cjr7pqqov00007ghtb6xafe02" class="article-share-link">Share</a>
+      <a data-url="http://blog.xiaban666.com/2019/01/22/夜神adb参数参考/" data-id="cjr7q3s1x0001xdhthjgsc65f" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/adb/">adb</a></li></ul>
