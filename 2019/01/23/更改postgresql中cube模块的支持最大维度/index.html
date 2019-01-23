@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>更改postgresql中cube模块的支持最大维度 | irobot&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="在做人脸检索的时候使用到了cube插件，但是默认的cube是不支持128维向量的，需要改动一下源码，其实也很简单。">
+<meta name="keywords" content="postgresql,cube,gist">
+<meta property="og:type" content="article">
+<meta property="og:title" content="更改postgresql中cube模块的支持最大维度">
+<meta property="og:url" content="http://blog.xiaban666.com/2019/01/23/更改postgresql中cube模块的支持最大维度/index.html">
+<meta property="og:site_name" content="irobot&#39;s blog">
+<meta property="og:description" content="在做人脸检索的时候使用到了cube插件，但是默认的cube是不支持128维向量的，需要改动一下源码，其实也很简单。">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-01-23T09:35:01.517Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="更改postgresql中cube模块的支持最大维度">
+<meta name="twitter:description" content="在做人脸检索的时候使用到了cube插件，但是默认的cube是不支持128维向量的，需要改动一下源码，其实也很简单。">
+  
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">irobot&#39;s blog</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">Linux/PHP/Python/Shell/ObjectC/Swift/Andorid/Delphi/.NET/NodeJS+/React+/Vue+/etc.</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/categories/Linux">Linux</a>
+        
+          <a class="main-nav-link" href="/categories/PHP">PHP</a>
+        
+          <a class="main-nav-link" href="/categories/Python">Python</a>
+        
+          <a class="main-nav-link" href="/categories/JS">JS</a>
+        
+          <a class="main-nav-link" href="/categories/IOS">IOS</a>
+        
+          <a class="main-nav-link" href="/categories/Android">Android</a>
+        
+          <a class="main-nav-link" href="/categories/Tools">Tools</a>
+        
+          <a class="main-nav-link" href="/about">About</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://blog.xiaban666.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-更改postgresql中cube模块的支持最大维度" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/01/23/更改postgresql中cube模块的支持最大维度/" class="article-date">
+  <time datetime="2019-01-23T09:30:01.000Z" itemprop="datePublished">2019-01-23</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Linux/">Linux</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      更改postgresql中cube模块的支持最大维度
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>在做人脸检索的时候使用到了cube插件，但是默认的cube是不支持128维向量的，需要改动一下源码，其实也很简单。</p>
+<a id="more"></a>
+<p>切换到contrib目录找到cubedata.h文件，<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vim a/contrib/cube/cubedata.h b/contrib/cube/cubedata.h</span><br></pre></td></tr></table></figure></p>
+<p>修改<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span>define CUBE_MAX_DIM (100)</span><br></pre></td></tr></table></figure></p>
+<p>为<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span>define CUBE_MAX_DIM (128)</span><br></pre></td></tr></table></figure></p>
+<p>也可直接使用命令来替换<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sed -i ‘s/#define CUBE_MAX_DIM (100)/#define CUBE_MAX_DIM (130)/’ cubedata.h</span><br><span class="line">sed -i ‘s/100 dime/130 dime/’ expected/cube*.out</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://blog.xiaban666.com/2019/01/23/更改postgresql中cube模块的支持最大维度/" data-id="cjr8zsykl000ewlhtnk0c5uus" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/cube/">cube</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/gist/">gist</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/postgresql/">postgresql</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2019/01/23/Talkingdata的js端代码/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Talkingdata的js端代码</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 irobot<br>
+      Powered by <a href="http://blog.xiaban666.com/" target="_blank">irobot's</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/categories/Linux" class="mobile-nav-link">Linux</a>
+  
+    <a href="/categories/PHP" class="mobile-nav-link">PHP</a>
+  
+    <a href="/categories/Python" class="mobile-nav-link">Python</a>
+  
+    <a href="/categories/JS" class="mobile-nav-link">JS</a>
+  
+    <a href="/categories/IOS" class="mobile-nav-link">IOS</a>
+  
+    <a href="/categories/Android" class="mobile-nav-link">Android</a>
+  
+    <a href="/categories/Tools" class="mobile-nav-link">Tools</a>
+  
+    <a href="/about" class="mobile-nav-link">About</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>
