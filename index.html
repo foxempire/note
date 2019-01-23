@@ -78,20 +78,8 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="1、黄图鉴别工具-nsfw"><a href="#1、黄图鉴别工具-nsfw" class="headerlink" title="1、黄图鉴别工具 nsfw"></a>1、黄图鉴别工具 nsfw</h3><p><img src="http://blog-static.midday.me/db11dc384603a1286f832ebe28545a812ab2fee885666789ab6006c01e374748.jpg" alt=""></p>
-<p>数据<br>训练数据共五个类别：</p>
-<p>porn - pornography images hentai - hentai images, but also includes pornographic drawings sexy - sexually explicit images, but not pornography. Think nude photos, playboy, bikini, beach volleyball, etc. neutral - safe for work neutral images of everyday things and people drawings - safe for work drawings (including anime)</p>
-<p>训练数据的数量如下:</p>
-<p>drawing: 18251 hentai: 42649 netural: 44677 porn: 108114 sexy: 17253</p>
-<p>使用<br>可以直接下载代码和训练好的模型来用 下载代码和模型</p>
-<p>git clone <a href="https://github.com/rockyzhengwu/nsfw.git" target="_blank" rel="noopener">https://github.com/rockyzhengwu/nsfw.git</a></p>
-<p>训练好的模型在 /data/目录下。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd nsfw</span><br><span class="line">python nsfw_predict.py /tmp/test/test.jpeg</span><br></pre></td></tr></table></figure>
-<p>输出结果：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&#123;'class': 'sexy', 'probability': &#123;'drawings': 0.008320281, 'hentai': 0.0011919827, 'neutral': 0.13077603, 'porn': 0.13146976, 'sexy': 0.72824186&#125;&#125;</span><br></pre></td></tr></table></figure></p>
-<p>class: 图片所属列表 probability: 各类别所属的概率得分</p>
-<p>也可以使用 Tensorflow Serving 部署，详情可以查看nsfw</p>
-<p>模型<br>模型部分采用 Resnet ，主要参考了 Tensorflow 官方的代码 做了少许修改。详情见 resnet目录下。 尝试了微调和训练一个相对简单的新模型，微调的效果并不好，反而速度会慢很多。我想是因为这些图片和ImageNet 数据集相差太大的缘故。最终发布的模型使用Resnet-32, 准确率 90% 。</p>
-
+        <p>This repo contains code for running Not Suitable for Work (NSFW) classification.</p>
+        
       
     </div>
     <footer class="article-footer">
