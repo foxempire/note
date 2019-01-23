@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>Talkingdata的react-native接口实现 | irobot&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="虽然比较简单，但是官方talkingdata并没有给出接口，自己实现了一下。">
+<meta name="keywords" content="talkingdata,react-native,ios,android">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Talkingdata的react-native接口实现">
+<meta property="og:url" content="http://blog.xiaban666.com/2019/01/23/Talkingdata的react-native接口实现/index.html">
+<meta property="og:site_name" content="irobot&#39;s blog">
+<meta property="og:description" content="虽然比较简单，但是官方talkingdata并没有给出接口，自己实现了一下。">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-01-23T09:23:24.592Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Talkingdata的react-native接口实现">
+<meta name="twitter:description" content="虽然比较简单，但是官方talkingdata并没有给出接口，自己实现了一下。">
+  
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">irobot&#39;s blog</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">Linux/PHP/Python/Shell/ObjectC/Swift/Andorid/Delphi/.NET/NodeJS+/React+/Vue+/etc.</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/categories/Linux">Linux</a>
+        
+          <a class="main-nav-link" href="/categories/PHP">PHP</a>
+        
+          <a class="main-nav-link" href="/categories/Python">Python</a>
+        
+          <a class="main-nav-link" href="/categories/JS">JS</a>
+        
+          <a class="main-nav-link" href="/categories/IOS">IOS</a>
+        
+          <a class="main-nav-link" href="/categories/Android">Android</a>
+        
+          <a class="main-nav-link" href="/categories/Tools">Tools</a>
+        
+          <a class="main-nav-link" href="/about">About</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://blog.xiaban666.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Talkingdata的react-native接口实现" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/01/23/Talkingdata的react-native接口实现/" class="article-date">
+  <time datetime="2019-01-23T09:18:41.000Z" itemprop="datePublished">2019-01-23</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/IOS/">IOS</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Talkingdata的react-native接口实现
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>虽然比较简单，但是官方talkingdata并没有给出接口，自己实现了一下。</p>
+<a id="more"></a>
+<h3 id="IOS的接口实现"><a href="#IOS的接口实现" class="headerlink" title="IOS的接口实现"></a>IOS的接口实现</h3><p>TalkingDataManager.h</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">#import &lt;UIKit/UIKit.h&gt;</span><br><span class="line">#import &lt;React/RCTBridgeModule.h&gt;</span><br><span class="line"></span><br><span class="line">@interface TalkingDataManager : NSObject &lt;RCTBridgeModule&gt;</span><br><span class="line"></span><br><span class="line">@end</span><br></pre></td></tr></table></figure>
+<p>TalkingDataManager.m</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line">//</span><br><span class="line">//  TalkingDataManager.m</span><br><span class="line">//  multap</span><br><span class="line">//</span><br><span class="line">//  Created by irobot on 2018/9/19.</span><br><span class="line">//  Copyright Â© 2018å¹´ Facebook. All rights reserved.</span><br><span class="line">//</span><br><span class="line"></span><br><span class="line">#import &quot;TalkingDataManager.h&quot;</span><br><span class="line">#import &quot;TalkingData.h&quot;</span><br><span class="line"></span><br><span class="line">@implementation TalkingDataManager</span><br><span class="line">@synthesize bridge=_bridge;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">RCT_EXPORT_MODULE(TalkingDataManager);</span><br><span class="line"></span><br><span class="line">RCT_EXPORT_METHOD(trackPageBegin:(NSString *) page)</span><br><span class="line">&#123;</span><br><span class="line"> [TalkingData trackPageBegin:page];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">RCT_EXPORT_METHOD(trackPageEnd:(NSString *) page)</span><br><span class="line">&#123;</span><br><span class="line">  [TalkingData trackPageEnd:page];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">RCT_EXPORT_METHOD(trackEvent:(NSString *) evt)</span><br><span class="line">&#123;</span><br><span class="line">  [TalkingData trackEvent:evt];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">RCT_EXPORT_METHOD(trackEvent:(NSString *) evt label:(NSString *)lb)</span><br><span class="line">&#123;</span><br><span class="line">  [TalkingData trackEvent:evt label:lb];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">RCT_EXPORT_METHOD(trackEvent:(NSString *) evt label:(NSString *)lb parameters:(NSDictionary *)dic)</span><br><span class="line">&#123;</span><br><span class="line">  [TalkingData trackEvent:evt label:lb parameters:dic];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">RCT_EXPORT_METHOD(setGlobalKV:(NSString *) key value:(id)value)</span><br><span class="line">&#123;</span><br><span class="line">  [TalkingData setGlobalKV:key value:value];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">RCT_EXPORT_METHOD(removeGlobalKV:(NSString *) key)</span><br><span class="line">&#123;</span><br><span class="line">  [TalkingData removeGlobalKV:key];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">@end</span><br></pre></td></tr></table></figure>
+<h3 id="Android端的实现"><a href="#Android端的实现" class="headerlink" title="Android端的实现"></a>Android端的实现</h3><p>TalkingDataManager.java<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.talkingdata;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> android.util.Log;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.facebook.react.bridge.NativeModule;</span><br><span class="line"><span class="keyword">import</span> com.facebook.react.bridge.ReactApplicationContext;</span><br><span class="line"><span class="keyword">import</span> com.facebook.react.bridge.ReactContext;</span><br><span class="line"><span class="keyword">import</span> com.facebook.react.bridge.ReactContextBaseJavaModule;</span><br><span class="line"><span class="keyword">import</span> com.facebook.react.bridge.ReactMethod;</span><br><span class="line"><span class="keyword">import</span> com.facebook.react.bridge.ReadableMap;</span><br><span class="line"><span class="keyword">import</span> com.tendcloud.tenddata.TCAgent;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.Map;</span><br><span class="line"><span class="keyword">import</span> java.util.HashMap;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TalkingDataManager</span> <span class="keyword">extends</span> <span class="title">ReactContextBaseJavaModule</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> ReactApplicationContext context;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">TalkingDataManager</span><span class="params">(ReactApplicationContext reactApplicationContext)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>(reactApplicationContext);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"TalkingDataManager"</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@ReactMethod</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">trackPageBegin</span><span class="params">(String page)</span> </span>&#123;</span><br><span class="line">        Log.e(<span class="string">"TalkingData"</span>, <span class="string">"trackPageBeginï¼š"</span> + page);</span><br><span class="line">        TCAgent.onPageStart(context, page);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@ReactMethod</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">trackPageEnd</span><span class="params">(String page)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        Log.e(<span class="string">"TalkingData"</span>, <span class="string">"trackPageEndï¼š"</span> + page);</span><br><span class="line">        TCAgent.onPageEnd(context, page);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@ReactMethod</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">trackEvent</span><span class="params">(String page)</span> </span>&#123;</span><br><span class="line">        TCAgent.onEvent(context, page);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@ReactMethod</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">trackEvent</span><span class="params">(String page, String label)</span> </span>&#123;</span><br><span class="line">        TCAgent.onEvent(context, page, label);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@ReactMethod</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">trackEvent</span><span class="params">(String page, String label, ReadableMap map)</span> </span>&#123;</span><br><span class="line">        TCAgent.onEvent(context, page, label, map.toHashMap());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="meta">@ReactMethod</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setGlobalKV</span><span class="params">(String k, String v)</span> </span>&#123;</span><br><span class="line">        TCAgent.setGlobalKV(k, v);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@ReactMethod</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">removeGlobalKV</span><span class="params">(String k)</span> </span>&#123;</span><br><span class="line">        TCAgent.removeGlobalKV(k);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>TalkingDataReactPackage.java<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.talkingdata;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.facebook.react.ReactPackage;</span><br><span class="line"><span class="keyword">import</span> com.facebook.react.bridge.JavaScriptModule;</span><br><span class="line"><span class="keyword">import</span> com.facebook.react.bridge.NativeModule;</span><br><span class="line"><span class="keyword">import</span> com.facebook.react.bridge.ReactApplicationContext;</span><br><span class="line"><span class="keyword">import</span> com.facebook.react.uimanager.ViewManager;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"><span class="keyword">import</span> java.util.Collections;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TalkingDataReactPackage</span> <span class="keyword">implements</span> <span class="title">ReactPackage</span> </span>&#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> List&lt;NativeModule&gt; <span class="title">createNativeModules</span><span class="params">(ReactApplicationContext reactContext)</span> </span>&#123;</span><br><span class="line">        List&lt;NativeModule&gt; modules = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">        modules.add(<span class="keyword">new</span> TalkingDataManager(reactContext));</span><br><span class="line">        <span class="keyword">return</span> modules;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//@Override</span></span><br><span class="line">    <span class="keyword">public</span> List&lt;Class&lt;? extends JavaScriptModule&gt;&gt; createJSModules() &#123;</span><br><span class="line">        <span class="keyword">return</span> Collections.emptyList();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> List&lt;ViewManager&gt; <span class="title">createViewManagers</span><span class="params">(ReactApplicationContext reactContext)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://blog.xiaban666.com/2019/01/23/Talkingdata的react-native接口实现/" data-id="cjr8ze63l0001lfht4xpcm84v" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/android/">android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ios/">ios</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/react-native/">react-native</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/talkingdata/">talkingdata</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2019/01/23/使用PHP-redis实现简单的ItemCF算法/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">使用PHP+redis实现简单的ItemCF算法</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 irobot<br>
+      Powered by <a href="http://blog.xiaban666.com/" target="_blank">irobot's</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/categories/Linux" class="mobile-nav-link">Linux</a>
+  
+    <a href="/categories/PHP" class="mobile-nav-link">PHP</a>
+  
+    <a href="/categories/Python" class="mobile-nav-link">Python</a>
+  
+    <a href="/categories/JS" class="mobile-nav-link">JS</a>
+  
+    <a href="/categories/IOS" class="mobile-nav-link">IOS</a>
+  
+    <a href="/categories/Android" class="mobile-nav-link">Android</a>
+  
+    <a href="/categories/Tools" class="mobile-nav-link">Tools</a>
+  
+    <a href="/about" class="mobile-nav-link">About</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>
