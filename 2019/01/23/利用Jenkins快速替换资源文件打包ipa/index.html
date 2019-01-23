@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>利用Jenkins快速替换资源文件打包ipa | irobot&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="在IPA约定配置下，写的以下脚本，可以替换包名、启动图、包名，以及三方的一些APPID">
+<meta name="keywords" content="IOS,Jenkins,ipa">
+<meta property="og:type" content="article">
+<meta property="og:title" content="利用Jenkins快速替换资源文件打包ipa">
+<meta property="og:url" content="http://blog.xiaban666.com/2019/01/23/利用Jenkins快速替换资源文件打包ipa/index.html">
+<meta property="og:site_name" content="irobot&#39;s blog">
+<meta property="og:description" content="在IPA约定配置下，写的以下脚本，可以替换包名、启动图、包名，以及三方的一些APPID">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-01-23T08:28:07.978Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="利用Jenkins快速替换资源文件打包ipa">
+<meta name="twitter:description" content="在IPA约定配置下，写的以下脚本，可以替换包名、启动图、包名，以及三方的一些APPID">
+  
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">irobot&#39;s blog</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">Linux/PHP/Python/Shell/ObjectC/Swift/Andorid/Delphi/.NET/NodeJS+/React+/Vue+/etc.</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/categories/Linux">Linux</a>
+        
+          <a class="main-nav-link" href="/categories/PHP">PHP</a>
+        
+          <a class="main-nav-link" href="/categories/Python">Python</a>
+        
+          <a class="main-nav-link" href="/categories/JS">JS</a>
+        
+          <a class="main-nav-link" href="/categories/IOS">IOS</a>
+        
+          <a class="main-nav-link" href="/categories/Android">Android</a>
+        
+          <a class="main-nav-link" href="/categories/Tools">Tools</a>
+        
+          <a class="main-nav-link" href="/about">About</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://blog.xiaban666.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-利用Jenkins快速替换资源文件打包ipa" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/01/23/利用Jenkins快速替换资源文件打包ipa/" class="article-date">
+  <time datetime="2019-01-23T08:20:35.000Z" itemprop="datePublished">2019-01-23</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/IOS/">IOS</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      利用Jenkins快速替换资源文件打包ipa
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>在IPA约定配置下，写的以下脚本，可以替换包名、启动图、包名，以及三方的一些APPID</p>
+<a id="more"></a>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br></pre></td><td class="code"><pre><span class="line">BuildToolRoot="/Users/my/Work/buildTool"</span><br><span class="line">ReleaseRoot="/Users/my/Work/Release"</span><br><span class="line">RND=$(date "+%Y%m%d%H%M%S")</span><br><span class="line">TMPPath="/tmp/IPA$&#123;RND&#125;"</span><br><span class="line">UnlockPWD="******"</span><br><span class="line">PlatformTAG="IOS"</span><br><span class="line">ShareSupports=""</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span>定义发行文件名</span><br><span class="line">if [ "$&#123;ReleaseName&#125;" = "" ]; then</span><br><span class="line">	ReleaseName="multap"</span><br><span class="line">fi</span><br><span class="line">IPA="$&#123;ReleaseRoot&#125;/$&#123;ReleaseName&#125;.ipa"</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span>清除过期的文件</span><br><span class="line">find /tmp/ -name "IPA*" -type d -ctime +1 -maxdepth 1 -exec rm -rf &#123;&#125; \;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span>包含公共文件</span><br><span class="line">. /Users/my/Work/include/Node.sh</span><br><span class="line">. /Users/my/Work/include/Tools.sh</span><br><span class="line">. /Users/my/Work/include/Public.sh</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span>临时目录</span><br><span class="line">mkdir -p $&#123;TMPPath&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span>开始打包</span><br><span class="line">CheckError "build start error"</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span>解压Ipa文件</span><br><span class="line">unzip -n $&#123;IPA&#125; -d $&#123;TMPPath&#125;/ipa &gt;/dev/null 2&gt;&amp;1</span><br><span class="line">CheckError "ipa unpackage error"</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span>获取app名称</span><br><span class="line">PayloadApp=`ls $&#123;TMPPath&#125;/ipa/Payload/`</span><br><span class="line">PayloadAppRoot="$&#123;TMPPath&#125;/ipa/Payload/$&#123;PayloadApp&#125;"</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span>下载远程替换包</span><br><span class="line">curl $&#123;AppAssets&#125; -o $&#123;TMPPath&#125;/assets.zip &gt;/dev/null 2&gt;&amp;1</span><br><span class="line">CheckError "assets download error"</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span>解压</span><br><span class="line"><span class="meta">$</span>&#123;P7zipCli&#125; x -y $&#123;TMPPath&#125;/assets.zip -r -o$&#123;TMPPath&#125;/assets  &gt;/dev/null 2&gt;&amp;1</span><br><span class="line">CheckError "assets unzip error"</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span>覆盖描述文件</span><br><span class="line">cp -rf $&#123;TMPPath&#125;/assets/embedded.mobileprovision $&#123;PayloadAppRoot&#125;/ &gt;/dev/null 2&gt;&amp;1</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span>替换图标和启动图</span><br><span class="line"><span class="meta">#</span>IOS11以后图标放到Assets.cer中，需要使用actool重新打包图标</span><br><span class="line">cp -rf $&#123;BuildToolRoot&#125;/assets-car-build/Assets.xcassets $&#123;TMPPath&#125;/</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span>替换图标</span><br><span class="line">if [ -f "$&#123;TMPPath&#125;/assets/App.png" ];then</span><br><span class="line">	ls -1 $&#123;TMPPath&#125;/Assets.xcassets/AppIcon.appiconset/*.png | while read line; do convertIcon "$&#123;TMPPath&#125;/assets/App.png" "$line"; done</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span>替换启动图</span><br><span class="line">ls -1 $&#123;TMPPath&#125;/assets/LaunchImage*.png | while read line; do autoCoverSameSize "$&#123;line&#125;" "$&#123;TMPPath&#125;/Assets.xcassets/LaunchImage.launchimage/" ; done</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span>生成启动图和图标</span><br><span class="line">mkdir $&#123;TMPPath&#125;/build</span><br><span class="line"><span class="meta">$</span>&#123;XRunClik&#125; $&#123;ACToolCli&#125; $&#123;TMPPath&#125;/Assets.xcassets --compile $&#123;TMPPath&#125;/build --platform iphoneos --minimum-deployment-target 8.0 --launch-image LaunchImage --app-icon AppIcon --output-partial-info-plist $&#123;TMPPath&#125;/build/partial.plist</span><br><span class="line"><span class="meta">$</span>CMD_PlistBuddy -x -c "Merge $&#123;TMPPath&#125;/build/partial.plist" "$&#123;PayloadAppRoot&#125;/Info.plist"</span><br><span class="line">unlink "$&#123;TMPPath&#125;/build/partial.plist"</span><br><span class="line">cp -rf $&#123;TMPPath&#125;/build/* $&#123;PayloadAppRoot&#125;/</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span>删除原签名</span><br><span class="line">rm -rf $&#123;PayloadAppRoot&#125;/_CodeSignature/</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span>导入证书</span><br><span class="line"><span class="meta">$</span>CMD_Security create-keychain -p "$&#123;UnlockPWD&#125;" "$&#123;TMPPath&#125;/$&#123;RND&#125;.keychain"  &gt;/dev/null 2&gt;&amp;1</span><br><span class="line"><span class="meta">$</span>CMD_Security unlock-keychain -p "$&#123;UnlockPWD&#125;" "$&#123;TMPPath&#125;/$&#123;RND&#125;.keychain"  &gt;/dev/null 2&gt;&amp;1</span><br><span class="line"><span class="meta">$</span>CMD_Security import $&#123;TMPPath&#125;/assets/cert.p12 -k "$&#123;TMPPath&#125;/$&#123;RND&#125;.keychain" -P "$&#123;KeychainPwd&#125;" -T $&#123;CodesignCmd&#125; -A  &gt;/dev/null 2&gt;&amp;1</span><br><span class="line"><span class="meta">$</span>CMD_Security list-keychains -s "$&#123;TMPPath&#125;/$&#123;RND&#125;.keychain"  &gt;/dev/null 2&gt;&amp;1</span><br><span class="line">CheckError "keychain error"</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span>根据mobileprofile生成plist文件</span><br><span class="line"><span class="meta">$</span>CMD_Security cms -D -i $&#123;PayloadAppRoot&#125;/embedded.mobileprovision &gt; $&#123;TMPPath&#125;/tmp.plist  2&gt;&amp;1</span><br><span class="line">CheckError "provision read error"</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span>获取必要的参数</span><br><span class="line">ApplicationIdentifier=`$CMD_PlistBuddy -c 'Print :Entitlements:application-identifier' "$&#123;TMPPath&#125;/tmp.plist"`</span><br><span class="line">BundleId=`$CMD_PlistBuddy -c "Print :Entitlements:application-identifier" "$&#123;TMPPath&#125;/tmp.plist"`</span><br><span class="line">ProvisonfileUUID=`$CMD_PlistBuddy -c 'Print :UUID' "$&#123;TMPPath&#125;/tmp.plist"`</span><br><span class="line">ProvisonfileTeamName=`$CMD_PlistBuddy -c 'Print :TeamName' "$&#123;TMPPath&#125;/tmp.plist"`</span><br><span class="line">ProvisonfileTeamID=`$CMD_PlistBuddy -c 'Print :Entitlements:com.apple.developer.team-identifier' "$&#123;TMPPath&#125;/tmp.plist"`</span><br><span class="line"><span class="meta">#</span>生成entitlements</span><br><span class="line"><span class="meta">$</span>CMD_PlistBuddy -x -c 'Print:Entitlements' "$&#123;TMPPath&#125;/tmp.plist" &gt; $&#123;TMPPath&#125;/entitlements.plist</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span>获取CodeSign</span><br><span class="line">echo "-----BEGIN CERTIFICATE-----" 	&gt; "$&#123;TMPPath&#125;/tmp.cer"</span><br><span class="line">cat $&#123;TMPPath&#125;/tmp.plist | grep data | head -n 1 | sed 's/.*&lt;data&gt;//g' | sed 's/&lt;\/data&gt;.*//g'						&gt;&gt; "$&#123;TMPPath&#125;/tmp.cer"</span><br><span class="line">echo "-----END CERTIFICATE-----"	&gt;&gt; "$&#123;TMPPath&#125;/tmp.cer"</span><br><span class="line">CodeSignIdentity=`$&#123;OpenSSLCmd&#125; x509 -noout -text -in "$&#123;TMPPath&#125;/tmp.cer"  | grep Subject | grep "CN=" | cut -d "," -f2 | cut -d "=" -f2 2&gt;1&amp;`</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span>更改Info.plist</span><br><span class="line"><span class="meta">$</span>CMD_PlistBuddy -c "Set :CFBundleDisplayName $&#123;AppName&#125;" "$&#123;PayloadAppRoot&#125;/Info.plist"</span><br><span class="line"><span class="meta">#</span>包名（entitlements存在）</span><br><span class="line"><span class="meta">$</span>CMD_PlistBuddy -c "Set :CFBundleIdentifier $&#123;BundleId&#125;" "$&#123;PayloadAppRoot&#125;/Info.plist"</span><br><span class="line"><span class="meta">#</span>版本（entitlements存在）</span><br><span class="line"><span class="meta">$</span>CMD_PlistBuddy -c "Set :CFBundleVersion $&#123;AppVersion&#125;" "$&#123;PayloadAppRoot&#125;/Info.plist"</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span>更改ProjectId</span><br><span class="line">if [ -n "$ProjectId" ]; then </span><br><span class="line"><span class="meta">	$</span>CMD_PlistBuddy -c "Set :OrgId $&#123;OrgId&#125;" "$&#123;PayloadAppRoot&#125;/Info.plist"</span><br><span class="line">else</span><br><span class="line"><span class="meta">	$</span>CMD_PlistBuddy -c "Set :OrgId 1" "$&#123;PayloadAppRoot&#125;/Info.plist"</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span>更改必要参数</span><br><span class="line">if [ -n "$MOB" ]; then </span><br><span class="line">	ShareSupports="$&#123;ShareSupports&#125;&amp;mob=$MOB"</span><br><span class="line">	MOBAppKey=`echo "$&#123;MOB&#125;" | awk -F ',' '&#123;print $1;&#125;'`</span><br><span class="line">	MOBAppSecret=`echo "$&#123;MOB&#125;" | awk -F ',' '&#123;print $2;&#125;'`</span><br><span class="line"><span class="meta">	$</span>CMD_PlistBuddy -c "Set :MOBAppKey $&#123;MOBAppKey&#125;" "$&#123;PayloadAppRoot&#125;/Info.plist"</span><br><span class="line"><span class="meta">	$</span>CMD_PlistBuddy -c "Set :MOBAppSecret $&#123;MOBAppSecret&#125;" "$&#123;PayloadAppRoot&#125;/Info.plist"</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line">if [ -n "$TalkingData" ]; then </span><br><span class="line">	TalkingDataAppKey=`echo "$&#123;TalkingData&#125;" | awk -F ',' '&#123;print $1;&#125;'`</span><br><span class="line">	TalkingDataChannel=`echo "$&#123;TalkingData&#125;" | awk -F ',' '&#123;print $2;&#125;'`</span><br><span class="line"><span class="meta">	$</span>CMD_PlistBuddy -c "Set :TalkingDataAppKey $&#123;TalkingDataAppKey&#125;" "$&#123;PayloadAppRoot&#125;/Info.plist"</span><br><span class="line"><span class="meta">	$</span>CMD_PlistBuddy -c "Set :TalkingDataChannel $&#123;TalkingDataChannel&#125;" "$&#123;PayloadAppRoot&#125;/Info.plist"</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">if [ -n "$JPUSH" ]; then </span><br><span class="line">	JpushKey=`echo "$&#123;JPUSH&#125;" | awk -F ',' '&#123;print $1;&#125;'`</span><br><span class="line">	JpushChannel=`echo "$&#123;JPUSH&#125;" | awk -F ',' '&#123;print $2;&#125;'`</span><br><span class="line"><span class="meta">	$</span>CMD_PlistBuddy -c "Set :JpushKey $&#123;JpushKey&#125;" "$&#123;PayloadAppRoot&#125;/Info.plist"</span><br><span class="line"><span class="meta">	$</span>CMD_PlistBuddy -c "Set :JpushChannel $&#123;JpushChannel&#125;" "$&#123;PayloadAppRoot&#125;/Info.plist"</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">$</span>CMD_PlistBuddy -c "Delete :CFBundleURLTypes:0:CFBundleURLSchemes" "$&#123;PayloadAppRoot&#125;/Info.plist"</span><br><span class="line"><span class="meta">$</span>CMD_PlistBuddy -c "Add :CFBundleURLTypes:0:CFBundleURLSchemes array" "$&#123;PayloadAppRoot&#125;/Info.plist"</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">if [ -n "$QQAppId" ] &amp;&amp; [ "$&#123;QQAppId:0:4&#125;" != "none" ]; then </span><br><span class="line">	ShareSupports="$&#123;ShareSupports&#125;&amp;qq=$QQAppId"</span><br><span class="line">	MOBQQAppId=`echo "$&#123;QQAppId&#125;" | awk -F ',' '&#123;print $1;&#125;'`</span><br><span class="line">	MOBQQAppKey=`echo "$&#123;QQAppId&#125;" | awk -F ',' '&#123;print $2;&#125;'`</span><br><span class="line"><span class="meta">	$</span>CMD_PlistBuddy -c "Add :CFBundleURLTypes:0:CFBundleURLSchemes:0 string tencent$&#123;MOBQQAppId&#125;" "$&#123;PayloadAppRoot&#125;/Info.plist"</span><br><span class="line"><span class="meta">	$</span>CMD_PlistBuddy -c "Set :MOBQQAppId $&#123;MOBQQAppId&#125;" "$&#123;PayloadAppRoot&#125;/Info.plist"</span><br><span class="line"><span class="meta">	$</span>CMD_PlistBuddy -c "Set :MOBQQAppKey $&#123;MOBQQAppKey&#125;" "$&#123;PayloadAppRoot&#125;/Info.plist"</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line">if [ -n "$QQAppId" ] &amp;&amp; [ "$&#123;QQAppId:0:4&#125;" != "none" ]; then </span><br><span class="line">	QQEnShemes=`echo "ibase=10;obase=16;$&#123;QQAppId0&#125;"|bc`</span><br><span class="line"><span class="meta">	$</span>CMD_PlistBuddy -c "Add :CFBundleURLTypes:0:CFBundleURLSchemes:0 string QQ&#123;QQEnShemes&#125;" "$&#123;PayloadAppRoot&#125;/Info.plist"</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line">if [ -n "$WechatAppId" ] &amp;&amp; [ "$&#123;WechatAppId:0:4&#125;" != "none" ]; then </span><br><span class="line">	ShareSupports="$&#123;ShareSupports&#125;&amp;wechat=$WechatAppId"</span><br><span class="line">	WechatAppId0=`echo "$&#123;WechatAppId&#125;" | awk -F ',' '&#123;print $1;&#125;'`</span><br><span class="line">	MOBWechatAppSecret=`echo "$&#123;WechatAppId&#125;" | awk -F ',' '&#123;print $2;&#125;'`</span><br><span class="line"><span class="meta">	$</span>CMD_PlistBuddy -c "Add :CFBundleURLTypes:0:CFBundleURLSchemes:0 string wx$&#123;WechatAppId0&#125;" "$&#123;PayloadAppRoot&#125;/Info.plist"</span><br><span class="line"><span class="meta">	$</span>CMD_PlistBuddy -c "Set :MOBWechatAppId $&#123;WechatAppId0&#125;" "$&#123;PayloadAppRoot&#125;/Info.plist"</span><br><span class="line"><span class="meta">	$</span>CMD_PlistBuddy -c "Set :MOBWechatAppSecret $&#123;MOBWechatAppSecret&#125;" "$&#123;PayloadAppRoot&#125;/Info.plist"</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line">if [ -n "$WeiboAppKey" ] &amp;&amp; [ "$&#123;WeiboAppKey:0:4&#125;" != "none" ]; then </span><br><span class="line">	ShareSupports="$&#123;ShareSupports&#125;&amp;weibo=$WeiboAppKey"</span><br><span class="line">	WeiboAppKey0=`echo "$&#123;WeiboAppKey&#125;" | awk -F ',' '&#123;print $1;&#125;'`</span><br><span class="line">	MOBSinaWeiboSecret=`echo "$&#123;WeiboAppKey&#125;" | awk -F ',' '&#123;print $2;&#125;'`</span><br><span class="line">	MOBSinaWeiboRedirect=`echo "$&#123;WeiboAppKey&#125;" | awk -F ',' '&#123;print $3;&#125;'`</span><br><span class="line"><span class="meta">	$</span>CMD_PlistBuddy -c "Add :CFBundleURLTypes:0:CFBundleURLSchemes:0 string sina$&#123;WeiboAppKey0&#125;" "$&#123;PayloadAppRoot&#125;/Info.plist"</span><br><span class="line"><span class="meta">	$</span>CMD_PlistBuddy -c "Set :MOBSinaWeiboAppKey $&#123;WeiboAppKey0&#125;" "$&#123;PayloadAppRoot&#125;/Info.plist"</span><br><span class="line"><span class="meta">	$</span>CMD_PlistBuddy -c "Set :MOBSinaWeiboSecret $&#123;MOBSinaWeiboSecret&#125;" "$&#123;PayloadAppRoot&#125;/Info.plist"</span><br><span class="line"><span class="meta">	$</span>CMD_PlistBuddy -c "Set :MOBSinaWeiboRedirect $&#123;MOBSinaWeiboRedirect&#125;" "$&#123;PayloadAppRoot&#125;/Info.plist"</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span>share支持情况</span><br><span class="line"><span class="meta">$</span>CMD_PlistBuddy -c "Set :ShareSupports $&#123;ShareSupports&#125;" "$&#123;PayloadAppRoot&#125;/Info.plist"</span><br><span class="line">CheckError "plist write error"</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span>重签</span><br><span class="line"><span class="meta">$</span>&#123;CodesignCmd&#125; -f -s "$&#123;CodeSignIdentity&#125;" --entitlements "$&#123;TMPPath&#125;/entitlements.plist"  "$&#123;PayloadAppRoot&#125;" &gt;/dev/null 2&gt;&amp;1</span><br><span class="line"><span class="meta">$</span>&#123;CodesignCmd&#125; -v "$&#123;PayloadAppRoot&#125;"</span><br><span class="line">CheckError "ipa resign error"</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">OutputIpa="$&#123;TMPPath&#125;/$&#123;BundleId&#125;_$(date "+%Y%m%d%H%M%S").ipa"</span><br><span class="line"></span><br><span class="line">`cd $&#123;PayloadAppRoot&#125; &amp;&amp; cd ../../ &amp;&amp; zip -r "$&#123;OutputIpa&#125;" Payload &gt;/dev/null 2&gt;&amp;1`</span><br><span class="line">CheckError "ipa package error"</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span>删除钥匙串</span><br><span class="line"><span class="meta">$</span>CMD_Security delete-keychain "$&#123;TMPPath&#125;/$&#123;RND&#125;.keychain"</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span>执行回调包</span><br><span class="line">doCallback "$&#123;Callback&#125;" "$&#123;OutputIpa&#125;"</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span>删除临时文件</span><br><span class="line">rm -rf "$&#123;TMPPath&#125;"</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://blog.xiaban666.com/2019/01/23/利用Jenkins快速替换资源文件打包ipa/" data-id="cjr8xhzli000vflhtlamo3250" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/IOS-Jenkins-ipa/">IOS,Jenkins,ipa</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2019/01/23/利用Jenkins快速替换资源文件打包apk/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          利用Jenkins快速替换资源文件打包apk
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/01/23/简说php依赖注入/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">简说php依赖注入</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 irobot<br>
+      Powered by <a href="http://blog.xiaban666.com/" target="_blank">irobot's</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/categories/Linux" class="mobile-nav-link">Linux</a>
+  
+    <a href="/categories/PHP" class="mobile-nav-link">PHP</a>
+  
+    <a href="/categories/Python" class="mobile-nav-link">Python</a>
+  
+    <a href="/categories/JS" class="mobile-nav-link">JS</a>
+  
+    <a href="/categories/IOS" class="mobile-nav-link">IOS</a>
+  
+    <a href="/categories/Android" class="mobile-nav-link">Android</a>
+  
+    <a href="/categories/Tools" class="mobile-nav-link">Tools</a>
+  
+    <a href="/about" class="mobile-nav-link">About</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>
