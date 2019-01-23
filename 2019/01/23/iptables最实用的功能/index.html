@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>iptables最实用的功能 | irobot&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="1.指定入站端口限制2.丢弃非法syn包3.透明代理，透明DNS4.客户端IP与MAC地址绑定5.出入邮件扫描6.端口转发">
+<meta name="keywords" content="iptables">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iptables最实用的功能">
+<meta property="og:url" content="http://blog.xiaban666.com/2019/01/23/iptables最实用的功能/index.html">
+<meta property="og:site_name" content="irobot&#39;s blog">
+<meta property="og:description" content="1.指定入站端口限制2.丢弃非法syn包3.透明代理，透明DNS4.客户端IP与MAC地址绑定5.出入邮件扫描6.端口转发">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-01-23T07:29:09.488Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="iptables最实用的功能">
+<meta name="twitter:description" content="1.指定入站端口限制2.丢弃非法syn包3.透明代理，透明DNS4.客户端IP与MAC地址绑定5.出入邮件扫描6.端口转发">
+  
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">irobot&#39;s blog</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">Linux/PHP/Python/Shell/ObjectC/Swift/Andorid/Delphi/.NET/NodeJS+/React+/Vue+/etc.</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://blog.xiaban666.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-iptables最实用的功能" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/01/23/iptables最实用的功能/" class="article-date">
+  <time datetime="2019-01-23T07:22:31.000Z" itemprop="datePublished">2019-01-23</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      iptables最实用的功能
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>1.指定入站端口限制<br>2.丢弃非法syn包<br>3.透明代理，透明DNS<br>4.客户端IP与MAC地址绑定<br>5.出入邮件扫描<br>6.端口转发</p>
+<a id="more"></a>
+<h2 id="iptables命令参数详解"><a href="#iptables命令参数详解" class="headerlink" title="iptables命令参数详解"></a>iptables命令参数详解</h2><p>1、 -A或者–append     //将一条或多条规则加到链尾<br>2、 -D或者–delete     //从链中删除该规则<br>3、 -R或者–replace   //从所选链中替换一条规则<br>4、 -L或者–list       //显示链的所有规则<br>5、 -I或者–inset     //根据给出的规则序号，在链中插入规则。按序号的顺序插入，如是 “1”就插入链首<br>6、 -X或者–delete-chain  //用来删除用户自定义链中规则。必须保证链中的规则都不在使用时才能删除链。如没有指定链，将删除所有自定义链中的规则。<br>7、 -F或者–flush        //清空所选链中的所有规则。如指定链名，则删除对应链的所有规则。如没有指定链名，则删除所有链的所有规则。<br>8、 -N或者–new-chain      //用命令中所指定的名字创建一个新链。<br>9、 -P或者–policy        //设置链的默认目标，即策略。 与链中任何规则都不匹配的信息包将强制使用此命令中指定的策略。<br>10、-Z或者–zero        //将指定链中的所有规则的包字节计数器清零。<br>-t&lt;表&gt;：指定要操纵的表；<br>-A：向规则链中添加条目；<br>-D：从规则链中删除条目；<br>-i：向规则链中插入条目；<br>-R：替换规则链中的条目；<br>-L：显示规则链中已有的条目；<br>-F：清楚规则链中已有的条目；<br>-Z：清空规则链中的数据包计算器和字节计数器；<br>-N：创建新的用户自定义规则链；<br>-P：定义规则链中的默认目标；<br>-h：显示帮助信息；<br>-p：指定要匹配的数据包协议类型；<br>-s：指定要匹配的数据包源ip地址；<br>-j&lt;目标&gt;：指定要跳转的目标；<br>-i&lt;网络接口&gt;：指定数据包进入本机的网络接口；<br>-o&lt;网络接口&gt;：指定数据包要离开本机所使用的网络接口。</p>
+<h2 id="常用功能："><a href="#常用功能：" class="headerlink" title="常用功能："></a>常用功能：</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">echo 1 &gt; /proc/sys/net/ipv4/ip_forward ##开启ip转发</span><br><span class="line">/sbin/iptables -F -t filter ##清空规则</span><br><span class="line">/sbin/iptables -F -t nat  ##清空NAT规则</span><br><span class="line">/sbin/iptables -P INPUT DROP ##默认入站策略为丢弃</span><br><span class="line">/sbin/iptables -P OUTPUT ACCEPT ##默认出站策略为允许</span><br><span class="line">/sbin/iptables -P FORWARD DROP ##默认转发策略为丢弃</span><br><span class="line">/sbin/iptables -A INPUT -i lo -j ACCEPT</span><br><span class="line">/sbin/iptables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT</span><br><span class="line">/sbin/iptables -A INPUT -p icmp -m limit --limit 1/s --limit-burst 10 -j ACCEPT #ICMP限速</span><br><span class="line">/sbin/iptables -A INPUT -p udp -m multiport --ports 53,161 -j ACCEPT ##允许入站UDP端口53,161</span><br><span class="line">/sbin/iptables -A INPUT -p tcp -m multiport --ports 22,80,8080,8110 -j ACCEPT ##允许入站TCP端口22,80,8080,8110</span><br><span class="line">/sbin/iptables -A INPUT -p tcp --syn -m ttl --ttl-eq 117 -j DROP</span><br><span class="line">/sbin/iptables -A INPUT -p tcp --syn -m length --length :40 -j DROP</span><br><span class="line">/sbin/iptables -A INPUT -p tcp ! --syn -m state --state NEW -j DROP ##丢掉sys非法连接</span><br><span class="line">/sbin/iptables -A FORWARD -s 192.168.0.5 -m mac --mac-source ! 00:11:22:33:44:55 -j DROP ##客户端MAC与IP绑定</span><br><span class="line">/sbin/iptables -A FORWARD -s 192.168.0.0/24 -j ACCEPT ##允许网段为192.168.0.0/24通过转发链</span><br><span class="line">/sbin/iptables -A FORWARD -m state --state ESTABLISHED,RELATED -j ACCEPT</span><br><span class="line">/sbin/iptables -t nat -A POSTROUTING -s 192.168.0.0/24 -o eth0 -j MASQUERADE ##IP伪装</span><br><span class="line">/sbin/iptables -t nat -A POSTROUTING -s 192.168.0.0/24  -j SNAT --to xxx.xxx.xxx.xxx #如果网关是固定IP的IP伪装</span><br><span class="line">/sbin/iptables -t nat -A PREROUTING -p tcp -d xxx.xxx.xxx.xxx --dport 3389 -j DNAT --to-destination 192.168.0.106:3389 ###端口转发</span><br><span class="line">/sbin/iptables -t nat -A PREROUTING -p udp -m udp --dport 53 -j REDIRECT --to-ports 53 #透明DNS</span><br><span class="line">/sbin/iptables -t nat -A PREROUTING -p tcp -m tcp --dport 80 -j REDIRECT --to-port 8080 ##透明代理服务</span><br><span class="line">/sbin/iptables -t nat -A PREROUTING -p tcp -m multiport --dport 25,110,995 -j REDIRECT --to-port 8110 #客户端邮件请求(通过TCP 25端口发送/110端口接收/995接收)都经过网关的8110的过滤程序(p3scan)再返回给客户端</span><br></pre></td></tr></table></figure>
+<h2 id="利用iptables做虚拟网关"><a href="#利用iptables做虚拟网关" class="headerlink" title="利用iptables做虚拟网关"></a>利用iptables做虚拟网关</h2><h4 id="1-gt-对于动态获取的地址，静态也可以实用"><a href="#1-gt-对于动态获取的地址，静态也可以实用" class="headerlink" title="1&gt;对于动态获取的地址，静态也可以实用"></a>1&gt;对于动态获取的地址，静态也可以实用</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">sudo /sbin/iptables -F</span><br><span class="line">sudo /sbin/iptables -F -t nat</span><br><span class="line">sudo /sbin/iptables -P INPUT ACCEPT</span><br><span class="line">sudo /sbin/iptables -P FORWARD ACCEPT</span><br><span class="line">sudo /sbin/iptables -A INPUT -i wlp4s0 -j ACCEPT</span><br><span class="line">sudo /sbin/iptables -A INPUT -i lo -j ACCEPT</span><br><span class="line">sudo /sbin/iptables -t nat -A POSTROUTING  -o wlp4s0 -j MASQUERADE</span><br></pre></td></tr></table></figure>
+<p>2&gt;对于静态地址做网关####<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">sudo /sbin/iptables -F</span><br><span class="line">sudo /sbin/iptables -F -t nat</span><br><span class="line">sudo /sbin/iptables -P INPUT ACCEPT</span><br><span class="line">sudo /sbin/iptables -P FORWARD ACCEPT</span><br><span class="line">sudo /sbin/iptables -A INPUT -i wlp4s0 -j ACCEPT</span><br><span class="line">sudo /sbin/iptables -A INPUT -i lo -j ACCEPT</span><br><span class="line">sudo /sbin/iptables -t nat -A POSTROUTING -o wlp4s0 -s 192.168.66.0/24 -j SNAT --to 192.168.1.55</span><br><span class="line">sudo /sbin/iptables -A INPUT -i wlp4s0 -m state --state ESTABLISHED,RELATED -j ACCEPT</span><br></pre></td></tr></table></figure></p>
+<p>其中wlp4s0为网卡的名字，-s是指虚拟内网的IP，–to是虚拟网关服务器的内网ip</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://blog.xiaban666.com/2019/01/23/iptables最实用的功能/" data-id="cjr8vb27h0000a8htd5d2fgdl" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iptables/">iptables</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2019/01/23/鉴黄开源收集/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">鉴黄开源收集</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 irobot<br>
+      Powered by <a href="http://blog.xiaban666.com/" target="_blank">irobot's</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>
