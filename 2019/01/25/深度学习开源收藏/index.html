@@ -15,7 +15,7 @@
 <meta property="og:site_name" content="irobot&#39;s blog">
 <meta property="og:description" content="在 TensorFlow 的官网上，它被定义为「一个用于机器智能的开源软件库」，但我觉得应该这么定义：TensorFlow 是一个使用数据流图（data flow graphs）进行数值计算的开源软件库。在这里，他们没有将 TensorFlow 包含在「深度学习框架」范围内，而是和 Theano 一起被包含在「图编译器（graph compilers）」类别中。 在结束了 Udacity 的 De">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-01-25T01:39:53.774Z">
+<meta property="og:updated_time" content="2019-01-25T01:40:32.453Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="深度学习开源收藏">
 <meta name="twitter:description" content="在 TensorFlow 的官网上，它被定义为「一个用于机器智能的开源软件库」，但我觉得应该这么定义：TensorFlow 是一个使用数据流图（data flow graphs）进行数值计算的开源软件库。在这里，他们没有将 TensorFlow 包含在「深度学习框架」范围内，而是和 Theano 一起被包含在「图编译器（graph compilers）」类别中。 在结束了 Udacity 的 De">
@@ -108,6 +108,10 @@
         <p>在 TensorFlow 的官网上，它被定义为「一个用于机器智能的开源软件库」，但我觉得应该这么定义：TensorFlow 是一个使用数据流图（data flow graphs）进行数值计算的开源软件库。在这里，他们没有将 TensorFlow 包含在「深度学习框架」范围内，而是和 Theano 一起被包含在「图编译器（graph compilers）」类别中。</p>
 <p>在结束了 Udacity 的 Deep Learning 课程（<a href="https://www.udacity.com/course/deep-learning--ud730）之后，我的感觉是" target="_blank" rel="noopener">https://www.udacity.com/course/deep-learning--ud730）之后，我的感觉是</a> TensorFlow 是一个非常好的框架，但是却非常低层。使用 TensorFlow 需要编写大量的代码，你必须一遍又一遍地重新发明轮子。而且我并不是唯一一个这么想的人。Andrej Karpathy 在 Twitter 上就多次吐过槽：</p>
 <a id="more"></a>
+<p>比如：我们在 OpenAI 使用 TensorFlow，但我们似乎都更喜欢其它框架，我们有些人还写自定义代码。叹</p>
+<p>几个月前，我去参加了「Google Experts Summit: TensorFlow, Machine Learning for everyone, with Sergio Guadarrama」。Sergio 是开发 TensorFlow 的一位工程师，但他在会上没有展示 TensorFlow，而是展示了一个在 TensorFlow 上工作的更高层的库 tf.contrib：<a href="https://www.tensorflow.org/tutorials/tflearn/。我的看法是：他们内部已经意识到如果要让更多人使用" target="_blank" rel="noopener">https://www.tensorflow.org/tutorials/tflearn/。我的看法是：他们内部已经意识到如果要让更多人使用</a> TensorFlow，他们就需要以更高的抽象水平在其上创建一些层，从而简化 TensorFlow 的使用。</p>
+<p>TensorFlow 支持 Python 和 C++，也允许在 CPU 和 GPU 上的计算分布，甚至支持使用 gRPC 进行水平扩展。</p>
+<p>总结：TensorFlow 非常好，但你必须了解它好在哪里。如果你不想什么事都自己手动去做和重新发明轮子，你可以使用更简单的库（安利一下 Keras）。</p>
 <p>Theano<br>链接：<a href="http://deeplearning.net/software/theano/" target="_blank" rel="noopener">http://deeplearning.net/software/theano/</a></p>
 <p>Theano 是最老牌和最稳定的库之一。据我所知，深度学习库的开端不是 Caffe 就是 Theano。</p>
 <p>和 TensorFlow 类似，Theano 是一个比较低层的库。也因此它并不适合深度学习，而更适合数值计算优化。它支持自动的函数梯度计算，带有 Python 接口并集成了 Numpy，这使得它从一开始就成为了通用深度学习领域最常使用的库之一。</p>
