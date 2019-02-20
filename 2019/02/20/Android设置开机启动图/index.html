@@ -5,20 +5,20 @@
   
 
   
-  <title>VMWare中安装Mac系统分辨率问题 | irobot&#39;s blog</title>
+  <title>Android设置开机启动图 | irobot&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="网上说 修改/Library/Preferences/SystemConfiguration/com.apple.Boot.plist，加入Graphics Mode 1280x1024x32，结果不行。">
-<meta name="keywords" content="mac">
+  <meta name="description" content="Android不熟，所以记录一下设置开机启动图的方法。">
+<meta name="keywords" content="android">
 <meta property="og:type" content="article">
-<meta property="og:title" content="VMWare中安装Mac系统分辨率问题">
-<meta property="og:url" content="http://blog.xiaban666.com/2019/02/02/VMWare中安装Mac系统分辨率问题/index.html">
+<meta property="og:title" content="Android设置开机启动图">
+<meta property="og:url" content="http://blog.xiaban666.com/2019/02/20/Android设置开机启动图/index.html">
 <meta property="og:site_name" content="irobot&#39;s blog">
-<meta property="og:description" content="网上说 修改/Library/Preferences/SystemConfiguration/com.apple.Boot.plist，加入Graphics Mode 1280x1024x32，结果不行。">
+<meta property="og:description" content="Android不熟，所以记录一下设置开机启动图的方法。">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-02-02T06:59:54.631Z">
+<meta property="og:updated_time" content="2019-02-20T09:01:07.898Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="VMWare中安装Mac系统分辨率问题">
-<meta name="twitter:description" content="网上说 修改/Library/Preferences/SystemConfiguration/com.apple.Boot.plist，加入Graphics Mode 1280x1024x32，结果不行。">
+<meta name="twitter:title" content="Android设置开机启动图">
+<meta name="twitter:description" content="Android不熟，所以记录一下设置开机启动图的方法。">
   
   
   
@@ -79,14 +79,14 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-VMWare中安装Mac系统分辨率问题" class="article article-type-post" itemscope="" itemprop="blogPost">
+        <section id="main"><article id="post-Android设置开机启动图" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2019/02/02/VMWare中安装Mac系统分辨率问题/" class="article-date">
-  <time datetime="2019-02-02T03:55:56.000Z" itemprop="datePublished">2019-02-02</time>
+    <a href="/2019/02/20/Android设置开机启动图/" class="article-date">
+  <time datetime="2019-02-20T09:01:07.000Z" itemprop="datePublished">2019-02-20</time>
 </a>
     
   <div class="article-category">
-    <a class="article-category-link" href="/categories/Linux/">Linux</a>
+    <a class="article-category-link" href="/categories/Android/">Android</a>
   </div>
 
   </div>
@@ -97,7 +97,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      VMWare中安装Mac系统分辨率问题
+      Android设置开机启动图
     </h1>
   
 
@@ -105,20 +105,16 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>网上说 修改/Library/Preferences/SystemConfiguration/com.apple.Boot.plist，加入<key>Graphics Mode</key></p>
-<p><string>1280x1024x32</string>，结果不行。<br><a id="more"></a></p>
-<p>于是继续google，终于解决：<br>运行进入固件恢复模式<br>运行<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">csrutil disable</span><br><span class="line">reboot</span><br></pre></td></tr></table></figure></p>
-<p>可修改plist文件，保存后重新进入恢复模式开启<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">csrutil enable</span><br><span class="line">reboot</span><br></pre></td></tr></table></figure></p>
-<p>尝试仍然不行的，安装最新的vmtools，我装的是8.5,然后安装Vmsvga2,重启必然解决分辨率问题！</p>
-<p>over</p>
+        <p>Android不熟，所以记录一下设置开机启动图的方法。<br><a id="more"></a></p>
+<p>编辑res/styles.xml,修改如下，其中启动图放置在minpmap-*下，可根据分辨率对应修改，可编辑为9图去适应分辨率。<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">resources</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!-- Base application theme. --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">style</span> <span class="attr">name</span>=<span class="string">"AppTheme"</span> <span class="attr">parent</span>=<span class="string">"Theme.AppCompat.Light.NoActionBar"</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="xml">        <span class="comment">&lt;!-- Customize your theme here. --&gt;</span></span></span><br><span class="line"><span class="xml">        <span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"android:windowBackground"</span>&gt;</span>@mipmap/launch<span class="tag">&lt;/<span class="name">item</span>&gt;</span></span></span><br><span class="line"><span class="undefined">    </span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">resources</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://blog.xiaban666.com/2019/02/02/VMWare中安装Mac系统分辨率问题/" data-id="cjrmy9rnu0000duhtfnqitonl" class="article-share-link">Share</a>
+      <a data-url="http://blog.xiaban666.com/2019/02/20/Android设置开机启动图/" data-id="cjscyyc4p0000h8htmtxl3791" class="article-share-link">Share</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mac/">mac</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/android/">android</a></li></ul>
 
     </footer>
   </div>
@@ -126,19 +122,10 @@
     
 <nav id="article-nav">
   
-    <a href="/2019/02/20/Android设置开机启动图/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          Android设置开机启动图
-        
-      </div>
-    </a>
   
-  
-    <a href="/2019/01/25/理解什么是LGPL什么是GPL/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2019/02/02/VMWare中安装Mac系统分辨率问题/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">开源协议的解释BSD，Apache，GPL，LGPL，MIT</div>
+      <div class="article-nav-title">VMWare中安装Mac系统分辨率问题</div>
     </a>
   
 </nav>
