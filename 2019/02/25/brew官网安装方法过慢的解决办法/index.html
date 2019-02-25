@@ -5,20 +5,20 @@
   
 
   
-  <title>react-native 在新版Xcode（10+）glog-0.3.4 问题 | irobot&#39;s blog</title>
+  <title>brew官网安装方法过慢的解决办法 | irobot&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="解决方法是： github 问题地址  https://github.com/facebook/react-native/issues/19774 I had the same issue but manually triggering configure script (cd ./node_modules/react-native/third-party/glog-0.3.4 &amp;amp;&amp;amp">
-<meta name="keywords" content="ios">
+  <meta name="description" content="原理：修改install文件，替换源 第一步，获取install文件把官网给的脚本拿下来curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install &amp;gt;&amp;gt; brew_install 第二步，更改脚本中的资源链接，替换成清华大学的镜像就是把这两句BREW_REPO = “https://githu">
+<meta name="keywords" content="IOS">
 <meta property="og:type" content="article">
-<meta property="og:title" content="react-native 在新版Xcode（10+）glog-0.3.4 问题">
-<meta property="og:url" content="http://blog.xiaban666.com/2019/02/25/react-native-在新版Xcode（10-）glog-0-3-4-问题/index.html">
+<meta property="og:title" content="brew官网安装方法过慢的解决办法">
+<meta property="og:url" content="http://blog.xiaban666.com/2019/02/25/brew官网安装方法过慢的解决办法/index.html">
 <meta property="og:site_name" content="irobot&#39;s blog">
-<meta property="og:description" content="解决方法是： github 问题地址  https://github.com/facebook/react-native/issues/19774 I had the same issue but manually triggering configure script (cd ./node_modules/react-native/third-party/glog-0.3.4 &amp;amp;&amp;amp">
+<meta property="og:description" content="原理：修改install文件，替换源 第一步，获取install文件把官网给的脚本拿下来curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install &amp;gt;&amp;gt; brew_install 第二步，更改脚本中的资源链接，替换成清华大学的镜像就是把这两句BREW_REPO = “https://githu">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-02-25T01:52:59.400Z">
+<meta property="og:updated_time" content="2019-02-25T01:54:22.673Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="react-native 在新版Xcode（10+）glog-0.3.4 问题">
-<meta name="twitter:description" content="解决方法是： github 问题地址  https://github.com/facebook/react-native/issues/19774 I had the same issue but manually triggering configure script (cd ./node_modules/react-native/third-party/glog-0.3.4 &amp;amp;&amp;amp">
+<meta name="twitter:title" content="brew官网安装方法过慢的解决办法">
+<meta name="twitter:description" content="原理：修改install文件，替换源 第一步，获取install文件把官网给的脚本拿下来curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install &amp;gt;&amp;gt; brew_install 第二步，更改脚本中的资源链接，替换成清华大学的镜像就是把这两句BREW_REPO = “https://githu">
   
   
   
@@ -79,10 +79,10 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-react-native-在新版Xcode（10-）glog-0-3-4-问题" class="article article-type-post" itemscope="" itemprop="blogPost">
+        <section id="main"><article id="post-brew官网安装方法过慢的解决办法" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2019/02/25/react-native-在新版Xcode（10-）glog-0-3-4-问题/" class="article-date">
-  <time datetime="2019-02-25T01:52:38.000Z" itemprop="datePublished">2019-02-25</time>
+    <a href="/2019/02/25/brew官网安装方法过慢的解决办法/" class="article-date">
+  <time datetime="2019-02-25T01:54:22.000Z" itemprop="datePublished">2019-02-25</time>
 </a>
     
   <div class="article-category">
@@ -97,7 +97,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      react-native 在新版Xcode（10+）glog-0.3.4 问题
+      brew官网安装方法过慢的解决办法
     </h1>
   
 
@@ -105,21 +105,18 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>解决方法是：</p>
-<p>github 问题地址  <a href="https://github.com/facebook/react-native/issues/19774" target="_blank" rel="noopener">https://github.com/facebook/react-native/issues/19774</a></p>
-<p>I had the same issue but manually triggering configure script (cd ./node_modules/react-native/third-party/glog-0.3.4 &amp;&amp; ../../scripts/ios-configure-glog.sh) resolves it.</p>
-<p>进入到cd ./node_modules/react-native/third-party/glog-0.3.4</p>
-<p>然后</p>
-<h1 id="sh-scripts-ios-configure-glog-sh"><a href="#sh-scripts-ios-configure-glog-sh" class="headerlink" title="sh ../../scripts/ios-configure-glog.sh"></a>sh ../../scripts/ios-configure-glog.sh</h1><p>即可解决</p>
-<p>如出现 C compiler cannot create executables,需要安装gcc</p>
-<h1 id="brew-install-gcc"><a href="#brew-install-gcc" class="headerlink" title="brew install gcc"></a>brew install gcc</h1>
+        <p>原理：修改install文件，替换源</p>
+<p>第一步，获取install文件<br>把官网给的脚本拿下来<br>curl -fsSL <a href="https://raw.githubusercontent.com/Homebrew/install/master/install" target="_blank" rel="noopener">https://raw.githubusercontent.com/Homebrew/install/master/install</a> &gt;&gt; brew_install</p>
+<p>第二步，更改脚本中的资源链接，替换成清华大学的镜像<br>就是把这两句<br>BREW_REPO = “<a href="https://github.com/Homebrew/brew“.freeze" target="_blank" rel="noopener">https://github.com/Homebrew/brew“.freeze</a><br>CORE_TAP_REPO = “<a href="https://github.com/Homebrew/homebrew-core“.freeze" target="_blank" rel="noopener">https://github.com/Homebrew/homebrew-core“.freeze</a><br>更改为这两句<br>BREW_REPO = “<a href="https://mirrors.ustc.edu.cn/brew.git" target="_blank" rel="noopener">https://mirrors.ustc.edu.cn/brew.git</a> “.freeze<br>CORE_TAP_REPO = “<a href="https://mirrors.ustc.edu.cn/homebrew-core.git“.freeze" target="_blank" rel="noopener">https://mirrors.ustc.edu.cn/homebrew-core.git“.freeze</a><br>当然如果这个镜像有问题的话，可以换成别的</p>
+<p>第三步，执行脚本<br>/usr/bin/ruby brew_install</p>
+
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://blog.xiaban666.com/2019/02/25/react-native-在新版Xcode（10-）glog-0-3-4-问题/" data-id="cjsjouasc0000ffhthguthmri" class="article-share-link">Share</a>
+      <a data-url="http://blog.xiaban666.com/2019/02/25/brew官网安装方法过慢的解决办法/" data-id="cjsjovns80000jiht9bikpjex" class="article-share-link">Share</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ios/">ios</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/IOS/">IOS</a></li></ul>
 
     </footer>
   </div>
@@ -127,19 +124,10 @@
     
 <nav id="article-nav">
   
-    <a href="/2019/02/25/brew官网安装方法过慢的解决办法/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          brew官网安装方法过慢的解决办法
-        
-      </div>
-    </a>
   
-  
-    <a href="/2019/02/20/Android设置开机启动图/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2019/02/25/react-native-在新版Xcode（10-）glog-0-3-4-问题/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">Android设置开机启动图</div>
+      <div class="article-nav-title">react-native 在新版Xcode（10+）glog-0.3.4 问题</div>
     </a>
   
 </nav>
