@@ -80,6 +80,55 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-react-native-在新版Xcode（10-）glog-0-3-4-问题" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/02/25/react-native-在新版Xcode（10-）glog-0-3-4-问题/" class="article-date">
+  <time datetime="2019-02-25T01:52:38.000Z" itemprop="datePublished">2019-02-25</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/IOS/">IOS</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/02/25/react-native-在新版Xcode（10-）glog-0-3-4-问题/">react-native 在新版Xcode（10+）glog-0.3.4 问题</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>解决方法是：</p>
+<p>github 问题地址  <a href="https://github.com/facebook/react-native/issues/19774" target="_blank" rel="noopener">https://github.com/facebook/react-native/issues/19774</a></p>
+<p>I had the same issue but manually triggering configure script (cd ./node_modules/react-native/third-party/glog-0.3.4 &amp;&amp; ../../scripts/ios-configure-glog.sh) resolves it.</p>
+<p>进入到cd ./node_modules/react-native/third-party/glog-0.3.4</p>
+<p>然后</p>
+<h1 id="sh-scripts-ios-configure-glog-sh"><a href="#sh-scripts-ios-configure-glog-sh" class="headerlink" title="sh ../../scripts/ios-configure-glog.sh"></a>sh ../../scripts/ios-configure-glog.sh</h1><p>即可解决</p>
+<p>如出现 C compiler cannot create executables,需要安装gcc</p>
+<h1 id="brew-install-gcc"><a href="#brew-install-gcc" class="headerlink" title="brew install gcc"></a>brew install gcc</h1>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://blog.xiaban666.com/2019/02/25/react-native-在新版Xcode（10-）glog-0-3-4-问题/" data-id="cjsjouasc0000ffhthguthmri" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ios/">ios</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-Android设置开机启动图" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/02/20/Android设置开机启动图/" class="article-date">
@@ -461,49 +510,6 @@
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Jenkins/">Jenkins</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/apk/">apk</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-利用Jenkins快速替换资源文件打包ipa" class="article article-type-post" itemscope="" itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/01/23/利用Jenkins快速替换资源文件打包ipa/" class="article-date">
-  <time datetime="2019-01-23T08:20:35.000Z" itemprop="datePublished">2019-01-23</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/IOS/">IOS</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/01/23/利用Jenkins快速替换资源文件打包ipa/">利用Jenkins快速替换资源文件打包ipa</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>在IPA约定配置下，写的以下脚本，可以替换包名、启动图、包名，以及三方的一些APPID</p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://blog.xiaban666.com/2019/01/23/利用Jenkins快速替换资源文件打包ipa/" data-id="cjrbrjdo50025uuhtjibxex93" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/IOS/">IOS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Jenkins/">Jenkins</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ipa/">ipa</a></li></ul>
 
     </footer>
   </div>
