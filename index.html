@@ -156,10 +156,11 @@
 <p>github 问题地址  <a href="https://github.com/facebook/react-native/issues/19774" target="_blank" rel="noopener">https://github.com/facebook/react-native/issues/19774</a></p>
 <p>I had the same issue but manually triggering configure script (cd ./node_modules/react-native/third-party/glog-0.3.4 &amp;&amp; ../../scripts/ios-configure-glog.sh) resolves it.</p>
 <p>进入到cd ./node_modules/react-native/third-party/glog-0.3.4</p>
-<p>然后</p>
-<h1 id="sh-scripts-ios-configure-glog-sh"><a href="#sh-scripts-ios-configure-glog-sh" class="headerlink" title="sh ../../scripts/ios-configure-glog.sh"></a>sh ../../scripts/ios-configure-glog.sh</h1><p>即可解决</p>
-<p>如出现 C compiler cannot create executables,需要安装gcc</p>
-<h1 id="brew-install-gcc"><a href="#brew-install-gcc" class="headerlink" title="brew install gcc"></a>brew install gcc</h1>
+<p>然后<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># sh ../../scripts/ios-configure-glog.sh</span><br></pre></td></tr></table></figure></p>
+<p>即可解决</p>
+<p>如出现 C compiler cannot create executables,需要安装gcc<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># brew install gcc</span><br></pre></td></tr></table></figure></p>
+<p>如果还是报错，尝试清空LIBS 和 CFLAGS值<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># export LIBS=</span><br><span class="line"># export CFLAGS=</span><br></pre></td></tr></table></figure></p>
+
       
     </div>
     <footer class="article-footer">
