@@ -80,6 +80,64 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-OpenSSH多路复用Multiplexing配置" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/04/09/OpenSSH多路复用Multiplexing配置/" class="article-date">
+  <time datetime="2019-04-09T07:36:41.000Z" itemprop="datePublished">2019-04-09</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Linux/">Linux</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/04/09/OpenSSH多路复用Multiplexing配置/">OpenSSH多路复用Multiplexing配置</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>设置 Session Multiplexing<br>在客户端节点如下配置/etc/ssh/ssh_config 或~/.ssh/config 就可以直接开启 Session Multiplexing 功能：</p>
+<p>清单 1. 配置 Session Multiplexing<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Host *                                  #该部分的定义将应用到全部主机</span><br><span class="line">ControlMaster yes                       #Session Multiplexing 开关</span><br><span class="line">ControlPath   ~/.ssh/master-%r@%h:%p    #供 Session Multiplexing 使用的 Control Socket (Unix Socket) 路径</span><br><span class="line">ControlPersist yes                      #是否开启后台 Control master 模式</span><br></pre></td></tr></table></figure></p>
+<p>成功开启后，无论从该客户端节点用同一用户向同一 SSH Server 节点发起多少次连接，都有且仅有一条连接被建立，负责该节点到该 Server 之间的所有 SSH 包文。</p>
+<p>下面我们给出一个实际案例：如清单 2 所示，设有一个 SSH 服务器节点：9.115.241.18，一个 SSH 客户端节点：9.115.241.20。在客户端的 Session Multiplexing 开启的情况下，向服务器端建立若干个 SSH 会话，最后在客户端或服务器端检测实际存在的连接数，会发现整个过程仅仅有一条 TCP 被建立起来。</p>
+<p>清单 2. Multiplexing 实际使用案例</p>
+<h1 id="注：以下的操作均在客户端节点-9-115-241-20-完成"><a href="#注：以下的操作均在客户端节点-9-115-241-20-完成" class="headerlink" title="注：以下的操作均在客户端节点(9.115.241.20)完成"></a>注：以下的操作均在客户端节点(9.115.241.20)完成</h1><h1 id="建立一个连接到服务器端，定期执行-ls-命令打印出当前目录下的文件"><a href="#建立一个连接到服务器端，定期执行-ls-命令打印出当前目录下的文件" class="headerlink" title="建立一个连接到服务器端，定期执行 ls 命令打印出当前目录下的文件"></a>建立一个连接到服务器端，定期执行 ls 命令打印出当前目录下的文件</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ssh zhang@9.115.241.18 &apos;while /bin/true; do ls; sleep 1; done &gt; /dev/null&apos; &amp;[1] 11551</span><br></pre></td></tr></table></figure>
+<h1 id="再建立另一个连接到服务器端，执行同样的操作"><a href="#再建立另一个连接到服务器端，执行同样的操作" class="headerlink" title="再建立另一个连接到服务器端，执行同样的操作"></a>再建立另一个连接到服务器端，执行同样的操作</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ssh zhang@9.115.241.18 &apos;while /bin/true; do ls; sleep 1; done &gt; /dev/null&apos; &amp;[2] 11638</span><br></pre></td></tr></table></figure>
+<h1 id="最后，显示出当前节点接入服务器端-9-115-241-18-22-端口-SSH-协议-的所有连接"><a href="#最后，显示出当前节点接入服务器端-9-115-241-18-22-端口-SSH-协议-的所有连接" class="headerlink" title="最后，显示出当前节点接入服务器端(9.115.241.18)22 端口(SSH 协议)的所有连接"></a>最后，显示出当前节点接入服务器端(9.115.241.18)22 端口(SSH 协议)的所有连接</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ netstat -n | grep &apos;9.115.241.18:22&apos;</span><br><span class="line">tcp        0      0 9.115.241.18:22         9.115.241.20:52148      ESTABLISHED</span><br></pre></td></tr></table></figure>
+<p>由清单 2 最后的 netstat 命令可知，无论由客户端发起多少个 SSH 进程，都只会有一条连接建立起来，而这一条连接便承载了 9.115.241.20 到服务器端的所有 SSH 通讯。 </p>
+<p>例子<br>新建文件ip.txt</p>
+<p>清单 3.ip.txt</p>
+<p>127.0.0.1<br>127.0.0.1<br>127.0.0.1<br>127.0.0.1<br>127.0.0.1<br>127.0.0.1<br>127.0.0.1<br>127.0.0.1</p>
+<p> 新建脚本ssht.sh</p>
+<p>清单 4.ssht.sh<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/bash  </span><br><span class="line">while read line;do  </span><br><span class="line">        ssh -n $line &quot;echo ok &amp;&gt;/dev/null&quot; &amp;&amp; echo -e &quot;\e[1;32m OK \e[0m&quot; || echo -e &quot;\e[1;31m FAIL \e[0m&quot;  </span><br><span class="line">done &lt; ip.txt</span><br></pre></td></tr></table></figure></p>
+<p>然后执行 time sh ssht.sh</p>
+<p>清单 5.结果</p>
+<p> OK<br> OK<br> OK<br> OK<br> OK<br> OK<br> OK   </p>
+<p>real    0m17.460s<br>user    0m1.109s<br>sys     0m0.607s </p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://blog.xiaban666.com/2019/04/09/OpenSSH多路复用Multiplexing配置/" data-id="cju9h2aiz0000mthth96yb13j" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-热更新那点事" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/03/21/热更新那点事/" class="article-date">
@@ -471,49 +529,6 @@
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/js/">js</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/react-native/">react-native</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/talkingdata/">talkingdata</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-Talkingdata的react-native接口实现" class="article article-type-post" itemscope="" itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/01/23/Talkingdata的react-native接口实现/" class="article-date">
-  <time datetime="2019-01-23T09:18:41.000Z" itemprop="datePublished">2019-01-23</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/IOS/">IOS</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/01/23/Talkingdata的react-native接口实现/">Talkingdata的react-native接口实现</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>虽然比较简单，但是官方talkingdata并没有给出接口，自己实现了一下。</p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://blog.xiaban666.com/2019/01/23/Talkingdata的react-native接口实现/" data-id="cjrbrjdnb0002uuhtki08sr3p" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/android/">android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ios/">ios</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/react-native/">react-native</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/talkingdata/">talkingdata</a></li></ul>
 
     </footer>
   </div>
