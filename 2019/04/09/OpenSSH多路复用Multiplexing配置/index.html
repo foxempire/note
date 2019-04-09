@@ -7,18 +7,18 @@
   
   <title>OpenSSH多路复用Multiplexing配置 | irobot&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="设置 Session Multiplexing在客户端节点如下配置/etc/ssh/ssh_config 或~/.ssh/config 就可以直接开启 Session Multiplexing 功能： 清单 1. 配置 Session Multiplexing1234Host *                                  #该部分的定义将应用到全部主机ControlMast">
+  <meta name="description" content="设置 Session Multiplexing在客户端节点如下配置/etc/ssh/ssh_config 或~/.ssh/config 就可以直接开启 Session Multiplexing 功能：">
 <meta name="keywords" content="IT,AI,AR,Tensorflow,Face detection,Postgresql,Mysql">
 <meta property="og:type" content="article">
 <meta property="og:title" content="OpenSSH多路复用Multiplexing配置">
 <meta property="og:url" content="http://blog.xiaban666.com/2019/04/09/OpenSSH多路复用Multiplexing配置/index.html">
 <meta property="og:site_name" content="irobot&#39;s blog">
-<meta property="og:description" content="设置 Session Multiplexing在客户端节点如下配置/etc/ssh/ssh_config 或~/.ssh/config 就可以直接开启 Session Multiplexing 功能： 清单 1. 配置 Session Multiplexing1234Host *                                  #该部分的定义将应用到全部主机ControlMast">
+<meta property="og:description" content="设置 Session Multiplexing在客户端节点如下配置/etc/ssh/ssh_config 或~/.ssh/config 就可以直接开启 Session Multiplexing 功能：">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-04-09T07:36:41.134Z">
+<meta property="og:updated_time" content="2019-04-09T08:23:02.689Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="OpenSSH多路复用Multiplexing配置">
-<meta name="twitter:description" content="设置 Session Multiplexing在客户端节点如下配置/etc/ssh/ssh_config 或~/.ssh/config 就可以直接开启 Session Multiplexing 功能： 清单 1. 配置 Session Multiplexing1234Host *                                  #该部分的定义将应用到全部主机ControlMast">
+<meta name="twitter:description" content="设置 Session Multiplexing在客户端节点如下配置/etc/ssh/ssh_config 或~/.ssh/config 就可以直接开启 Session Multiplexing 功能：">
   
   
   
@@ -105,7 +105,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>设置 Session Multiplexing<br>在客户端节点如下配置/etc/ssh/ssh_config 或~/.ssh/config 就可以直接开启 Session Multiplexing 功能：</p>
+        <p>设置 Session Multiplexing<br>在客户端节点如下配置/etc/ssh/ssh_config 或~/.ssh/config 就可以直接开启 Session Multiplexing 功能：<br><a id="more"></a></p>
 <p>清单 1. 配置 Session Multiplexing<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Host *                                  #该部分的定义将应用到全部主机</span><br><span class="line">ControlMaster yes                       #Session Multiplexing 开关</span><br><span class="line">ControlPath   ~/.ssh/master-%r@%h:%p    #供 Session Multiplexing 使用的 Control Socket (Unix Socket) 路径</span><br><span class="line">ControlPersist yes                      #是否开启后台 Control master 模式</span><br></pre></td></tr></table></figure></p>
 <p>成功开启后，无论从该客户端节点用同一用户向同一 SSH Server 节点发起多少次连接，都有且仅有一条连接被建立，负责该节点到该 Server 之间的所有 SSH 包文。</p>
 <p>下面我们给出一个实际案例：如清单 2 所示，设有一个 SSH 服务器节点：9.115.241.18，一个 SSH 客户端节点：9.115.241.20。在客户端的 Session Multiplexing 开启的情况下，向服务器端建立若干个 SSH 会话，最后在客户端或服务器端检测实际存在的连接数，会发现整个过程仅仅有一条 TCP 被建立起来。</p>
@@ -122,7 +122,7 @@
 <p>然后执行 time sh ssht.sh</p>
 <p>清单 5.结果</p>
 <p> OK<br> OK<br> OK<br> OK<br> OK<br> OK<br> OK   </p>
-<p>real    0m17.460s<br>user    0m1.109s<br>sys     0m0.607s </p>
+<p>real    0m17.460s<br>user    0m1.109s<br>sys     0m0.607s</p>
 
       
     </div>
