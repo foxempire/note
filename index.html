@@ -80,6 +80,92 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-npm私有仓库搭建" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/04/15/npm私有仓库搭建/" class="article-date">
+  <time datetime="2019-04-15T02:14:00.000Z" itemprop="datePublished">2019-04-15</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/JS/">JS</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/04/15/npm私有仓库搭建/">npm私有仓库搭建</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>背景<br>Node.js开发本地项目，有时不同项目之间存在依赖，如果不想把项目发布到npm社区的仓库，则需要有自己本地的仓库。<br>有些公司采用的是内网开发，很多npm资源无法从内网去下载。<br>sinopia（主流）<br>使用文件系统作为存储，仅保存用户需要的包，如果本地仓库没有对应的包，则从指定的registry下载，默认为npmjs.org，可以改成淘宝的镜像。</p>
+<p>安装<br>Sinopia的安装比较简单，只需使用npm一条安装命令即可：</p>
+<p>npm install -g sinopia 或者 yarn global add sinopia<br>安装遇到问题<br>1.python</p>
+<p>gyp ERR! stack Error: Can’t find Python executable “python”, you can set the PYTHON env variable.<br>node-gyp依赖python 2.7。安装python2.7，并把它添加到环境变量PATH,npm config set python python2.7<br>2.不支持fs-ext和crypt3<br><img src="https://images2015.cnblogs.com/blog/966107/201707/966107-20170707115624222-2142801851.png" alt=""></p>
+<p>只要有出现以上图的或者 其他关于crypt3的问题的话， 看下面解决方法</p>
+<p>查看sinopia源码（看你安装在哪）里的package.yaml</p>
+<p>optionalDependencies:</p>
+<h1 id="those-are-native-modules-that-could-fail-to-compile"><a href="#those-are-native-modules-that-could-fail-to-compile" class="headerlink" title="those are native modules that could fail to compile"></a>those are native modules that could fail to compile</h1><h1 id="and-unavailable-on-windows"><a href="#and-unavailable-on-windows" class="headerlink" title="and unavailable on windows"></a>and unavailable on windows</h1><p>  fs-ext: ‘&gt;=0.4.1 &lt;1.0.0-0’<br>  crypt3: ‘&gt;=0.1.6 &lt;1.0.0-0’ # for sinopia-htpasswd<br>删除sinopia安装目录node_modules里的fs-ext和crypt3相关的包，否则执行npm添加用户和登陆验证时会报错。包括：.0.2.0@crypt3，.0.6.0@fs-ext，crypt3和fs-ext以及sinopia-htpasswd\node_modules下的crypt3和fs-ext</p>
+<p>使用<br>启动： sinopia<br><img src="https://images2015.cnblogs.com/blog/966107/201707/966107-20170707123311940-2146176203.png" alt=""><br>你也可以打开 地址看一下<a href="http://localhost:4873/" target="_blank" rel="noopener">http://localhost:4873/</a><br><img src="https://images2015.cnblogs.com/blog/966107/201707/966107-20170707133156456-1994408696.png" alt=""><br>就说明成功了</p>
+<p>换npm 源<br>npm config set registry <a href="http://xxx.xx.xx.xx:4873/" target="_blank" rel="noopener">http://xxx.xx.xx.xx:4873/</a><br>//xxx.xx.xx.xx 为自己的ip<br>建议使用用 nrm<br>npm install -g nrm # 安装nrm<br>nrm add name <a href="http://XXXXXX:4873" target="_blank" rel="noopener">http://XXXXXX:4873</a> # 添加本地的npm镜像地址<br>nrm use name # 使用本址的镜像地址     name为你要增加的地址<br>新建用户<br>npm adduser<br>Username: test<br>Password: test<br>Email: (this IS public) xxx@xxxx<br>然后就可以发布包了<br>npm publish     // 在自己要发布的包 路径打这个命令<br>这边发布的包可以 是自己写的一些资源 或者是其他的 但是要根据npm 包的规范</p>
+<p>本人配置文件<br>#</p>
+<h1 id="This-is-the-default-config-file-It-allows-all-users-to-do-anything"><a href="#This-is-the-default-config-file-It-allows-all-users-to-do-anything" class="headerlink" title="This is the default config file. It allows all users to do anything,"></a>This is the default config file. It allows all users to do anything,</h1><h1 id="so-don’t-use-it-on-production-systems"><a href="#so-don’t-use-it-on-production-systems" class="headerlink" title="so don’t use it on production systems."></a>so don’t use it on production systems.</h1><p>#</p>
+<h1 id="Look-here-for-more-config-file-examples"><a href="#Look-here-for-more-config-file-examples" class="headerlink" title="Look here for more config file examples:"></a>Look here for more config file examples:</h1><h1 id="https-github-com-rlidwka-sinopia-tree-master-conf"><a href="#https-github-com-rlidwka-sinopia-tree-master-conf" class="headerlink" title="https://github.com/rlidwka/sinopia/tree/master/conf"></a><a href="https://github.com/rlidwka/sinopia/tree/master/conf" target="_blank" rel="noopener">https://github.com/rlidwka/sinopia/tree/master/conf</a></h1><p>#</p>
+<h1 id="path-to-a-directory-with-all-packages"><a href="#path-to-a-directory-with-all-packages" class="headerlink" title="path to a directory with all packages"></a>path to a directory with all packages</h1><p>storage: ./storage    # npm包存放的路径</p>
+<p>auth:<br>  htpasswd:<br>    file: ./htpasswd</p>
+<pre><code># Maximum amount of users allowed to register, defaults to &quot;+inf&quot;.
+# You can set this to -1 to disable registration.
+# max_users: 1000
+max_users: 1000     # 默认为1000，改为-1，禁止注册
+</code></pre><h1 id="a-list-of-other-known-repositories-we-can-talk-to"><a href="#a-list-of-other-known-repositories-we-can-talk-to" class="headerlink" title="a list of other known repositories we can talk to"></a>a list of other known repositories we can talk to</h1><p>uplinks:<br>  npmjs:<br>    url: <a href="http://registry.npm.taobao.org/" target="_blank" rel="noopener">http://registry.npm.taobao.org/</a>  # 默认为npm的官网，由于国情，修改 url 让sinopia使用 淘宝的npm镜像地址</p>
+<p>packages:<br>  ‘@<em>/</em>‘:</p>
+<pre><code># scoped packages
+access: $all
+publish: $authenticated
+</code></pre><p>  ‘*’:</p>
+<pre><code># allow all users (including non-authenticated users) to read and
+# publish all packages
+#
+# you can specify usernames/groupnames (depending on your auth plugin)
+# and three keywords: &quot;$all&quot;, &quot;$anonymous&quot;, &quot;$authenticated&quot;
+access: $all
+
+# allow all known users to publish packages
+# (anyone can register by default, remember?)
+publish: $authenticated
+
+# if package is not available locally, proxy requests to &apos;npmjs&apos; registry
+# proxy: npmjs   #这个去掉的话,sinopia 将不去下载依赖包   如果只是要放自己资源仓库的话就去掉      
+# 
+</code></pre><h1 id="log-settings"><a href="#log-settings" class="headerlink" title="log settings"></a>log settings</h1><p>logs:</p>
+<ul>
+<li>{type: stdout, format: pretty, level: http}<br>#- {type: file, path: sinopia.log, level: info}</li>
+</ul>
+<h1 id="you-can-specify-listen-address-or-simply-a-port"><a href="#you-can-specify-listen-address-or-simply-a-port" class="headerlink" title="you can specify listen address (or simply a port)"></a>you can specify listen address (or simply a port)</h1><p>listen: 0.0.0.0:4873  # 默认没有，只能在本机访问，添加后可以通过外网访问。<br>注意：配置文件 是在你的用户名 如：本人就admin 找到目录就可以了 （win）</p>
+<p><img src="https://images2015.cnblogs.com/blog/966107/201707/966107-20170707133515815-576489477.png" alt=""></p>
+<p>storage: 仓库保存的路径<br>htpasswd: 保存密码信息 只有新建用户后才 有这个文件<br>config.yaml: 这个是本地的 配置文件 信息（改这个）</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://blog.xiaban666.com/2019/04/15/npm私有仓库搭建/" data-id="cjuhq6ga600004lhtow0gp1a3" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-OpenSSH多路复用Multiplexing配置" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/04/09/OpenSSH多路复用Multiplexing配置/" class="article-date">
@@ -469,49 +555,6 @@
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/cube/">cube</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/gist/">gist</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/postgresql/">postgresql</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-Talkingdata的js端代码" class="article article-type-post" itemscope="" itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/01/23/Talkingdata的js端代码/" class="article-date">
-  <time datetime="2019-01-23T09:25:40.000Z" itemprop="datePublished">2019-01-23</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/JS/">JS</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/01/23/Talkingdata的js端代码/">Talkingdata的js端代码</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>JS端比较简单也列以下</p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://blog.xiaban666.com/2019/01/23/Talkingdata的js端代码/" data-id="cjrbrjdn60000uuht8uibc993" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/js/">js</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/react-native/">react-native</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/talkingdata/">talkingdata</a></li></ul>
 
     </footer>
   </div>
