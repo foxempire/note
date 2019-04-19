@@ -102,265 +102,10 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="1-为什么需要服务发现"><a href="#1-为什么需要服务发现" class="headerlink" title="1 为什么需要服务发现"></a>1 为什么需要服务发现</h1><p>简单来说，服务化的核心就是将传统的一站式应用根据业务拆分成一个一个的服务，而微服务在这个基础上要更彻底地去耦合（不再共享DB、KV，去掉重量级ESB），并且强调DevOps和快速演化。这就要求我们必须采用与一站式时代、泛SOA时代不同的技术栈，而Spring Cloud就是其中的佼佼者。</p>
-<blockquote>
-<p>DevOps是英文Development和Operations的合体，他要求开发、测试、运维进行一体化的合作，进行更小、更频繁、更自动化的应用发布，以及围绕应用架构来构建基础设施的架构。这就要求应用充分的内聚，也方便运维和管理。这个理念与微服务理念不谋而合。</p>
-</blockquote>
-<p>接下来我们从服务化架构演进的角度来看看为什么Spring Cloud更适应微服务架构。</p>
-<h2 id="1-1-从使用nginx说起"><a href="#1-1-从使用nginx说起" class="headerlink" title="1.1 从使用nginx说起"></a>1.1 从使用nginx说起</h2><p>最初的服务化解决方案是给提供相同服务提供一个统一的域名，然后服务调用者向这个域名发送HTTP请求，由Nginx负责请求的分发和跳转。</p>
-<p><img src="//upload-images.jianshu.io/upload_images/4718034-b56204f6738c1fbe.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/530/format/webp" alt=""></p>
-<p>NginxArch.png</p>
-<p>这种架构存在很多问题:</p>
-<ul>
-<li>Nginx作为中间层，在配置文件中耦合了服务调用的逻辑，这削弱了微服务的完整性，也使得Nginx在一定程度上变成了一个重量级的ESB。</li>
-<li>服务的信息分散在各个系统，无法统一管理和维护。每一次的服务调用都是一次尝试，服务消费者并不知道有哪些实例在给他们提供服务。这不符合DevOps的理念。</li>
-<li>无法直观的看到服务提供者和服务消费者当前的运行状况和通信频率。这也不符合DevOps的理念。</li>
-<li>消费者的失败重发，负载均衡等都没有统一策略，这加大了开发每个服务的难度，不利于快速演化。</li>
-</ul>
-<p>为了解决上面的问题，我们需要一个<strong>现成的</strong>中心组件对服务进行整合，将每个服务的信息汇总，包括服务的组件名称、地址、数量等。服务的调用方在请求某项服务时首先通过中心组件获取提供这项服务的实例的信息（IP、端口等），再通过默认或自定义的策略选择该服务的某一提供者<strong>直接</strong>进行访问。所以，我们引入了Dubbo。</p>
-<h2 id="1-2-基于Dubbo实现微服务"><a href="#1-2-基于Dubbo实现微服务" class="headerlink" title="1.2 基于Dubbo实现微服务"></a>1.2 基于Dubbo实现微服务</h2><p>Dubbo是阿里开源的一个SOA服务治理解决方案，文档丰富，在国内的使用度非常高。</p>
-<p>使用Dubbo构建的微服务，已经可以比较好地解决上面提到的问题：</p>
-<p><img src="//upload-images.jianshu.io/upload_images/4718034-23485aacd9d7c022.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/513/format/webp" alt=""></p>
-<p>DubboArch.png</p>
-<ul>
-<li><p>调用中间层变成了可选组件，消费者可以直接访问服务提供者。</p>
-</li>
-<li><p>服务信息被集中到Registry中，形成了服务治理的中心组件。</p>
-</li>
-<li><p>通过Monitor监控系统，可以直观地展示服务调用的统计信息。</p>
-</li>
-<li><p>Consumer可以进行负载均衡、服务降级的选择。</p>
-</li>
-</ul>
-<p>但是对于微服务架构而言，Dubbo也并不是十全十美的：</p>
-<ul>
-<li><p>Registry严重依赖第三方组件（zookeeper或者redis），当这些组件出现问题时，服务调用很快就会中断。</p>
-</li>
-<li><p>DUBBO只支持RPC调用。使得服务提供方与调用方在代码上产生了强依赖，服务提供者需要不断将包含公共代码的jar包打包出来供消费者使用。一旦打包出现问题，就会导致服务调用出错。</p>
-</li>
-<li><p>最为重要的是，DUBBO现在已经停止维护了，对于技术发展的新需求，需要由开发者自行拓展升级。这对于很多想要采用微服务架构的中小软件组织，显然是不太合适的。</p>
-</li>
-</ul>
-<blockquote>
-<p>目前Github社区上有一个DUBBO的升级版，叫DUBBOX，提供了更高效的RPC序列化方式和REST调用方式。但是该项目也基本停止维护了。</p>
-</blockquote>
-<h2 id="1-3-新的选择——Spring-Cloud"><a href="#1-3-新的选择——Spring-Cloud" class="headerlink" title="1.3 新的选择——Spring Cloud"></a>1.3 新的选择——Spring Cloud</h2><p>作为新一代的服务框架，Spring Cloud提出的口号是开发“面向云环境的应用程序”，它为微服务架构提供了更加全面的技术支持。<br>结合我们一开始提到的微服务的诉求，我们把Spring Cloud与DUBBO进行一番对比：</p>
-<p>微服务需要的功能</p>
-<table>
-<thead>
-<tr>
-<th>微服务需要的功能</th>
-<th>Dubbo</th>
-<th>Spring Cloud</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>服务注册和发现</td>
-<td>Zookeeper</td>
-<td>Eureka</td>
-</tr>
-<tr>
-<td>服务调用方式</td>
-<td>RPC</td>
-<td>RESTful API</td>
-<td></td>
-</tr>
-<tr>
-<td>断路器</td>
-<td>有</td>
-<td>有</td>
-<td></td>
-</tr>
-<tr>
-<td>负载均衡</td>
-<td>有</td>
-<td>有</td>
-</tr>
-<tr>
-<td>服务路由和过滤</td>
-<td>有</td>
-<td>有</td>
-</tr>
-<tr>
-<td>分布式配置</td>
-<td>无</td>
-<td>有</td>
-</tr>
-<tr>
-<td>分布式锁</td>
-<td>无</td>
-<td>计划开发</td>
-</tr>
-<tr>
-<td>集群选主</td>
-<td>无</td>
-<td>有</td>
-</tr>
-<tr>
-<td>分布式消息</td>
-<td>无</td>
-<td>有</td>
-</tr>
-</tbody>
-</table>
-<blockquote>
-<p>Spring Cloud抛弃了Dubbo的RPC通信，采用的是基于HTTP的REST方式。严格来说，这两种方式各有优劣。虽然从一定程度上来说，后者牺牲了服务调用的性能，但也避免了上面提到的原生RPC带来的问题。而且REST相比RPC更为灵活，服务提供方和调用方的依赖只依靠一纸契约，不存在代码级别的强依赖，这在强调快速演化的微服务环境下，显得更加合适。</p>
-</blockquote>
-<p>很明显，Spring Cloud的功能比DUBBO更加强大，涵盖面更广，而且作为Spring的拳头项目，它也能够与Spring Framework、Spring Boot、Spring Data、Spring Batch等其他Spring项目完美融合，这些对于微服务而言是至关重要的。前面提到，微服务背后一个重要的理念就是持续集成、快速交付，而在服务内部使用一个统一的技术框架，显然比把分散的技术组合到一起更有效率。更重要的是，相比于Dubbo，它是一个正在持续维护的、社区更加火热的开源项目，这就保证使用它构建的系统，可以持续地得到开源力量的支持。</p>
-<h1 id="2-Spring-Cloud-Netflix-组件"><a href="#2-Spring-Cloud-Netflix-组件" class="headerlink" title="2. Spring Cloud Netflix 组件"></a>2. Spring Cloud Netflix 组件</h1><blockquote>
-<p>Netflix和Spring Cloud是什么关系呢？Netflix是一家成功实践微服务架构的互联网公司，几年前，Netflix就把它的几乎整个微服务框架栈开源贡献给了社区。Spring背后的Pivotal在2015年推出的Spring Cloud开源产品，主要对Netflix开源组件的进一步封装，方便Spring开发人员构建微服务基础框架。<br>对于微服务的治理而言，核心就是服务的注册和发现。所以选择哪个组件，很大程度上要看它对于服务注册与发现的解决方案。在这个领域，开源架构很多，最常见的是Zookeeper，但这并不是一个最佳选择。</p>
-</blockquote>
-<p>在分布式系统领域有个著名的CAP定理：<strong>C——数据一致性，A——服务可用性，P——服务对网络分区故障的容错性</strong>。这三个特性在任何分布式系统中不能同时满足，最多同时满足两个。</p>
-<p>Zookeeper是著名Hadoop的一个子项目，很多场景下Zookeeper也作为Service发现服务解决方案。<strong>Zookeeper保证的是CP</strong>，即任何时刻对<br>Zookeeper的访问请求能得到一致的数据结果，同时系统对网络分割具备容错性，但是它不能保证每次服务请求的可用性。从实际情况来分析，在使用Zookeeper获取服务列表时，如果zookeeper正在选主，或者Zookeeper集群中半数以上机器不可用，那么将就无法获得数据了。所以说，Zookeeper不能保证服务可用性。</p>
-<p>诚然，对于大多数分布式环境，尤其是涉及到数据存储的场景，数据一致性应该是首先被保证的，这也是zookeeper设计成CP的原因。但是对于服务发现场景来说，情况就不太一样了：针对同一个服务，即使注册中心的不同节点保存的服务提供者信息不尽相同，也并不会造成灾难性的后果。因为对于服务消费者来说，能消费才是最重要的——拿到可能不正确的服务实例信息后尝试消费一下，也好过因为无法获取实例信息而不去消费。<strong>所以，对于服务发现而言，可用性比数据一致性更加重要——AP胜过CP</strong>。而Spring Cloud Netflix在设计Eureka时遵守的就是AP原则。</p>
-<p>Eureka本身是Netflix开源的一款提供服务注册和发现的产品，并且提供了相应的Java封装。在它的实现中，节点之间是相互平等的，部分注册中心的节点挂掉也不会对集群造成影响，即使集群只剩一个节点存活，也可以正常提供发现服务。哪怕是所有的服务注册节点都挂了，Eureka Clients上也会缓存服务调用的信息。这就保证了我们微服务之间的互相调用是足够健壮的。</p>
-<p>除此之外，Spring Cloud Netflix背后强大的开源力量，也促使我们选择了Spring Cloud Netflix：</p>
-<ul>
-<li>前文提到过，Spring Cloud的社区十分活跃，其在业界的应用也十分广泛（尤其是国外），而且整个框架也经受住了Netflix严酷生产环境的考验。</li>
-<li>除了服务注册和发现，Spring Cloud Netflix的其他功能也十分强大，包括Ribbon，hystrix，Feign，Zuul等组件，结合到一起，让服务的调用、路由也变得异常容易。</li>
-<li>Spring Cloud Netflix作为Spring的重量级整合框架，使用它也意味着我们能从Spring获取到巨大的便利。Spring Cloud的其他子项目，比如Spring Cloud Stream、Spring Cloud Config等等，都为微服务的各种需求提供了一站式的解决方案。</li>
-</ul>
-<h1 id="3-Spring-Cloud-服务发现"><a href="#3-Spring-Cloud-服务发现" class="headerlink" title="3. Spring Cloud 服务发现"></a>3. Spring Cloud 服务发现</h1><p>Spring Cloud Netflix的核心是用于服务注册与发现的Eureka，接下来我们将以Eureka为线索，介绍Eureka、Ribbon、Hystrix、Feign这些Spring Cloud Netflix主要组件。</p>
-<h2 id="3-1-服务注册与发现——Eureka"><a href="#3-1-服务注册与发现——Eureka" class="headerlink" title="3.1 服务注册与发现——Eureka"></a>3.1 服务注册与发现——Eureka</h2><blockquote>
-<p>Eureka这个词来源于古希腊语，意为“我找到了！我发现了！”，据传，阿基米德在洗澡时发现浮力原理，高兴得来不及穿上裤子，跑到街上大喊：“Eureka(我找到了)！”。</p>
-</blockquote>
-<p>Eureka由多个instance(服务实例)组成，这些服务实例可以分为两种：Eureka Server和Eureka Client。为了便于理解，我们将Eureka client再分为Service Provider和Service Consumer。如下图所示：</p>
-<p><img src="//upload-images.jianshu.io/upload_images/4718034-1ca157c844dd8e2d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/550/format/webp" alt=""></p>
-<p>EurekaRole.png</p>
-<ul>
-<li>Eureka Server：服务的注册中心，负责维护注册的服务列表。</li>
-<li>Service Provider：服务提供方，作为一个Eureka Client，向Eureka Server做服务注册、续约和下线等操作，注册的主要数据包括服务名、机器ip、端口号、域名等等。</li>
-<li>Service Consumer：服务消费方，作为一个Eureka Client，向Eureka Server获取Service Provider的注册信息，并通过远程调用与Service Provider进行通信。</li>
-</ul>
-<blockquote>
-<p>Service Provider和Service Consumer不是严格的概念，Service Consumer也可以随时向Eureka Server注册，来让自己变成一个Service Provider。</p>
-</blockquote>
-<hr>
-<blockquote>
-<p>Spring Cloud针对服务注册与发现，进行了一层抽象，并提供了三种实现：Eureka、Consul、Zookeeper。目前支持得最好的就是Eureka，其次是Consul，最后是Zookeeper。</p>
-</blockquote>
-<h3 id="3-1-1-Eureka-Server"><a href="#3-1-1-Eureka-Server" class="headerlink" title="3.1.1 Eureka Server"></a>3.1.1 Eureka Server</h3><p>Eureka Server作为一个独立的部署单元，以REST API的形式为服务实例提供了注册、管理和查询等操作。同时，Eureka Server也为我们提供了可视化的监控页面，可以直观地看到各个Eureka Server当前的运行状态和所有已注册服务的情况。</p>
-<h4 id="3-1-1-1-Eureka-Server的高可用集群"><a href="#3-1-1-1-Eureka-Server的高可用集群" class="headerlink" title="3.1.1.1 Eureka Server的高可用集群"></a>3.1.1.1 Eureka Server的高可用集群</h4><p>Eureka Server可以运行多个实例来构建集群，解决单点问题，但不同于ZooKeeper的选举leader的过程，Eureka Server采用的是Peer to Peer对等通信。这是一种去中心化的架构，无master/slave区分，每一个Peer都是对等的。在这种架构中，节点通过彼此互相注册来提高可用性，每个节点需要添加一个或多个有效的serviceUrl指向其他节点。每个节点都可被视为其他节点的副本。</p>
-<p>如果某台Eureka Server宕机，Eureka Client的请求会自动切换到新的Eureka Server节点，当宕机的服务器重新恢复后，Eureka会再次将其纳入到服务器集群管理之中。当节点开始接受客户端请求时，所有的操作都会进行replicateToPeer（节点间复制）操作，将请求复制到其他Eureka Server当前所知的所有节点中。</p>
-<p>一个新的Eureka Server节点启动后，会首先尝试从邻近节点获取所有实例注册表信息，完成初始化。Eureka Server通过getEurekaServiceUrls()方法获取所有的节点，并且会通过心跳续约的方式定期更新。默认配置下，如果Eureka Server在一定时间内没有接收到某个服务实例的心跳，Eureka Server将会注销该实例（默认为90秒，通过eureka.instance.lease-expiration-duration-in-seconds配置）。当Eureka Server节点在短时间内丢失过多的心跳时（比如发生了网络分区故障），那么这个节点就会进入自我保护模式。下图为Eureka官网的架构图</p>
-<blockquote>
-<p>什么是自我保护模式？默认配置下，如果Eureka Server每分钟收到心跳续约的数量低于一个阈值（instance的数量<em>(60/每个instance的心跳间隔秒数)</em>自我保护系数），就会触发自我保护。在自我保护模式中，Eureka Server会保护服务注册表中的信息，不再注销任何服务实例。当它收到的心跳数重新恢复到阈值以上时，该Eureka Server节点就会自动退出自我保护模式。它的设计哲学前面提到过，那就是宁可保留错误的服务注册信息，也不盲目注销任何可能健康的服务实例。该模式可以通过eureka.server.enable-self-preservation = false来禁用，同时eureka.instance.lease-renewal-interval-in-seconds可以用来更改心跳间隔，eureka.server.renewal-percent-threshold可以用来修改自我保护系数（默认0.85）。</p>
-</blockquote>
-<p>EurekaArchitecture.png</p>
-<h4 id="3-1-1-2-Eureka-Server的Region、Zone"><a href="#3-1-1-2-Eureka-Server的Region、Zone" class="headerlink" title="3.1.1.2 Eureka Server的Region、Zone"></a>3.1.1.2 Eureka Server的Region、Zone</h4><p>Eureka的官方文档对Regin、Zone几乎没有提及，由于概念抽象，新手很难理解。因此，我们先来了解一下Region、Zone、Eureka集群三者的关系，如下图所示：</p>
-<p>RegionZone.png</p>
-<p>region和zone（或者Availability Zone）均是AWS的概念。在非AWS环境下，我们可以先简单地将region理解为Eureka集群，zone理解成机房。上图就可以理解为一个Eureka集群被部署在了zone1机房和zone2机房中。</p>
-<h3 id="3-1-2-Service-Provider"><a href="#3-1-2-Service-Provider" class="headerlink" title="3.1.2 Service Provider"></a>3.1.2 Service Provider</h3><h4 id="3-1-2-1-服务注册"><a href="#3-1-2-1-服务注册" class="headerlink" title="3.1.2.1 服务注册"></a>3.1.2.1 服务注册</h4><p>Service Provider本质上是一个Eureka Client。它启动时，会调用服务注册方法，向Eureka Server注册自己的信息。Eureka Server会维护一个已注册服务的列表，这个列表为一个嵌套的hash map：</p>
-<ul>
-<li>第一层，application name和对应的服务实例。</li>
-<li>第二层，服务实例及其对应的注册信息，包括IP，端口号等。</li>
-</ul>
-<p>当实例状态发生变化时（如自身检测认为Down的时候），也会向Eureka Server更新自己的服务状态，同时用replicateToPeers()向其它Eureka Server节点做状态同步。</p>
-<p>![Uploading EurekaServerEvict_655129.png . . .]</p>
-<h4 id="3-1-2-2-续约与剔除"><a href="#3-1-2-2-续约与剔除" class="headerlink" title="3.1.2.2 续约与剔除"></a>3.1.2.2 续约与剔除</h4><p>前面提到过，服务实例启动后，会周期性地向Eureka Server发送心跳以续约自己的信息，避免自己的注册信息被剔除。续约的方式与服务注册基本一致：首先更新自身状态，再同步到其它Peer。</p>
-<p>如果Eureka Server在一段时间内没有接收到某个微服务节点的心跳，Eureka Server将会注销该微服务节点（自我保护模式除外）。</p>
-<p>EurekaServerRegister.png</p>
-<h3 id="3-1-3-Service-Consumer"><a href="#3-1-3-Service-Consumer" class="headerlink" title="3.1.3 Service Consumer"></a>3.1.3 Service Consumer</h3><p>Service Consumer本质上也是一个Eureka Client（它也会向Eureka Server注册，只是这个注册信息无关紧要罢了）。它启动后，会从Eureka Server上获取所有实例的注册信息，包括IP地址、端口等，并缓存到本地。这些信息默认每30秒更新一次。前文提到过，如果与Eureka Server通信中断，Service Consumer仍然可以通过本地缓存与Service Provider通信。</p>
-<p>实际开发Eureka的过程中，有时会遇见Service Consumer获取到Server Provider的信息有延迟，在<a href="https://link.jianshu.com?t=https://github.com/Netflix/eureka/wiki/Understanding-eureka-client-server-communication" target="_blank" rel="noopener">Eureka Wiki</a>中有这么一段话:</p>
-<blockquote>
-<p>All operations from Eureka client may take some time to reflect in the Eureka servers and subsequently in other Eureka clients. This is because of the caching of the payload on the eureka server which is refreshed periodically to reflect new information. Eureka clients also fetch deltas periodically. Hence, it may take up to 2 mins for changes to propagate to all Eureka clients.</p>
-</blockquote>
-<p>最后一句话提到，服务端的更改可能需要2分钟才能传播到所有客户端，至于原因并没有介绍。这是因为Eureka有三处缓存和一处延迟造成的。</p>
-<ul>
-<li>Eureka Server对注册列表进行缓存，默认时间为30s。</li>
-<li>Eureka Client对获取到的注册信息进行缓存，默认时间为30s。</li>
-<li>Ribbon会从上面提到的Eureka Client获取服务列表，将负载均衡后的结果缓存30s。</li>
-<li>如果不是在Spring Cloud环境下使用这些组件(Eureka, Ribbon)，服务启动后并不会马上向Eureka注册，而是需要等到第一次发送心跳请求时才会注册。心跳请求的发送间隔默认是30s。Spring Cloud对此做了修改，服务启动后会马上注册。</li>
-</ul>
-<p>基于Service Consumer获取到的服务实例信息，我们就可以进行服务调用了。而Spring Cloud也为Service Consumer提供了丰富的服务调用工具：</p>
-<ul>
-<li>Ribbon，实现客户端的负载均衡。</li>
-<li>Hystrix，断路器。</li>
-<li>Feign，RESTful Web Service客户端，整合了Ribbon和Hystrix。</li>
-</ul>
-<p>接下来我们就一一介绍。</p>
-<h2 id="3-2-服务调用端负载均衡——Ribbon"><a href="#3-2-服务调用端负载均衡——Ribbon" class="headerlink" title="3.2 服务调用端负载均衡——Ribbon"></a>3.2 服务调用端负载均衡——Ribbon</h2><p>Ribbon是Netflix发布的开源项目，主要功能是为REST客户端实现负载均衡。它主要包括六个组件：</p>
-<ul>
-<li>ServerList，负载均衡使用的服务器列表。这个列表会缓存在负载均衡器中，并定期更新。当Ribbon与Eureka结合使用时，ServerList的实现类就是DiscoveryEnabledNIWSServerList，它会保存Eureka Server中注册的服务实例表。</li>
-<li>ServerListFilter，服务器列表过滤器。这是一个接口，主要用于对Service Consumer获取到的服务器列表进行预过滤，过滤的结果也是ServerList。Ribbon提供了多种过滤器的实现。</li>
-<li>IPing，探测服务实例是否存活的策略。</li>
-<li>IRule，负载均衡策略，其实现类表述的策略包括：轮询、随机、根据响应时间加权等。</li>
-</ul>
-<blockquote>
-<p>我们也可以自己定义负载均衡策略，比如我们就利用自己实现的策略，实现了服务的版本控制和直连配置。实现好之后，将实现类重新注入到Ribbon中即可。</p>
-</blockquote>
-<ul>
-<li>ILoadBalancer，负载均衡器。这也是一个接口，Ribbon为其提供了多个实现，比如ZoneAwareLoadBalancer。而上层代码通过调用其API进行服务调用的负载均衡选择。一般ILoadBalancer的实现类中会引用一个IRule。</li>
-<li>RestClient，服务调用器。顾名思义，这就是负载均衡后，Ribbon向Service Provider发起REST请求的工具。</li>
-</ul>
-<p>Ribbon工作时会做四件事情：</p>
-<ol>
-<li>优先选择在同一个Zone且负载较少的Eureka Server；</li>
-<li>定期从Eureka更新并过滤服务实例列表；</li>
-<li>根据用户指定的策略，在从Server取到的服务注册列表中选择一个实例的地址；</li>
-<li>通过RestClient进行服务调用。</li>
-</ol>
-<h2 id="3-3-服务调用端熔断——Hystrix"><a href="#3-3-服务调用端熔断——Hystrix" class="headerlink" title="3.3 服务调用端熔断——Hystrix"></a>3.3 服务调用端熔断——Hystrix</h2><p>Netflix创建了一个名为Hystrix的库,实现了断路器的模式。“断路器”本身是一种开关装置，当某个服务单元发生故障之后，通过断路器的故障监控（类似熔断保险丝），向调用方返回一个符合预期的、可处理的备选响应（FallBack），而不是长时间的等待或者抛出调用方无法处理的异常，这样就保证了服务调用方的线程不会被长时间、不必要地占用，从而避免了故障在分布式系统中的蔓延，乃至雪崩。</p>
-<p>Hystrix.png</p>
-<p>当然，在请求失败频率较低的情况下，Hystrix还是会直接把故障返回给客户端。只有当失败次数达到阈值（默认在20秒内失败5次）时，断路器打开并且不进行后续通信，而是直接返回备选响应。当然，Hystrix的备选响应也是可以由开发者定制的。</p>
-<p>HystrixFallback.png</p>
-<p>除了隔离依赖服务的调用以外，Hystrix还提供了准实时的调用监控（<strong>Hystrix Dashboard</strong>），Hystrix会持续地记录所有通过Hystrix发起的请求的执行信息，并以统计报表和图形的形式展示给用户，包括每秒执行多少请求多少成功，多少失败等。Netflix通过hystrix-metrics-event-stream项目实现了对以上指标的监控。Spring Cloud也提供了Hystrix Dashboard的整合，对监控内容转化成可视化界面，<a href="https://link.jianshu.com?t=https://github.com/Netflix/Hystrix/wiki/Dashboard" target="_blank" rel="noopener">Hystrix Dashboard Wiki</a>上详细说明了图上每个指标的含义。</p>
-<p>HystrixDashboard.png</p>
-<h2 id="3-4-服务调用端代码抽象和封装——Feign"><a href="#3-4-服务调用端代码抽象和封装——Feign" class="headerlink" title="3.4 服务调用端代码抽象和封装——Feign"></a>3.4 服务调用端代码抽象和封装——Feign</h2><p>Feign是一个声明式的Web Service客户端，它的目的就是让Web Service调用更加简单。它整合了Ribbon和Hystrix，从而让我们不再需要显式地使用这两个组件。Feign还提供了HTTP请求的模板，通过编写简单的接口和插入注解，我们就可以定义好HTTP请求的参数、格式、地址等信息。接下来，Feign会完全代理HTTP的请求，我们只需要像调用方法一样调用它就可以完成服务请求。</p>
-<p>Feign具有如下特性：</p>
-<ul>
-<li>可插拔的注解支持，包括Feign注解和JAX-RS注解</li>
-<li>支持可插拔的HTTP编码器和解码器</li>
-<li>支持Hystrix和它的Fallback</li>
-<li>支持Ribbon的负载均衡</li>
-<li>支持HTTP请求和响应的压缩</li>
-</ul>
-<p>以下是一个Feign的简单示例：</p>
-<pre><code>@SpringBootApplication
-@EnableDiscoveryClient //启用Feign
-@EnableFeignClients
-public class Application
-{
-    public static void main(String[] args)
-    {
-        SpringApplication.run(Application.class, args);
-    }
-}
-
-@FeignClient(name = &quot;elements&quot;, fallback = ElementsFallback.class) //指定feign调用的服务和Hystrix Fallback（name即eureka的application name）
-public interface Elements
-{
-    @RequestMapping(value = &quot;/index&quot;)
-    String index();
-}
-
-//Hystrix Fallback  
-@Component
-public class ElementsFallback implements Elements
-{
-    @Override
-    public String index()
-    {
-        return &quot;**************&quot;;
-    }
-}
-
-//测试类
-@Component  
-public class TestController {
-    @Autowired
-    Elements elements;
-
-    @RequestMapping(value = &quot;/testEureka&quot;, method = RequestMethod.GET)
-    public String testeureka()
-    {
-        return elements.index();
-    }
-}
-</code></pre>
+        <h1 id="1-为什么需要服务发现"><a href="#1-为什么需要服务发现" class="headerlink" title="1 为什么需要服务发现"></a>1 为什么需要服务发现</h1><p>简单来说，服务化的核心就是将传统的一站式应用根据业务拆分成一个一个的服务，而微服务在这个基础上要更彻底地去耦合（不再共享DB、KV，去掉重量级ESB），并且强调DevOps和快速演化。这就要求我们必须采用与一站式时代、泛SOA时代不同的技术栈，而Spring Cloud就是其中的佼佼者。<br>
+        
       
-    </div>
+    </p></div>
     <footer class="article-footer">
       <a data-url="http://blog.xiaban666.com/2019/04/19/微服务架构SpringCloud-服务发现/" data-id="cjunhlij90000cuhtbglaa5kf" class="article-share-link">Share</a>
       
@@ -394,62 +139,10 @@ public class TestController {
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><p>随着微服务的大范围应用，服务发现这个词也变的越来越火热。下面这篇文章，就会对服务发现这个概念进行介绍，介绍主要包含三部分，服务发现的定义，服务发现的模式以及目前比较成熟的服务发现应用。</p>
-<h1 id="服务发现是什么？"><a href="#服务发现是什么？" class="headerlink" title="服务发现是什么？"></a>服务发现是什么？</h1><p>其实，我们日常的很多普通操作，都是在做服务发现。</p>
-<p><img src="https://img-blog.csdn.net/20170827085001216?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvTXJfU2VhVHVydGxlXw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-<p>如上图所示，这是一个在浏览器输入域名，然后获取网站服务的流程。这个流程中，DNS服务器会根据我们的域名解析出一个ip地址，返回ip地址中对应链接包含的内容。我们根据特定的标志（域名）来获取我们所需要的服务，这就是服务发现。而在微服务的领域，我们将应用拆分成一个个的微服务之后，服务发现，则变成了微服务之间相互获取彼此的信息。</p>
-<p>然而，在微服务的场景下，使用DNS服务器作为服务发现的实现者会存在以下几个问题。</p>
-<ul>
-<li><p>DNS服务器不支持动态变更，不能够随着服务的状态变更（上线、下线、故障）而对域名映射变更。</p>
-</li>
-<li><p>DNS只能支持域名和ip地址的一一映射，但在微服务的场景中，很多微服务都会部署多个实例，这也就要求标志与服务要有一对多的映射。</p>
-</li>
-<li><p>DNS服务无法解决多数据中心的问题。</p>
-</li>
-</ul>
-<p>总的来说，服务发现就是程序如何通过一个标志来获取服务列表，并且这个服务列表是能够随着服务的状态而动态变更的。</p>
-<h1 id="服务发现的模式"><a href="#服务发现的模式" class="headerlink" title="服务发现的模式"></a>服务发现的模式</h1><p>目前，服务发现主要存在有两种模式，客户端模式与服务端模式，两者的本质区别在于，<strong>客户端是否保存服务列表信息</strong>。下面用两个图来表示客户端模式与服务端模式。</p>
-<h2 id="客户端模式"><a href="#客户端模式" class="headerlink" title="客户端模式"></a>客户端模式</h2><p><img src="https://img-blog.csdn.net/20170827090105514?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvTXJfU2VhVHVydGxlXw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-<p>在客户端模式下，如果要进行微服务调用，首先要进行的是到服务注册中心获取服务列表，然后再根据调用端本地的负载均衡策略，进行服务调用。</p>
-<h2 id="服务端模式"><a href="#服务端模式" class="headerlink" title="服务端模式"></a>服务端模式</h2><p><img src="https://img-blog.csdn.net/20170827090745682?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvTXJfU2VhVHVydGxlXw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-<p>在服务端模式下，调用方直接向服务注册中心进行请求，服务注册中心再通过自身负载均衡策略，对微服务进行调用。这个模式下，调用方不需要在自身节点维护服务发现逻辑以及服务注册信息，这个模式相对来说比较类似DNS模式。</p>
-<p>对两者进行对比的话，他们的优劣也十分的明显</p>
-<p>客户端模式</p>
-<p>服务端模式</p>
-<p>只需要周期性获取列表，在调用服务时可以直接调用少了一个RT。但需要在每个客户端维护获取列表的逻辑</p>
-<p>简单，不需要在客户端维护获取服务列表的逻辑</p>
-<p>可用性高，即使注册中心出现故障也能正常工作</p>
-<p>可用性由路由器中间件决定，路由中间件故障则所有服务不可用，同时，由于所有调度以及存储都由中间件服务器完成，中间件服务器可能会面临过高的负载</p>
-<p>服务上下线对调用方有影响（会出现短暂调用失败）</p>
-<p>服务上下线调用方无感知</p>
-<p>目前来说，大部分服务发现的实现都采取了客户端模式。下面就会对两种比较经典的服务发现框架进行介绍</p>
-<h1 id="几种服务发现框架的简介"><a href="#几种服务发现框架的简介" class="headerlink" title="几种服务发现框架的简介"></a>几种服务发现框架的简介</h1><p>在这一小节中，我们将会通过三个方面以及一些具体的例子来介绍服务发现框架是如何工作的，它们各自的特点又是些什么。包括如何对服务进行注册/反注册，在CAP（一致性，可用性，分布式）之间的选择。</p>
-<h2 id="Eureka"><a href="#Eureka" class="headerlink" title="Eureka"></a>Eureka</h2><p>eureka是netflix用于服务注册和发现的框架。在这个框架中，分为server和client两种角色。server负责保存服务的注册信息，同时server之间也可以彼此相互注册，client则需要向特定的server进行注册。</p>
-<h3 id="服务注册-反注册机制"><a href="#服务注册-反注册机制" class="headerlink" title="服务注册/反注册机制"></a>服务注册/反注册机制</h3><p><img src="https://img-blog.csdn.net/20170827091202717?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvTXJfU2VhVHVydGxlXw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-<p>图片来源：<a href="techshow.ctrip.com/archives/1699.html">携程技术中心</a></p>
-<p>如上图所示，Eureka采用了客户端的模式，服务首先需要向注册中心注册，调用方则需要在本地维护一个服务注册列表。</p>
-<p>具体的操作为：client/server通过RESTful Api向server进行服务注册，并且定期调用<code>renew</code>接口来更新服务的注册状态，若server在60s内没有收到服务的<code>renew</code>信息，则该服务就会被标志为下线。而如果服务需要主动下线的话，向server调用<code>cancel</code>就可以了。</p>
-<p>Eureka同时支持多个注册中心，以保证注册中心的高可用性。</p>
-<p><img src="https://img-blog.csdn.net/20170827091447991?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvTXJfU2VhVHVydGxlXw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-<p>在多注册中心（server）的情况下，单个server在接收到服务的注册/更新信息的时候，它还会将这些信息同步给同样为server的peer(replicate to peer)，为了避免广播风暴，这些信息只会传递一次，也就是说，接收到的server，不会再同步给自身的peer。</p>
-<p>服务注册完成之后，当client需要进行服务调用的时候，就可以向server获取当前的服务列表，再根据服务列表中的ip地址以及端口号进行调用了。</p>
-<p>更加具体一些的介绍，可以看<a href="http://techshow.ctrip.com/archives/1699.html" target="_blank" rel="noopener">这篇文章</a>。</p>
-<p>由于eureka的相关配置都是存储在配置文件中，因此如果需要动态增加server数量的话，就必须修改配置重启client，以确保server的一致性。所以在服务器端弹性配置上不够灵活。还有一个缺点是，由于一个client需要维持与多个server之间的联系，这个会占用额外的系统资源，另外这个框架在github上也有将近一年没有更新了。</p>
-<h2 id="Consul"><a href="#Consul" class="headerlink" title="Consul"></a>Consul</h2><p>Consul是目前较为流行的一个服务发现以及配置工具，Consul能够承担包括服务注册与发现、健康检查（health check)以及键值对存储等，同时，Consul还支持多个数据中心。</p>
-<p><img src="https://img-blog.csdn.net/20170827091651220?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvTXJfU2VhVHVydGxlXw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="Consul的微服务架构"></p>
-<p>如上图所示，基于Consul的微服务一般都是集群，集群由一个个的Consul Agent组成，在这些Consul Agent里面，分为两种角色，Server 以及 Client。Consul是基于Raft协议实现的，这些Server里包含了Raft中的Leader以及follower。而client则只是向这些server进行键值对的读/写。</p>
-<h3 id="服务注册-反注册机制-1"><a href="#服务注册-反注册机制-1" class="headerlink" title="服务注册/反注册机制"></a>服务注册/反注册机制</h3><p>当我们在本地启动Consul Agent之后，我们可以通过Consul的Restful Api（<code>curl -request PUT http://consul/v1//agent/service/register</code>）向Consul Agent注册服务信息，提交服务的端口号，ip地址，以及健康检查的方式。随后，这个Client就按照配置中的周期以及方式执行健康检查，当健康检查失败的时候，就会像Server Agent发送服务不可用的消息，这个服务就会被Consul标记为不可用了。</p>
-<p>我们也能够通过Get方法请求相同的地址来获取当前agent中注册的所有服务信息。</p>
-<h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1><p>这篇文章通过三个方面介绍了服务发现。</p>
-<ul>
-<li><p>服务端模式和客户端模式的区分，客户端模式下，所有客户端需要维护服务列表信息，负载均衡策略而服务端模式下则无需这些额外的实现。换而言之，在服务端模式下，更容易实现多语言的接入，更具有通用性，但是在客户端模式下，则具有了更快的响应时间以及更强的容灾能力。</p>
-</li>
-<li><p>服务发现中的CAP选择，由于微服务本身就是面向分布式的，因此所有框架都天然地支持分布式，那么具体的选择差异就体现在了可用性以及一致性上。Eureka认为部分服务注册信息没有实时同步实际上并不影响服务之间的依赖调用（一个服务节点失败了，客户端会选择另外一个节点进行重试），因此选择了高可用的架构。而Consul是基于Raft协议的，因此一致性更加重要。</p>
-</li>
-</ul>
-
+        <h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><p>随着微服务的大范围应用，服务发现这个词也变的越来越火热。下面这篇文章，就会对服务发现这个概念进行介绍，介绍主要包含三部分，服务发现的定义，服务发现的模式以及目前比较成熟的服务发现应用。<br>
+        
       
-    </div>
+    </p></div>
     <footer class="article-footer">
       <a data-url="http://blog.xiaban666.com/2019/04/19/浅谈服务发现/" data-id="cjunhcji000008jht0tivfb6s" class="article-share-link">Share</a>
       
@@ -483,27 +176,10 @@ public class TestController {
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>一、安装</p>
-<p>1、安装micro</p>
-<p>go get -u github.com/micro/micro<br>2、安装consul 微服务发现</p>
-<p><a href="https://www.consul.io/downloads.html" target="_blank" rel="noopener">https://www.consul.io/downloads.html</a> windows需要添加到环境变量</p>
-<p>3、安装protobuf</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">go get -u github.com/golang/protobuf/proto</span><br><span class="line">go get -u github.com/golang/protobuf/protoc-gen-go</span><br><span class="line">go get -u github.com/micro/protoc-gen-micro</span><br></pre></td></tr></table></figure>
-<p>windows安装<a href="https://github.com/protocolbuffers/protobuf/releases并添加到环境变量" target="_blank" rel="noopener">https://github.com/protocolbuffers/protobuf/releases并添加到环境变量</a></p>
-<p>二、运行微服务</p>
-<p>1、启动 consul</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">consul agent -dev</span><br></pre></td></tr></table></figure>
-<p>2、下载测试服务代码</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">micro new github.com/micro/example</span><br></pre></td></tr></table></figure>
-<p>3、使用protoc编译protobuf代码</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">protoc --proto_path=. --micro_out=. --go_out=. proto/example/example.proto</span><br></pre></td></tr></table></figure>
-<p>4、运行测试服务代码</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">go run main.go</span><br></pre></td></tr></table></figure>
-<p>5、启动web服务</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">micro web</span><br></pre></td></tr></table></figure>
-
+        <p>如题<br>
+        
       
-    </div>
+    </p></div>
     <footer class="article-footer">
       <a data-url="http://blog.xiaban666.com/2019/04/18/go-微服务micro基础搭建/" data-id="cjumey2g70000ochtd28iswv9" class="article-share-link">Share</a>
       
@@ -537,23 +213,10 @@ public class TestController {
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>介绍<br>go的各种包管理，在国内有加速效果<br>github地址：<a href="https://github.com/gpmgo/gopm" target="_blank" rel="noopener">https://github.com/gpmgo/gopm</a><br>官方地址：<a href="https://gopm.io/" target="_blank" rel="noopener">https://gopm.io/</a><br>文档路径：<a href="https://github.com/gpmgo/docs/tree/master/zh-CN" target="_blank" rel="noopener">https://github.com/gpmgo/docs/tree/master/zh-CN</a><br>gopm 使用<br>安装</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">go get -v -u github.com/gpmgo/gopm</span><br></pre></td></tr></table></figure>
-<p>使用<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"># 查看当前工程依赖</span><br><span class="line">gopm list</span><br><span class="line"># 显示依赖详细信息</span><br><span class="line">gopm list -v</span><br><span class="line"># 列出文件依赖</span><br><span class="line">gopm list -t [file]</span><br><span class="line"># 拉取依赖到缓存目录</span><br><span class="line">gopm get -r xxx</span><br><span class="line"># 仅下载当前指定的包</span><br><span class="line">gopm get -d xxx</span><br><span class="line"># 拉取依赖到$GOPATH</span><br><span class="line">gopm get -g xxx</span><br><span class="line"># 检查更新所有包</span><br><span class="line">gopm get -u xxx</span><br><span class="line"># 拉取到当前所在目录</span><br><span class="line">gopm get -l xxx</span><br><span class="line"># 运行当前目录程序</span><br><span class="line">gopm run</span><br><span class="line"># 生成当前工程的 gopmfile 文件用于包管理</span><br><span class="line">gopm gen -v</span><br><span class="line"># 根据当前项目 gopmfile 链接依赖并执行 go install</span><br><span class="line">gopm install -v</span><br><span class="line"># 更新当前依赖</span><br><span class="line">gopm update -v</span><br><span class="line"># 清理临时文件</span><br><span class="line">gopm clean</span><br><span class="line"># 编译到当前目录</span><br><span class="line">gopm bin</span><br></pre></td></tr></table></figure></p>
-<p>gopm 下载存放缓存目录 $USER/.gopm/repos<br>.gopmfile<br>gopmfile 需放在项目根目录下，名称为 .gopmfile<br>这个文件可以通过生成<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gopm gen</span><br></pre></td></tr></table></figure></p>
-<p>文件格式为<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[target]</span><br><span class="line">path = github.com/gpmgo/gopm</span><br><span class="line"></span><br><span class="line">[deps]</span><br><span class="line">github.com/codegangsta/cli = branch:master</span><br><span class="line"></span><br><span class="line">[res]</span><br><span class="line">include = conf|etc|public|scripts|templates</span><br></pre></td></tr></table></figure></p>
-<p>target -&gt; path 指示项目名称或导入路径。</p>
-<p>deps 节包含了特殊（非最新）版本的依赖。</p>
-<p>res 在执行 gopm bin 命令时自动打包的资源。</p>
-<p>包版本<br>有五种可能的包版本组合：</p>
-<p>空白：表示使用最新版本的依赖进行构建</p>
-<p>/path/to/my/project：绝对或者相对的文件路径，例如：d:\projects\xorm</p>
-<p>branch:<value>：固定分支，例如：branch:master</value></p>
-<p>tag:<value>：指定标签，例如：tag:v0.9.0</value></p>
-<p>commit:<value>：某个提交，例如：commit:6ffffe9 一般来说只需要 SHA 的前 7 个字母就可以确定一个提交</value></p>
-
+        <p>介绍<br>go的各种包管理，在国内有加速效果<br>github地址：<a href="https://github.com/gpmgo/gopm" target="_blank" rel="noopener">https://github.com/gpmgo/gopm</a><br>官方地址：<a href="https://gopm.io/" target="_blank" rel="noopener">https://gopm.io/</a><br>文档路径：<a href="https://github.com/gpmgo/docs/tree/master/zh-CN" target="_blank" rel="noopener">https://github.com/gpmgo/docs/tree/master/zh-CN</a><br>
+        
       
-    </div>
+    </p></div>
     <footer class="article-footer">
       <a data-url="http://blog.xiaban666.com/2019/04/18/gopm-包管理工具使用/" data-id="cjumey2gq0001ochtkhuubv6c" class="article-share-link">Share</a>
       
@@ -591,55 +254,10 @@ public class TestController {
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>背景<br>Node.js开发本地项目，有时不同项目之间存在依赖，如果不想把项目发布到npm社区的仓库，则需要有自己本地的仓库。<br>有些公司采用的是内网开发，很多npm资源无法从内网去下载。<br>sinopia（主流）<br>使用文件系统作为存储，仅保存用户需要的包，如果本地仓库没有对应的包，则从指定的registry下载，默认为npmjs.org，可以改成淘宝的镜像。</p>
-<p>安装<br>Sinopia的安装比较简单，只需使用npm一条安装命令即可：</p>
-<p>npm install -g sinopia 或者 yarn global add sinopia<br>安装遇到问题<br>1.python</p>
-<p>gyp ERR! stack Error: Can’t find Python executable “python”, you can set the PYTHON env variable.<br>node-gyp依赖python 2.7。安装python2.7，并把它添加到环境变量PATH,npm config set python python2.7<br>2.不支持fs-ext和crypt3<br><img src="https://images2015.cnblogs.com/blog/966107/201707/966107-20170707115624222-2142801851.png" alt=""></p>
-<p>只要有出现以上图的或者 其他关于crypt3的问题的话， 看下面解决方法</p>
-<p>查看sinopia源码（看你安装在哪）里的package.yaml</p>
-<p>optionalDependencies:</p>
-<h1 id="those-are-native-modules-that-could-fail-to-compile"><a href="#those-are-native-modules-that-could-fail-to-compile" class="headerlink" title="those are native modules that could fail to compile"></a>those are native modules that could fail to compile</h1><h1 id="and-unavailable-on-windows"><a href="#and-unavailable-on-windows" class="headerlink" title="and unavailable on windows"></a>and unavailable on windows</h1><p>  fs-ext: ‘&gt;=0.4.1 &lt;1.0.0-0’<br>  crypt3: ‘&gt;=0.1.6 &lt;1.0.0-0’ # for sinopia-htpasswd<br>删除sinopia安装目录node_modules里的fs-ext和crypt3相关的包，否则执行npm添加用户和登陆验证时会报错。包括：.0.2.0@crypt3，.0.6.0@fs-ext，crypt3和fs-ext以及sinopia-htpasswd\node_modules下的crypt3和fs-ext</p>
-<p>使用<br>启动： sinopia<br><img src="https://images2015.cnblogs.com/blog/966107/201707/966107-20170707123311940-2146176203.png" alt=""><br>你也可以打开 地址看一下<a href="http://localhost:4873/" target="_blank" rel="noopener">http://localhost:4873/</a><br><img src="https://images2015.cnblogs.com/blog/966107/201707/966107-20170707133156456-1994408696.png" alt=""><br>就说明成功了</p>
-<p>换npm 源<br>npm config set registry <a href="http://xxx.xx.xx.xx:4873/" target="_blank" rel="noopener">http://xxx.xx.xx.xx:4873/</a><br>//xxx.xx.xx.xx 为自己的ip<br>建议使用用 nrm<br>npm install -g nrm # 安装nrm<br>nrm add name <a href="http://XXXXXX:4873" target="_blank" rel="noopener">http://XXXXXX:4873</a> # 添加本地的npm镜像地址<br>nrm use name # 使用本址的镜像地址     name为你要增加的地址<br>新建用户<br>npm adduser<br>Username: test<br>Password: test<br>Email: (this IS public) xxx@xxxx<br>然后就可以发布包了<br>npm publish     // 在自己要发布的包 路径打这个命令<br>这边发布的包可以 是自己写的一些资源 或者是其他的 但是要根据npm 包的规范</p>
-<p>本人配置文件<br>#</p>
-<h1 id="This-is-the-default-config-file-It-allows-all-users-to-do-anything"><a href="#This-is-the-default-config-file-It-allows-all-users-to-do-anything" class="headerlink" title="This is the default config file. It allows all users to do anything,"></a>This is the default config file. It allows all users to do anything,</h1><h1 id="so-don’t-use-it-on-production-systems"><a href="#so-don’t-use-it-on-production-systems" class="headerlink" title="so don’t use it on production systems."></a>so don’t use it on production systems.</h1><p>#</p>
-<h1 id="Look-here-for-more-config-file-examples"><a href="#Look-here-for-more-config-file-examples" class="headerlink" title="Look here for more config file examples:"></a>Look here for more config file examples:</h1><h1 id="https-github-com-rlidwka-sinopia-tree-master-conf"><a href="#https-github-com-rlidwka-sinopia-tree-master-conf" class="headerlink" title="https://github.com/rlidwka/sinopia/tree/master/conf"></a><a href="https://github.com/rlidwka/sinopia/tree/master/conf" target="_blank" rel="noopener">https://github.com/rlidwka/sinopia/tree/master/conf</a></h1><p>#</p>
-<h1 id="path-to-a-directory-with-all-packages"><a href="#path-to-a-directory-with-all-packages" class="headerlink" title="path to a directory with all packages"></a>path to a directory with all packages</h1><p>storage: ./storage    # npm包存放的路径</p>
-<p>auth:<br>  htpasswd:<br>    file: ./htpasswd</p>
-<pre><code># Maximum amount of users allowed to register, defaults to &quot;+inf&quot;.
-# You can set this to -1 to disable registration.
-# max_users: 1000
-max_users: 1000     # 默认为1000，改为-1，禁止注册
-</code></pre><h1 id="a-list-of-other-known-repositories-we-can-talk-to"><a href="#a-list-of-other-known-repositories-we-can-talk-to" class="headerlink" title="a list of other known repositories we can talk to"></a>a list of other known repositories we can talk to</h1><p>uplinks:<br>  npmjs:<br>    url: <a href="http://registry.npm.taobao.org/" target="_blank" rel="noopener">http://registry.npm.taobao.org/</a>  # 默认为npm的官网，由于国情，修改 url 让sinopia使用 淘宝的npm镜像地址</p>
-<p>packages:<br>  ‘@<em>/</em>‘:</p>
-<pre><code># scoped packages
-access: $all
-publish: $authenticated
-</code></pre><p>  ‘*’:</p>
-<pre><code># allow all users (including non-authenticated users) to read and
-# publish all packages
-#
-# you can specify usernames/groupnames (depending on your auth plugin)
-# and three keywords: &quot;$all&quot;, &quot;$anonymous&quot;, &quot;$authenticated&quot;
-access: $all
-
-# allow all known users to publish packages
-# (anyone can register by default, remember?)
-publish: $authenticated
-
-# if package is not available locally, proxy requests to &apos;npmjs&apos; registry
-# proxy: npmjs   #这个去掉的话,sinopia 将不去下载依赖包   如果只是要放自己资源仓库的话就去掉      
-# 
-</code></pre><h1 id="log-settings"><a href="#log-settings" class="headerlink" title="log settings"></a>log settings</h1><p>logs:</p>
-<ul>
-<li>{type: stdout, format: pretty, level: http}<br>#- {type: file, path: sinopia.log, level: info}</li>
-</ul>
-<h1 id="you-can-specify-listen-address-or-simply-a-port"><a href="#you-can-specify-listen-address-or-simply-a-port" class="headerlink" title="you can specify listen address (or simply a port)"></a>you can specify listen address (or simply a port)</h1><p>listen: 0.0.0.0:4873  # 默认没有，只能在本机访问，添加后可以通过外网访问。<br>注意：配置文件 是在你的用户名 如：本人就admin 找到目录就可以了 （win）</p>
-<p><img src="https://images2015.cnblogs.com/blog/966107/201707/966107-20170707133515815-576489477.png" alt=""></p>
-<p>storage: 仓库保存的路径<br>htpasswd: 保存密码信息 只有新建用户后才 有这个文件<br>config.yaml: 这个是本地的 配置文件 信息（改这个）</p>
-
+        <p>背景<br>Node.js开发本地项目，有时不同项目之间存在依赖，如果不想把项目发布到npm社区的仓库，则需要有自己本地的仓库。<br>有些公司采用的是内网开发，很多npm资源无法从内网去下载。<br>sinopia（主流）<br>使用文件系统作为存储，仅保存用户需要的包，如果本地仓库没有对应的包，则从指定的registry下载，默认为npmjs.org，可以改成淘宝的镜像。<br>
+        
       
-    </div>
+    </p></div>
     <footer class="article-footer">
       <a data-url="http://blog.xiaban666.com/2019/04/15/npm私有仓库搭建/" data-id="cjuhq6ga600004lhtow0gp1a3" class="article-share-link">Share</a>
       

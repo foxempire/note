@@ -7,13 +7,13 @@
   
   <title>浅谈服务发现 | irobot&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="引言随着微服务的大范围应用，服务发现这个词也变的越来越火热。下面这篇文章，就会对服务发现这个概念进行介绍，介绍主要包含三部分，服务发现的定义，服务发现的模式以及目前比较成熟的服务发现应用。 服务发现是什么？其实，我们日常的很多普通操作，都是在做服务发现。  如上图所示，这是一个在浏览器输入域名，然后获取网站服务的流程。这个流程中，DNS服务器会根据我们的域名解析出一个ip地址，返回ip地址中对应链">
+  <meta name="description" content="引言随着微服务的大范围应用，服务发现这个词也变的越来越火热。下面这篇文章，就会对服务发现这个概念进行介绍，介绍主要包含三部分，服务发现的定义，服务发现的模式以及目前比较成熟的服务发现应用。">
 <meta name="keywords" content="IT,AI,AR,Tensorflow,Face detection,Postgresql,Mysql">
 <meta property="og:type" content="article">
 <meta property="og:title" content="浅谈服务发现">
 <meta property="og:url" content="http://blog.xiaban666.com/2019/04/19/浅谈服务发现/index.html">
 <meta property="og:site_name" content="irobot&#39;s blog">
-<meta property="og:description" content="引言随着微服务的大范围应用，服务发现这个词也变的越来越火热。下面这篇文章，就会对服务发现这个概念进行介绍，介绍主要包含三部分，服务发现的定义，服务发现的模式以及目前比较成熟的服务发现应用。 服务发现是什么？其实，我们日常的很多普通操作，都是在做服务发现。  如上图所示，这是一个在浏览器输入域名，然后获取网站服务的流程。这个流程中，DNS服务器会根据我们的域名解析出一个ip地址，返回ip地址中对应链">
+<meta property="og:description" content="引言随着微服务的大范围应用，服务发现这个词也变的越来越火热。下面这篇文章，就会对服务发现这个概念进行介绍，介绍主要包含三部分，服务发现的定义，服务发现的模式以及目前比较成熟的服务发现应用。">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="https://img-blog.csdn.net/20170827085001216?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvTXJfU2VhVHVydGxlXw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
 <meta property="og:image" content="https://img-blog.csdn.net/20170827090105514?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvTXJfU2VhVHVydGxlXw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
@@ -21,10 +21,10 @@
 <meta property="og:image" content="https://img-blog.csdn.net/20170827091202717?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvTXJfU2VhVHVydGxlXw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
 <meta property="og:image" content="https://img-blog.csdn.net/20170827091447991?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvTXJfU2VhVHVydGxlXw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
 <meta property="og:image" content="https://img-blog.csdn.net/20170827091651220?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvTXJfU2VhVHVydGxlXw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
-<meta property="og:updated_time" content="2019-04-19T02:53:33.427Z">
+<meta property="og:updated_time" content="2019-04-19T03:02:15.019Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="浅谈服务发现">
-<meta name="twitter:description" content="引言随着微服务的大范围应用，服务发现这个词也变的越来越火热。下面这篇文章，就会对服务发现这个概念进行介绍，介绍主要包含三部分，服务发现的定义，服务发现的模式以及目前比较成熟的服务发现应用。 服务发现是什么？其实，我们日常的很多普通操作，都是在做服务发现。  如上图所示，这是一个在浏览器输入域名，然后获取网站服务的流程。这个流程中，DNS服务器会根据我们的域名解析出一个ip地址，返回ip地址中对应链">
+<meta name="twitter:description" content="引言随着微服务的大范围应用，服务发现这个词也变的越来越火热。下面这篇文章，就会对服务发现这个概念进行介绍，介绍主要包含三部分，服务发现的定义，服务发现的模式以及目前比较成熟的服务发现应用。">
 <meta name="twitter:image" content="https://img-blog.csdn.net/20170827085001216?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvTXJfU2VhVHVydGxlXw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
   
   
@@ -108,7 +108,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><p>随着微服务的大范围应用，服务发现这个词也变的越来越火热。下面这篇文章，就会对服务发现这个概念进行介绍，介绍主要包含三部分，服务发现的定义，服务发现的模式以及目前比较成熟的服务发现应用。</p>
+        <h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><p>随着微服务的大范围应用，服务发现这个词也变的越来越火热。下面这篇文章，就会对服务发现这个概念进行介绍，介绍主要包含三部分，服务发现的定义，服务发现的模式以及目前比较成熟的服务发现应用。<br><a id="more"></a></p>
 <h1 id="服务发现是什么？"><a href="#服务发现是什么？" class="headerlink" title="服务发现是什么？"></a>服务发现是什么？</h1><p>其实，我们日常的很多普通操作，都是在做服务发现。</p>
 <p><img src="https://img-blog.csdn.net/20170827085001216?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvTXJfU2VhVHVydGxlXw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
 <p>如上图所示，这是一个在浏览器输入域名，然后获取网站服务的流程。这个流程中，DNS服务器会根据我们的域名解析出一个ip地址，返回ip地址中对应链接包含的内容。我们根据特定的标志（域名）来获取我们所需要的服务，这就是服务发现。而在微服务的领域，我们将应用拆分成一个个的微服务之后，服务发现，则变成了微服务之间相互获取彼此的信息。</p>

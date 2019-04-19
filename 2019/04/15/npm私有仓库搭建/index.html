@@ -7,22 +7,22 @@
   
   <title>npm私有仓库搭建 | irobot&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="背景Node.js开发本地项目，有时不同项目之间存在依赖，如果不想把项目发布到npm社区的仓库，则需要有自己本地的仓库。有些公司采用的是内网开发，很多npm资源无法从内网去下载。sinopia（主流）使用文件系统作为存储，仅保存用户需要的包，如果本地仓库没有对应的包，则从指定的registry下载，默认为npmjs.org，可以改成淘宝的镜像。 安装Sinopia的安装比较简单，只需使用npm一条">
+  <meta name="description" content="背景Node.js开发本地项目，有时不同项目之间存在依赖，如果不想把项目发布到npm社区的仓库，则需要有自己本地的仓库。有些公司采用的是内网开发，很多npm资源无法从内网去下载。sinopia（主流）使用文件系统作为存储，仅保存用户需要的包，如果本地仓库没有对应的包，则从指定的registry下载，默认为npmjs.org，可以改成淘宝的镜像。">
 <meta name="keywords" content="IT,AI,AR,Tensorflow,Face detection,Postgresql,Mysql">
 <meta property="og:type" content="article">
 <meta property="og:title" content="npm私有仓库搭建">
 <meta property="og:url" content="http://blog.xiaban666.com/2019/04/15/npm私有仓库搭建/index.html">
 <meta property="og:site_name" content="irobot&#39;s blog">
-<meta property="og:description" content="背景Node.js开发本地项目，有时不同项目之间存在依赖，如果不想把项目发布到npm社区的仓库，则需要有自己本地的仓库。有些公司采用的是内网开发，很多npm资源无法从内网去下载。sinopia（主流）使用文件系统作为存储，仅保存用户需要的包，如果本地仓库没有对应的包，则从指定的registry下载，默认为npmjs.org，可以改成淘宝的镜像。 安装Sinopia的安装比较简单，只需使用npm一条">
+<meta property="og:description" content="背景Node.js开发本地项目，有时不同项目之间存在依赖，如果不想把项目发布到npm社区的仓库，则需要有自己本地的仓库。有些公司采用的是内网开发，很多npm资源无法从内网去下载。sinopia（主流）使用文件系统作为存储，仅保存用户需要的包，如果本地仓库没有对应的包，则从指定的registry下载，默认为npmjs.org，可以改成淘宝的镜像。">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="https://images2015.cnblogs.com/blog/966107/201707/966107-20170707115624222-2142801851.png">
 <meta property="og:image" content="https://images2015.cnblogs.com/blog/966107/201707/966107-20170707123311940-2146176203.png">
 <meta property="og:image" content="https://images2015.cnblogs.com/blog/966107/201707/966107-20170707133156456-1994408696.png">
 <meta property="og:image" content="https://images2015.cnblogs.com/blog/966107/201707/966107-20170707133515815-576489477.png">
-<meta property="og:updated_time" content="2019-04-15T02:14:00.631Z">
+<meta property="og:updated_time" content="2019-04-19T03:03:01.901Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="npm私有仓库搭建">
-<meta name="twitter:description" content="背景Node.js开发本地项目，有时不同项目之间存在依赖，如果不想把项目发布到npm社区的仓库，则需要有自己本地的仓库。有些公司采用的是内网开发，很多npm资源无法从内网去下载。sinopia（主流）使用文件系统作为存储，仅保存用户需要的包，如果本地仓库没有对应的包，则从指定的registry下载，默认为npmjs.org，可以改成淘宝的镜像。 安装Sinopia的安装比较简单，只需使用npm一条">
+<meta name="twitter:description" content="背景Node.js开发本地项目，有时不同项目之间存在依赖，如果不想把项目发布到npm社区的仓库，则需要有自己本地的仓库。有些公司采用的是内网开发，很多npm资源无法从内网去下载。sinopia（主流）使用文件系统作为存储，仅保存用户需要的包，如果本地仓库没有对应的包，则从指定的registry下载，默认为npmjs.org，可以改成淘宝的镜像。">
 <meta name="twitter:image" content="https://images2015.cnblogs.com/blog/966107/201707/966107-20170707115624222-2142801851.png">
   
   
@@ -110,8 +110,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>背景<br>Node.js开发本地项目，有时不同项目之间存在依赖，如果不想把项目发布到npm社区的仓库，则需要有自己本地的仓库。<br>有些公司采用的是内网开发，很多npm资源无法从内网去下载。<br>sinopia（主流）<br>使用文件系统作为存储，仅保存用户需要的包，如果本地仓库没有对应的包，则从指定的registry下载，默认为npmjs.org，可以改成淘宝的镜像。</p>
-<p>安装<br>Sinopia的安装比较简单，只需使用npm一条安装命令即可：</p>
+        <p>背景<br>Node.js开发本地项目，有时不同项目之间存在依赖，如果不想把项目发布到npm社区的仓库，则需要有自己本地的仓库。<br>有些公司采用的是内网开发，很多npm资源无法从内网去下载。<br>sinopia（主流）<br>使用文件系统作为存储，仅保存用户需要的包，如果本地仓库没有对应的包，则从指定的registry下载，默认为npmjs.org，可以改成淘宝的镜像。<br><a id="more"></a><br>安装<br>Sinopia的安装比较简单，只需使用npm一条安装命令即可：</p>
 <p>npm install -g sinopia 或者 yarn global add sinopia<br>安装遇到问题<br>1.python</p>
 <p>gyp ERR! stack Error: Can’t find Python executable “python”, you can set the PYTHON env variable.<br>node-gyp依赖python 2.7。安装python2.7，并把它添加到环境变量PATH,npm config set python python2.7<br>2.不支持fs-ext和crypt3<br><img src="https://images2015.cnblogs.com/blog/966107/201707/966107-20170707115624222-2142801851.png" alt=""></p>
 <p>只要有出现以上图的或者 其他关于crypt3的问题的话， 看下面解决方法</p>
