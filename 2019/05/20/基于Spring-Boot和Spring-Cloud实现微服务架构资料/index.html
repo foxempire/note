@@ -5,19 +5,37 @@
   
 
   
-  <title>irobot&#39;s blog</title>
+  <title>基于Spring Boot和Spring Cloud实现微服务架构资料 | irobot&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Full-stack technology for more than ten years, familiar with various technologies, currently focusing on artificial intelligence and the direction of the Internet of Things.">
+  <meta name="description" content="首先，最想说的是，当你要学习一套最新的技术时，官网的英文文档是学习的最佳渠道。因为网上流传的多数资料是官网翻译而来，很多描述的重点也都偏向于作者自身碰到的问题，这样就很容易让你理解和操作出现偏差，最开始我就进入了这样误区。官网的技术导读真的描述的很详细，虽然对于我们看英文很费劲，但如果英文不是很差，请选择沉下心去读，你一定能收获好多。我的学习是先从Spring boot开始的，然后接触到微服务架构">
 <meta name="keywords" content="IT,AI,AR,Tensorflow,Face detection,Postgresql,Mysql,Java,SpringBoot,SpringCloud">
-<meta property="og:type" content="website">
-<meta property="og:title" content="irobot&#39;s blog">
-<meta property="og:url" content="http://blog.xiaban666.com/index.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="基于Spring Boot和Spring Cloud实现微服务架构资料">
+<meta property="og:url" content="http://blog.xiaban666.com/2019/05/20/基于Spring-Boot和Spring-Cloud实现微服务架构资料/index.html">
 <meta property="og:site_name" content="irobot&#39;s blog">
-<meta property="og:description" content="Full-stack technology for more than ten years, familiar with various technologies, currently focusing on artificial intelligence and the direction of the Internet of Things.">
+<meta property="og:description" content="首先，最想说的是，当你要学习一套最新的技术时，官网的英文文档是学习的最佳渠道。因为网上流传的多数资料是官网翻译而来，很多描述的重点也都偏向于作者自身碰到的问题，这样就很容易让你理解和操作出现偏差，最开始我就进入了这样误区。官网的技术导读真的描述的很详细，虽然对于我们看英文很费劲，但如果英文不是很差，请选择沉下心去读，你一定能收获好多。我的学习是先从Spring boot开始的，然后接触到微服务架构">
 <meta property="og:locale" content="default">
+<meta property="og:image" content="http://img.blog.csdn.net/20160720101626238?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center">
+<meta property="og:image" content="http://img.blog.csdn.net/20160718205701276?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center">
+<meta property="og:image" content="http://img.blog.csdn.net/20160720101728504?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center">
+<meta property="og:image" content="http://img2.tbcdn.cn/L1/461/1/59f97219283a8e8cef996531a05a3c7880fb501b.png">
+<meta property="og:image" content="http://img3.tbcdn.cn/L1/461/1/cb87aabb9b184df0edd6769ef877b4b16b200855.png">
+<meta property="og:image" content="http://img3.tbcdn.cn/L1/461/1/6a2474878e4c1000335770fe64269269f9211d17.png">
+<meta property="og:image" content="http://img4.tbcdn.cn/L1/461/1/238adf07b6afdc6ae246e2da83f83ce2e144cbeb.png">
+<meta property="og:image" content="http://img2.tbcdn.cn/L1/461/1/4da28f2382d64d39ee4942c51636af31e9cc1d0b.png">
+<meta property="og:image" content="http://img2.tbcdn.cn/L1/461/1/d7e9a881c8940c216e6c1d8cb3bbbe7407e1e63b.png">
+<meta property="og:image" content="http://img3.tbcdn.cn/L1/461/1/61decc9c96f96e795ae36353c9cbcc312c035910.png">
+<meta property="og:image" content="http://img2.tbcdn.cn/L1/461/1/d639a17e4d2c9fc8d0ceebed2eaf32016096c458.png">
+<meta property="og:image" content="http://img3.tbcdn.cn/L1/461/1/766c31d336cfe1e455547fdf5f3a3751f62bdd59.png">
+<meta property="og:image" content="http://img3.tbcdn.cn/L1/461/1/0ab73766d0b12ca16aa249ae4a61053b34f51548.png">
+<meta property="og:image" content="http://img2.tbcdn.cn/L1/461/1/052b1cebf73e0b31c502341e0e3cc916a3da2a25.png">
+<meta property="og:image" content="https://oss.aliyuncs.com/yqfiles/8f101fd3509cc97a5904802415326fba2cdb36ec.png">
+<meta property="og:image" content="http://img3.tbcdn.cn/L1/461/1/f9684c79f476a27982f3285cfb9b5b6eb7e29517.png">
+<meta property="og:updated_time" content="2019-05-20T08:20:25.440Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="irobot&#39;s blog">
-<meta name="twitter:description" content="Full-stack technology for more than ten years, familiar with various technologies, currently focusing on artificial intelligence and the direction of the Internet of Things.">
+<meta name="twitter:title" content="基于Spring Boot和Spring Cloud实现微服务架构资料">
+<meta name="twitter:description" content="首先，最想说的是，当你要学习一套最新的技术时，官网的英文文档是学习的最佳渠道。因为网上流传的多数资料是官网翻译而来，很多描述的重点也都偏向于作者自身碰到的问题，这样就很容易让你理解和操作出现偏差，最开始我就进入了这样误区。官网的技术导读真的描述的很详细，虽然对于我们看英文很费劲，但如果英文不是很差，请选择沉下心去读，你一定能收获好多。我的学习是先从Spring boot开始的，然后接触到微服务架构">
+<meta name="twitter:image" content="http://img.blog.csdn.net/20160720101626238?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center">
   
   
   
@@ -78,9 +96,7 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-    <article id="post-基于Spring-Boot和Spring-Cloud实现微服务架构资料" class="article article-type-post" itemscope="" itemprop="blogPost">
+        <section id="main"><article id="post-基于Spring-Boot和Spring-Cloud实现微服务架构资料" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/05/20/基于Spring-Boot和Spring-Cloud实现微服务架构资料/" class="article-date">
   <time datetime="2019-05-20T08:20:25.000Z" itemprop="datePublished">2019-05-20</time>
@@ -93,8 +109,8 @@
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/05/20/基于Spring-Boot和Spring-Cloud实现微服务架构资料/">基于Spring Boot和Spring Cloud实现微服务架构资料</a>
+    <h1 class="article-title" itemprop="name">
+      基于Spring Boot和Spring Cloud实现微服务架构资料
     </h1>
   
 
@@ -359,385 +375,19 @@
     </footer>
   </div>
   
-</article>
-
-
+    
+<nav id="article-nav">
   
-    <article id="post-微服务架构SpringCloud-服务发现" class="article article-type-post" itemscope="" itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/04/19/微服务架构SpringCloud-服务发现/" class="article-date">
-  <time datetime="2019-04-19T03:01:01.000Z" itemprop="datePublished">2019-04-19</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/04/19/微服务架构SpringCloud-服务发现/">微服务架构SpringCloud&amp;服务发现</a>
-    </h1>
+    <a href="/2019/04/19/微服务架构SpringCloud-服务发现/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">微服务架构SpringCloud&amp;服务发现</div>
+    </a>
   
+</nav>
 
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="1-为什么需要服务发现"><a href="#1-为什么需要服务发现" class="headerlink" title="1 为什么需要服务发现"></a>1 为什么需要服务发现</h1><p>简单来说，服务化的核心就是将传统的一站式应用根据业务拆分成一个一个的服务，而微服务在这个基础上要更彻底地去耦合（不再共享DB、KV，去掉重量级ESB），并且强调DevOps和快速演化。这就要求我们必须采用与一站式时代、泛SOA时代不同的技术栈，而Spring Cloud就是其中的佼佼者。<br>
-        
-      
-    </p></div>
-    <footer class="article-footer">
-      <a data-url="http://blog.xiaban666.com/2019/04/19/微服务架构SpringCloud-服务发现/" data-id="cjunhlij90000cuhtbglaa5kf" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
   
 </article>
-
-
-  
-    <article id="post-浅谈服务发现" class="article article-type-post" itemscope="" itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/04/19/浅谈服务发现/" class="article-date">
-  <time datetime="2019-04-19T02:53:33.000Z" itemprop="datePublished">2019-04-19</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/04/19/浅谈服务发现/">浅谈服务发现</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><p>随着微服务的大范围应用，服务发现这个词也变的越来越火热。下面这篇文章，就会对服务发现这个概念进行介绍，介绍主要包含三部分，服务发现的定义，服务发现的模式以及目前比较成熟的服务发现应用。<br>
-        
-      
-    </p></div>
-    <footer class="article-footer">
-      <a data-url="http://blog.xiaban666.com/2019/04/19/浅谈服务发现/" data-id="cjunhcji000008jht0tivfb6s" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-go-微服务micro基础搭建" class="article article-type-post" itemscope="" itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/04/18/go-微服务micro基础搭建/" class="article-date">
-  <time datetime="2019-04-18T08:58:39.000Z" itemprop="datePublished">2019-04-18</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/04/18/go-微服务micro基础搭建/">go 微服务micro基础搭建</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>如题<br>
-        
-      
-    </p></div>
-    <footer class="article-footer">
-      <a data-url="http://blog.xiaban666.com/2019/04/18/go-微服务micro基础搭建/" data-id="cjumey2g70000ochtd28iswv9" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-gopm-包管理工具使用" class="article article-type-post" itemscope="" itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/04/18/gopm-包管理工具使用/" class="article-date">
-  <time datetime="2019-04-18T08:57:16.000Z" itemprop="datePublished">2019-04-18</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/04/18/gopm-包管理工具使用/">gopm 包管理工具使用</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>介绍<br>go的各种包管理，在国内有加速效果<br>github地址：<a href="https://github.com/gpmgo/gopm" target="_blank" rel="noopener">https://github.com/gpmgo/gopm</a><br>官方地址：<a href="https://gopm.io/" target="_blank" rel="noopener">https://gopm.io/</a><br>文档路径：<a href="https://github.com/gpmgo/docs/tree/master/zh-CN" target="_blank" rel="noopener">https://github.com/gpmgo/docs/tree/master/zh-CN</a><br>
-        
-      
-    </p></div>
-    <footer class="article-footer">
-      <a data-url="http://blog.xiaban666.com/2019/04/18/gopm-包管理工具使用/" data-id="cjumey2gq0001ochtkhuubv6c" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-npm私有仓库搭建" class="article article-type-post" itemscope="" itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/04/15/npm私有仓库搭建/" class="article-date">
-  <time datetime="2019-04-15T02:14:00.000Z" itemprop="datePublished">2019-04-15</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/JS/">JS</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/04/15/npm私有仓库搭建/">npm私有仓库搭建</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>背景<br>Node.js开发本地项目，有时不同项目之间存在依赖，如果不想把项目发布到npm社区的仓库，则需要有自己本地的仓库。<br>有些公司采用的是内网开发，很多npm资源无法从内网去下载。<br>sinopia（主流）<br>使用文件系统作为存储，仅保存用户需要的包，如果本地仓库没有对应的包，则从指定的registry下载，默认为npmjs.org，可以改成淘宝的镜像。<br>
-        
-      
-    </p></div>
-    <footer class="article-footer">
-      <a data-url="http://blog.xiaban666.com/2019/04/15/npm私有仓库搭建/" data-id="cjuhq6ga600004lhtow0gp1a3" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-OpenSSH多路复用Multiplexing配置" class="article article-type-post" itemscope="" itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/04/09/OpenSSH多路复用Multiplexing配置/" class="article-date">
-  <time datetime="2019-04-09T07:36:41.000Z" itemprop="datePublished">2019-04-09</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Linux/">Linux</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/04/09/OpenSSH多路复用Multiplexing配置/">OpenSSH多路复用Multiplexing配置</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>设置 Session Multiplexing<br>在客户端节点如下配置/etc/ssh/ssh_config 或~/.ssh/config 就可以直接开启 Session Multiplexing 功能：<br>
-        
-      
-    </p></div>
-    <footer class="article-footer">
-      <a data-url="http://blog.xiaban666.com/2019/04/09/OpenSSH多路复用Multiplexing配置/" data-id="cju9h2aiz0000mthth96yb13j" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-热更新那点事" class="article article-type-post" itemscope="" itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/03/21/热更新那点事/" class="article-date">
-  <time datetime="2019-03-21T09:37:59.000Z" itemprop="datePublished">2019-03-21</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Linux/">Linux</a>►<a class="article-category-link" href="/categories/Linux/JS/">JS</a>►<a class="article-category-link" href="/categories/Linux/JS/IOS/">IOS</a>►<a class="article-category-link" href="/categories/Linux/JS/IOS/Android/">Android</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/03/21/热更新那点事/">热更新那点事</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>使用RN做了两个项目了，简单说一下比较重要的一个环节“热更新”<br>
-        
-      
-    </p></div>
-    <footer class="article-footer">
-      <a data-url="http://blog.xiaban666.com/2019/03/21/热更新那点事/" data-id="cjtig3h270000emht560ioczz" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/react-native/">react-native</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-brew官网安装方法过慢的解决办法" class="article article-type-post" itemscope="" itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/02/25/brew官网安装方法过慢的解决办法/" class="article-date">
-  <time datetime="2019-02-25T01:54:22.000Z" itemprop="datePublished">2019-02-25</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/IOS/">IOS</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/02/25/brew官网安装方法过慢的解决办法/">brew官网安装方法过慢的解决办法</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>原理：修改install文件，替换源</p>
-<p>第一步，获取install文件<br>把官网给的脚本拿下来<br>curl -fsSL <a href="https://raw.githubusercontent.com/Homebrew/install/master/install" target="_blank" rel="noopener">https://raw.githubusercontent.com/Homebrew/install/master/install</a> &gt;&gt; brew_install</p>
-<p>第二步，更改脚本中的资源链接，替换成清华大学的镜像<br>就是把这两句<br>BREW_REPO = “<a href="https://github.com/Homebrew/brew“.freeze" target="_blank" rel="noopener">https://github.com/Homebrew/brew“.freeze</a><br>CORE_TAP_REPO = “<a href="https://github.com/Homebrew/homebrew-core“.freeze" target="_blank" rel="noopener">https://github.com/Homebrew/homebrew-core“.freeze</a><br>更改为这两句<br>BREW_REPO = “<a href="https://mirrors.ustc.edu.cn/brew.git" target="_blank" rel="noopener">https://mirrors.ustc.edu.cn/brew.git</a> “.freeze<br>CORE_TAP_REPO = “<a href="https://mirrors.ustc.edu.cn/homebrew-core.git“.freeze" target="_blank" rel="noopener">https://mirrors.ustc.edu.cn/homebrew-core.git“.freeze</a><br>当然如果这个镜像有问题的话，可以换成别的</p>
-<p>第三步，执行脚本<br>/usr/bin/ruby brew_install</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://blog.xiaban666.com/2019/02/25/brew官网安装方法过慢的解决办法/" data-id="cjsjovns80000jiht9bikpjex" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/IOS/">IOS</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-react-native-在新版Xcode（10-）glog-0-3-4-问题" class="article article-type-post" itemscope="" itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/02/25/react-native-在新版Xcode（10-）glog-0-3-4-问题/" class="article-date">
-  <time datetime="2019-02-25T01:52:38.000Z" itemprop="datePublished">2019-02-25</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/IOS/">IOS</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/02/25/react-native-在新版Xcode（10-）glog-0-3-4-问题/">react-native 在新版Xcode（10+）glog-0.3.4 问题</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>解决方法是：</p>
-<p>github 问题地址  <a href="https://github.com/facebook/react-native/issues/19774" target="_blank" rel="noopener">https://github.com/facebook/react-native/issues/19774</a></p>
-<p>I had the same issue but manually triggering configure script (cd ./node_modules/react-native/third-party/glog-0.3.4 &amp;&amp; ../../scripts/ios-configure-glog.sh) resolves it.</p>
-<p>进入到cd ./node_modules/react-native/third-party/glog-0.3.4</p>
-<p>然后<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># sh ../../scripts/ios-configure-glog.sh</span><br></pre></td></tr></table></figure></p>
-<p>即可解决</p>
-<p>如出现 C compiler cannot create executables,需要安装gcc<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># brew install gcc</span><br></pre></td></tr></table></figure></p>
-<p>如果还是报错，尝试清空LIBS 和 CFLAGS值<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># export LIBS=</span><br><span class="line"># export CFLAGS=</span><br></pre></td></tr></table></figure></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://blog.xiaban666.com/2019/02/25/react-native-在新版Xcode（10-）glog-0-3-4-问题/" data-id="cjsjouasc0000ffhthguthmri" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ios/">ios</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-
-
-  <nav id="page-nav">
-    
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
-  </nav>
 
 </section>
         
