@@ -80,6 +80,44 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-微服务四大网关性能对比-拿来主义" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/05/20/微服务四大网关性能对比-拿来主义/" class="article-date">
+  <time datetime="2019-05-20T08:44:32.000Z" itemprop="datePublished">2019-05-20</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/05/20/微服务四大网关性能对比-拿来主义/">微服务四大网关性能对比,拿来主义</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>1 技术介绍</p>
+<p>文中针对 Nginx、ZUUL、Spring Cloud、Linkerd 等技术进行了对比（其实还有 Envoy 和 UnderTow 也是属于可选的 API 网关，本文不予涉及），那我就分别进行介绍，当然，首先得介绍 API 网关。</p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://blog.xiaban666.com/2019/05/20/微服务四大网关性能对比-拿来主义/" data-id="cjvw4iss30000vbht2bc1oi4g" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-基于Spring-Boot和Spring-Cloud实现微服务架构资料" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/05/20/基于Spring-Boot和Spring-Cloud实现微服务架构资料/" class="article-date">
@@ -428,56 +466,6 @@
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/IOS/">IOS</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-react-native-在新版Xcode（10-）glog-0-3-4-问题" class="article article-type-post" itemscope="" itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/02/25/react-native-在新版Xcode（10-）glog-0-3-4-问题/" class="article-date">
-  <time datetime="2019-02-25T01:52:38.000Z" itemprop="datePublished">2019-02-25</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/IOS/">IOS</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/02/25/react-native-在新版Xcode（10-）glog-0-3-4-问题/">react-native 在新版Xcode（10+）glog-0.3.4 问题</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>解决方法是：</p>
-<p>github 问题地址  <a href="https://github.com/facebook/react-native/issues/19774" target="_blank" rel="noopener">https://github.com/facebook/react-native/issues/19774</a></p>
-<p>I had the same issue but manually triggering configure script (cd ./node_modules/react-native/third-party/glog-0.3.4 &amp;&amp; ../../scripts/ios-configure-glog.sh) resolves it.</p>
-<p>进入到cd ./node_modules/react-native/third-party/glog-0.3.4</p>
-<p>然后<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># sh ../../scripts/ios-configure-glog.sh</span><br></pre></td></tr></table></figure></p>
-<p>即可解决</p>
-<p>如出现 C compiler cannot create executables,需要安装gcc<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># brew install gcc</span><br></pre></td></tr></table></figure></p>
-<p>如果还是报错，尝试清空LIBS 和 CFLAGS值<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># export LIBS=</span><br><span class="line"># export CFLAGS=</span><br></pre></td></tr></table></figure></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://blog.xiaban666.com/2019/02/25/react-native-在新版Xcode（10-）glog-0-3-4-问题/" data-id="cjsjouasc0000ffhthguthmri" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ios/">ios</a></li></ul>
 
     </footer>
   </div>
