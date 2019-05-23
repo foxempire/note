@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>ThinkPad T440p黑苹果安装记 | irobot&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="闲来无事，看到一篇关于再t440p安装黑苹果的文章，尝试将自己的本安装个黑苹果试试，总之有些坑。">
+<meta name="keywords" content="IT,AI,AR,Tensorflow,Face detection,Postgresql,Mysql,Java,SpringBoot,SpringCloud">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ThinkPad T440p黑苹果安装记">
+<meta property="og:url" content="http://blog.xiaban666.com/2019/05/23/ThinkPad-T440p黑苹果安装记/index.html">
+<meta property="og:site_name" content="irobot&#39;s blog">
+<meta property="og:description" content="闲来无事，看到一篇关于再t440p安装黑苹果的文章，尝试将自己的本安装个黑苹果试试，总之有些坑。">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="https://raw.githubusercontent.com/jloisel/t440p/master/t440p-hackintosh.jpg">
+<meta property="og:image" content="https://hackintosher.com/wp-content/uploads/Clover-EFI-Bootloader-Installer-Destination.png">
+<meta property="og:image" content="https://hackintosher.com/wp-content/uploads/Clover-EFI-Bootloader-Installer-UEFI-Mode.png">
+<meta property="og:image" content="https://hackintosher.com/wp-content/uploads/Clover-EFI-Bootloader-Installer-Drivers64UEFI.png">
+<meta property="og:image" content="https://hackintosher.com/wp-content/uploads/Clover-EFI-Bootloader-Installer-Drivers64UEFI-2.png">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/8244809-693846a1547cb0cf.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/592/format/webp">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/8244809-01e8400fee7e1bbc.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/920/format/webp">
+<meta property="og:updated_time" content="2019-05-23T04:18:02.862Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ThinkPad T440p黑苹果安装记">
+<meta name="twitter:description" content="闲来无事，看到一篇关于再t440p安装黑苹果的文章，尝试将自己的本安装个黑苹果试试，总之有些坑。">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/jloisel/t440p/master/t440p-hackintosh.jpg">
+  
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">irobot&#39;s blog</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">Linux/PHP/Python/Shell/ObjectC/Swift/Andorid/Delphi/.NET/NodeJS+/React+/Vue+/etc.</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/categories/Linux">Linux</a>
+        
+          <a class="main-nav-link" href="/categories/PHP">PHP</a>
+        
+          <a class="main-nav-link" href="/categories/Python">Python</a>
+        
+          <a class="main-nav-link" href="/categories/JS">JS</a>
+        
+          <a class="main-nav-link" href="/categories/IOS">IOS</a>
+        
+          <a class="main-nav-link" href="/categories/Android">Android</a>
+        
+          <a class="main-nav-link" href="/categories/Tools">Tools</a>
+        
+          <a class="main-nav-link" href="/categories/AI">AI</a>
+        
+          <a class="main-nav-link" href="/about">About</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://blog.xiaban666.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-ThinkPad-T440p黑苹果安装记" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/05/23/ThinkPad-T440p黑苹果安装记/" class="article-date">
+  <time datetime="2019-05-23T04:15:23.000Z" itemprop="datePublished">2019-05-23</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      ThinkPad T440p黑苹果安装记
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>闲来无事，看到一篇关于再t440p安装黑苹果的文章，尝试将自己的本安装个黑苹果试试，总之有些坑。<br><img src="https://raw.githubusercontent.com/jloisel/t440p/master/t440p-hackintosh.jpg" alt=""><br><a id="more"></a></p>
+<p>参照项目地址: <a href="">https://github.com/jloisel/t440p</a></p>
+<p>1、准备8G+U盘，保证Application里有安装Mojave安装程序。<br>2、格式化U盘，这只卷名Hackintosher，文件格式选择扩展日志<br>3、将安装系统拷入U盘</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo /Applications/Install\ macOS\ Mojave.app/Contents/Resources/createinstallmedia --volume /Volumes/Hackintosher --applicationpath /Applications/Install\ macOS\ Mojave.app --nointeraction</span><br></pre></td></tr></table></figure>
+<p>4、使用<a href="http://mackie100projects.altervista.org/download-clover-configurator/" target="_blank" rel="noopener">Clover Configurator</a>挂载U盘EFI分区</p>
+<p>5、使用<a href="https://sourceforge.net/projects/cloverefiboot/files/latest/download" target="_blank" rel="noopener">Clover EFI Bootloader</a>将efi等文件拷入U盘；<br><img src="https://hackintosher.com/wp-content/uploads/Clover-EFI-Bootloader-Installer-Destination.png" alt=""></p>
+<p><img src="https://hackintosher.com/wp-content/uploads/Clover-EFI-Bootloader-Installer-UEFI-Mode.png" alt=""></p>
+<p><img src="https://hackintosher.com/wp-content/uploads/Clover-EFI-Bootloader-Installer-Drivers64UEFI.png" alt=""></p>
+<p><img src="https://hackintosher.com/wp-content/uploads/Clover-EFI-Bootloader-Installer-Drivers64UEFI-2.png" alt=""></p>
+<p>6、将github项目中的EFI目录下的文件拷贝到U盘EFI分区下的EFI目录，注意：“一定要把之前的EFI目录下的文件先删除，或者是使用替换，不要使用合并”。</p>
+<p>7、进入BIOS设置需要更改配置：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">进入 Security 选项更改配置:</span><br><span class="line"></span><br><span class="line">Memory Protection &gt; Execution Prevention 设置为 Enabled,</span><br><span class="line">Virtualization &gt; Intel Virtualization Technology 设置为 Disabled,</span><br><span class="line">Internal Device Access &gt; Bottom Cover Tamper Detection 设置为 Disabled,</span><br><span class="line">Anti-Theft &gt; Current Setting 设置为 Disabled,</span><br><span class="line">Anti-Theft &gt; Computrace &gt; Current Setting 设置为 Disabled,</span><br><span class="line">Secure Boot &gt; Secure Boot 设置为 Disabled.</span><br><span class="line"></span><br><span class="line">进入Startup选项，更改如下</span><br><span class="line">UEFI/Legacy Boot: EFI only,</span><br><span class="line">CSM Support: Yes.</span><br></pre></td></tr></table></figure>
+<p>8、启动按F12选择U盘启动，进入引导界面，第一次选择格式化<br><img src="https://upload-images.jianshu.io/upload_images/8244809-693846a1547cb0cf.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/592/format/webp" alt="https://upload-images.jianshu.io/upload_images/8244809-693846a1547cb0cf.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/592/format/webp"></p>
+<p>9、格式化完成，重启选择安装MacOS<br><img src="https://upload-images.jianshu.io/upload_images/8244809-01e8400fee7e1bbc.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/920/format/webp" alt=""></p>
+<p>10、等待大概20分钟，安装完成。</p>
+<p>坑：<br>不支持WIFI，因为本的无线网卡是Intel 7260，并没有开放的Intel的驱动，折中办法并不完美。<br>可以尝试如下：<br>a)刷bios白名单，更换适用博通无线网卡；<br>b)适用USB无线网卡，但是可能会有很多限制，起码少一个USB口；<br>其他基本完美。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://blog.xiaban666.com/2019/05/23/ThinkPad-T440p黑苹果安装记/" data-id="cjw06thr30000o9htvxsd8k4f" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2019/05/20/微服务四大网关性能对比-拿来主义/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">微服务四大网关性能对比,拿来主义</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 irobot<br>
+      Powered by <a href="http://blog.xiaban666.com/" target="_blank">irobot's</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/categories/Linux" class="mobile-nav-link">Linux</a>
+  
+    <a href="/categories/PHP" class="mobile-nav-link">PHP</a>
+  
+    <a href="/categories/Python" class="mobile-nav-link">Python</a>
+  
+    <a href="/categories/JS" class="mobile-nav-link">JS</a>
+  
+    <a href="/categories/IOS" class="mobile-nav-link">IOS</a>
+  
+    <a href="/categories/Android" class="mobile-nav-link">Android</a>
+  
+    <a href="/categories/Tools" class="mobile-nav-link">Tools</a>
+  
+    <a href="/categories/AI" class="mobile-nav-link">AI</a>
+  
+    <a href="/about" class="mobile-nav-link">About</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

@@ -80,6 +80,43 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-ThinkPad-T440p黑苹果安装记" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/05/23/ThinkPad-T440p黑苹果安装记/" class="article-date">
+  <time datetime="2019-05-23T04:15:23.000Z" itemprop="datePublished">2019-05-23</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/05/23/ThinkPad-T440p黑苹果安装记/">ThinkPad T440p黑苹果安装记</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>闲来无事，看到一篇关于再t440p安装黑苹果的文章，尝试将自己的本安装个黑苹果试试，总之有些坑。<br><img src="https://raw.githubusercontent.com/jloisel/t440p/master/t440p-hackintosh.jpg" alt=""><br>
+        
+      
+    </p></div>
+    <footer class="article-footer">
+      <a data-url="http://blog.xiaban666.com/2019/05/23/ThinkPad-T440p黑苹果安装记/" data-id="cjw06thr30000o9htvxsd8k4f" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-微服务四大网关性能对比-拿来主义" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/05/20/微服务四大网关性能对比-拿来主义/" class="article-date">
@@ -140,10 +177,10 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>首先，最想说的是，当你要学习一套最新的技术时，官网的英文文档是学习的最佳渠道。因为网上流传的多数资料是官网翻译而来，很多描述的重点也都偏向于作者自身碰到的问题，这样就很容易让你理解和操作出现偏差，最开始我就进入了这样误区。官网的技术导读真的描述的很详细，虽然对于我们看英文很费劲，但如果英文不是很差，请选择沉下心去读，你一定能收获好多。</p>
+        <p>首先，最想说的是，当你要学习一套最新的技术时，官网的英文文档是学习的最佳渠道。因为网上流传的多数资料是官网翻译而来，很多描述的重点也都偏向于作者自身碰到的问题，这样就很容易让你理解和操作出现偏差，最开始我就进入了这样误区。官网的技术导读真的描述的很详细，虽然对于我们看英文很费劲，但如果英文不是很差，请选择沉下心去读，你一定能收获好多。<br>
         
       
-    </div>
+    </p></div>
     <footer class="article-footer">
       <a data-url="http://blog.xiaban666.com/2019/05/20/基于Spring-Boot和Spring-Cloud实现微服务架构资料/" data-id="cjvw3onrg0000qhhtm7ej60kv" class="article-share-link">Share</a>
       
@@ -420,52 +457,6 @@
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/react-native/">react-native</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-brew官网安装方法过慢的解决办法" class="article article-type-post" itemscope="" itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/02/25/brew官网安装方法过慢的解决办法/" class="article-date">
-  <time datetime="2019-02-25T01:54:22.000Z" itemprop="datePublished">2019-02-25</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/IOS/">IOS</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/02/25/brew官网安装方法过慢的解决办法/">brew官网安装方法过慢的解决办法</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>原理：修改install文件，替换源</p>
-<p>第一步，获取install文件<br>把官网给的脚本拿下来<br>curl -fsSL <a href="https://raw.githubusercontent.com/Homebrew/install/master/install" target="_blank" rel="noopener">https://raw.githubusercontent.com/Homebrew/install/master/install</a> &gt;&gt; brew_install</p>
-<p>第二步，更改脚本中的资源链接，替换成清华大学的镜像<br>就是把这两句<br>BREW_REPO = “<a href="https://github.com/Homebrew/brew“.freeze" target="_blank" rel="noopener">https://github.com/Homebrew/brew“.freeze</a><br>CORE_TAP_REPO = “<a href="https://github.com/Homebrew/homebrew-core“.freeze" target="_blank" rel="noopener">https://github.com/Homebrew/homebrew-core“.freeze</a><br>更改为这两句<br>BREW_REPO = “<a href="https://mirrors.ustc.edu.cn/brew.git" target="_blank" rel="noopener">https://mirrors.ustc.edu.cn/brew.git</a> “.freeze<br>CORE_TAP_REPO = “<a href="https://mirrors.ustc.edu.cn/homebrew-core.git“.freeze" target="_blank" rel="noopener">https://mirrors.ustc.edu.cn/homebrew-core.git“.freeze</a><br>当然如果这个镜像有问题的话，可以换成别的</p>
-<p>第三步，执行脚本<br>/usr/bin/ruby brew_install</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://blog.xiaban666.com/2019/02/25/brew官网安装方法过慢的解决办法/" data-id="cjsjovns80000jiht9bikpjex" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/IOS/">IOS</a></li></ul>
 
     </footer>
   </div>

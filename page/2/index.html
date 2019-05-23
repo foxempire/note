@@ -80,6 +80,52 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-brew官网安装方法过慢的解决办法" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/02/25/brew官网安装方法过慢的解决办法/" class="article-date">
+  <time datetime="2019-02-25T01:54:22.000Z" itemprop="datePublished">2019-02-25</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/IOS/">IOS</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/02/25/brew官网安装方法过慢的解决办法/">brew官网安装方法过慢的解决办法</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>原理：修改install文件，替换源</p>
+<p>第一步，获取install文件<br>把官网给的脚本拿下来<br>curl -fsSL <a href="https://raw.githubusercontent.com/Homebrew/install/master/install" target="_blank" rel="noopener">https://raw.githubusercontent.com/Homebrew/install/master/install</a> &gt;&gt; brew_install</p>
+<p>第二步，更改脚本中的资源链接，替换成清华大学的镜像<br>就是把这两句<br>BREW_REPO = “<a href="https://github.com/Homebrew/brew“.freeze" target="_blank" rel="noopener">https://github.com/Homebrew/brew“.freeze</a><br>CORE_TAP_REPO = “<a href="https://github.com/Homebrew/homebrew-core“.freeze" target="_blank" rel="noopener">https://github.com/Homebrew/homebrew-core“.freeze</a><br>更改为这两句<br>BREW_REPO = “<a href="https://mirrors.ustc.edu.cn/brew.git" target="_blank" rel="noopener">https://mirrors.ustc.edu.cn/brew.git</a> “.freeze<br>CORE_TAP_REPO = “<a href="https://mirrors.ustc.edu.cn/homebrew-core.git“.freeze" target="_blank" rel="noopener">https://mirrors.ustc.edu.cn/homebrew-core.git“.freeze</a><br>当然如果这个镜像有问题的话，可以换成别的</p>
+<p>第三步，执行脚本<br>/usr/bin/ruby brew_install</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://blog.xiaban666.com/2019/02/25/brew官网安装方法过慢的解决办法/" data-id="cjsjovns80000jiht9bikpjex" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/IOS/">IOS</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-react-native-在新版Xcode（10-）glog-0-3-4-问题" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/02/25/react-native-在新版Xcode（10-）glog-0-3-4-问题/" class="article-date">
@@ -468,49 +514,6 @@
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/itemcf/">itemcf</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/usercf/">usercf</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-利用Jenkins快速替换资源文件打包apk" class="article article-type-post" itemscope="" itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/01/23/利用Jenkins快速替换资源文件打包apk/" class="article-date">
-  <time datetime="2019-01-23T08:28:42.000Z" itemprop="datePublished">2019-01-23</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Android/">Android</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/01/23/利用Jenkins快速替换资源文件打包apk/">利用Jenkins快速替换资源文件打包apk</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>在Android约定配置下，写的以下脚本，可以替换包名、启动图、包名，以及三方的一些APPID</p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://blog.xiaban666.com/2019/01/23/利用Jenkins快速替换资源文件打包apk/" data-id="cjrbrjdnf0006uuhtlri7q8mh" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Jenkins/">Jenkins</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/apk/">apk</a></li></ul>
 
     </footer>
   </div>
