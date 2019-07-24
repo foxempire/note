@@ -80,6 +80,75 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-git常用操作备份" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/07/24/git常用操作备份/" class="article-date">
+  <time datetime="2019-07-24T05:02:15.000Z" itemprop="datePublished">2019-07-24</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/07/24/git常用操作备份/">git常用操作备份</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>1.初始化<br>git init 初始化仓库,新建一个Git仓库(新建了一个隐藏目录.git)<br>　　<br>把远程仓库克隆到本地<br>git clone <a href="mailto:git@github.com" target="_blank" rel="noopener">git@github.com</a>:lioilwin/lioilwin.github.io.git<br>git clone <a href="mailto:git@git.coding.net" target="_blank" rel="noopener">git@git.coding.net</a>:lifec/lioilwin.git</p>
+<p>把本地仓库关联到远程仓库<br>git remote add github <a href="mailto:git@github.com" target="_blank" rel="noopener">git@github.com</a>:lioilwin/lioilwin.github.io.git<br>git remote add coding <a href="mailto:git@git.coding.net" target="_blank" rel="noopener">git@git.coding.net</a>:lifec/lioilwin.git</p>
+<p>远程仓库别名<br>如果git clone一个远程仓库, Git会自动添加url,别名为origin<br>git remote      列出远程仓库别名<br>git remote -v   远程仓库别名对应的实际url<br>git remote add [alias] [url]   添加一个新远程仓库<br>git remote rm [alias]          删除远程仓库别名<br>git remote rename [old-alias] [new-alias]   重命名<br>git remote set-url [alias] [url]   更改url,可以加上—push和fetch参数,为同一个别名set不同地址</p>
+<p>2.常用<br>git status<br>git add .<br>git commit -m “注释…”<br>git push -u origin master<br>git fetch origin master<br>git pull origin master</p>
+<p>git pull = git fetch + git merge</p>
+<p>特殊符号:<br>~<n>相当于连续的<n>个^<br>^代表父提交,当一个提交有多个父提交时,可以通过在^后面跟上一个数字,表示第几个父提交 ^相当于^1</n></n></p>
+<p>3.日志/回滚重置<br>git log –name-only –oneline fileName<br>git log –oneline –number  每条log只显示一行,显示number条<br>git log –oneline –graph   图形化显示分支合并历史<br>git log branchname          显示特定分支<br>git log –decorate<br>git log –author=[author name] 指定作者的提交历史.<br>git log –since –before –until –after  根据提交时间筛选<br>git log –grep 根据commit信息过滤<br>git log –stat 改动信息     </p>
+<p>git reflog<br>    reflog记录分支变化或者HEAD引用变化, 当git reflog不指定引用时, 默认列出HEAD的reflog,<br>    HEAD@{0}代表HEAD当前的值, HEAD@{3}代表HEAD在3次变化之前的值,<br>    git会将变化记录到HEAD对应的reflog文件中, 其路径为.git/logs/HEAD, 分支reflog文件都放在.git/logs/refs的子目录</p>
+<p>git show commitID<br>git diff<br>    不加参数: show diff of unstaged changes.</p>
+<pre><code>git diff --cached 命令
+    已经暂存的文件和上次提交之间的差异
+
+git diff HEAD
+    show diff of all staged or unstated changes.
+</code></pre><p>git checkout commitID fileName<br>git revert<br>git reset –hard</p>
+<p>git分为三个区域:<br>    1.工作区(working directry)<br>    2.暂缓区(stage index)<br>    3.历史记录区(history)</p>
+<p>git reset –mixed id  history变了(提交记录变了),但staged 和 working没变  (默认方式)<br>git reset –soft id   history变了(提交记录变了)和staged区都变了,但working没变<br>git reset –hard id   全都变了</p>
+<p>变化范围:<br>soft (history) &lt; mixed (history + stage) &lt; hard (history + stage + working)</p>
+<p>4.分支<br>git branch -v  每一个分支的最后一次提交.<br>git branch     列出本地所有分支,当前分支会被星号标示出<br>git branch mybranch        创建分支<br>git branch -D mybranch     删除分支 </p>
+<p>git checkout mybranch      切换分支<br>git checkout -b mybranch   创建并切换分支<br>git rebase master          把master分支更新到当前分支<br>git merge mybranch         分支合并</p>
+<p>git push [remote-name] :branch-name 删除远程分支</p>
+<p>5.彻底清除垃圾文件,缩减git仓库<br>参考GitHub官网: <a href="https://help.github.com/articles/removing-sensitive-data-from-a-repository" target="_blank" rel="noopener">https://help.github.com/articles/removing-sensitive-data-from-a-repository</a></p>
+<p>例如, 我的jekyll博客代码库提交了大量mp3文件, 使用下面命令清除后代码库由233M缩小为1.3M, 提交到GitHub部署博客轻快飞速</p>
+<h1 id="清除垃圾文件-大量无用的mp3文件"><a href="#清除垃圾文件-大量无用的mp3文件" class="headerlink" title="清除垃圾文件(大量无用的mp3文件)"></a>清除垃圾文件(大量无用的mp3文件)</h1><p>git filter-branch –force –index-filter ‘git rm –cached –ignore-unmatch *.mp3’ –prune-empty –tag-name-filter cat – –all</p>
+<h1 id="提交到远程仓库-如GitHub-我再次从git-clone-GitHub代码库会变小为1-3M"><a href="#提交到远程仓库-如GitHub-我再次从git-clone-GitHub代码库会变小为1-3M" class="headerlink" title="提交到远程仓库(如GitHub, 我再次从git clone GitHub代码库会变小为1.3M)"></a>提交到远程仓库(如GitHub, 我再次从git clone GitHub代码库会变小为1.3M)</h1><p>git push origin –force –all</p>
+<h1 id="必须回收垃圾-本地仓库才变小"><a href="#必须回收垃圾-本地仓库才变小" class="headerlink" title="必须回收垃圾,本地仓库才变小"></a>必须回收垃圾,本地仓库才变小</h1><p>git for-each-ref –format=’delete %(refname)’ refs/original | git update-ref –stdin<br>git reflog expire –expire=now –all<br>git gc –prune=now</p>
+<p>rm -rf .git/refs/original<br>git reflog expire –expire=now –all<br>git gc –prune=now<br>git gc –aggressive –prune=now</p>
+<p>6.绑定远程分支<br>git branch –set-upstream-to=origin/remotebranch  localbranch</p>
+<p>7.显示10个最大的文件id列表<br>git verify-pack -v .git/objects/pack/pack-*.idx | sort -k 3 -g | tail -10</p>
+<p>$ git verify-pack -v .git/objects/pack/pack-*.idx | sort -k 3 -g | tail -10</p>
+<ol start="8">
+<li>根据文件id查询文件路径<br>git rev-list –objects –all | grep apk</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://blog.xiaban666.com/2019/07/24/git常用操作备份/" data-id="cjygs8mbs0000loxk0l1jr27g" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-ThinkPad-T440p黑苹果安装记" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/05/23/ThinkPad-T440p黑苹果安装记/" class="article-date">
@@ -415,49 +484,6 @@
       <a data-url="http://blog.xiaban666.com/2019/04/09/OpenSSH多路复用Multiplexing配置/" data-id="cju9h2aiz0000mthth96yb13j" class="article-share-link">Share</a>
       
       
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-热更新那点事" class="article article-type-post" itemscope="" itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/03/21/热更新那点事/" class="article-date">
-  <time datetime="2019-03-21T09:37:59.000Z" itemprop="datePublished">2019-03-21</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Linux/">Linux</a>►<a class="article-category-link" href="/categories/Linux/JS/">JS</a>►<a class="article-category-link" href="/categories/Linux/JS/IOS/">IOS</a>►<a class="article-category-link" href="/categories/Linux/JS/IOS/Android/">Android</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/03/21/热更新那点事/">热更新那点事</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>使用RN做了两个项目了，简单说一下比较重要的一个环节“热更新”<br>
-        
-      
-    </p></div>
-    <footer class="article-footer">
-      <a data-url="http://blog.xiaban666.com/2019/03/21/热更新那点事/" data-id="cjtig3h270000emht560ioczz" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/react-native/">react-native</a></li></ul>
-
     </footer>
   </div>
   
