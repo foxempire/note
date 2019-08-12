@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>webrtc原理简述 | irobot&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="webrtc旧题重述">
+<meta name="keywords" content="IT,AI,AR,Tensorflow,Face detection,Postgresql,Mysql,Java,SpringBoot,SpringCloud">
+<meta property="og:type" content="article">
+<meta property="og:title" content="webrtc原理简述">
+<meta property="og:url" content="http://blog.xiaban666.com/2019/08/12/webrtc原理简述/index.html">
+<meta property="og:site_name" content="irobot&#39;s blog">
+<meta property="og:description" content="webrtc旧题重述">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-08-12T07:44:00.173Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="webrtc原理简述">
+<meta name="twitter:description" content="webrtc旧题重述">
+  
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">irobot&#39;s blog</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">Linux/PHP/Python/Shell/ObjectC/Swift/Andorid/Delphi/.NET/NodeJS+/React+/Vue+/etc.</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/categories/Linux">Linux</a>
+        
+          <a class="main-nav-link" href="/categories/PHP">PHP</a>
+        
+          <a class="main-nav-link" href="/categories/Python">Python</a>
+        
+          <a class="main-nav-link" href="/categories/JS">JS</a>
+        
+          <a class="main-nav-link" href="/categories/IOS">IOS</a>
+        
+          <a class="main-nav-link" href="/categories/Android">Android</a>
+        
+          <a class="main-nav-link" href="/categories/Tools">Tools</a>
+        
+          <a class="main-nav-link" href="/categories/AI">AI</a>
+        
+          <a class="main-nav-link" href="/about">About</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://blog.xiaban666.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-webrtc原理简述" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/08/12/webrtc原理简述/" class="article-date">
+  <time datetime="2019-08-12T07:44:00.000Z" itemprop="datePublished">2019-08-12</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      webrtc原理简述
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>webrtc旧题重述</p>
+<a id="more"></a>
+<p>Signaling Server（信令服务器），需自己实现，它是在客户端A和客户端B之前传递彼此的SDP信息和candidate信息。ClientA和ClientB通过这些信息建立P2P连接来传送音视频数据。由于网络环境的复杂性，并不是所有的客户端之间都能够建立P2P连接，这种情况下就需要有个relay服务器做音视频数据的中转。</p>
+<p>说明：STUN服务器 、TURN服务器、relay服务器的实现在WebRTC源码中都有示例</p>
+<p>接下来将从使用层面描述WebRTC建立连接的流程，至于深层次的内容，将持续更新</p>
+<p>场景：ClientA向ClientB发起视讯请求</p>
+<p>【ClientA创建PeerConnection对象】→【ClientA打开本地音视频设备】→【ClientA将音视频数据封装成MediaStream添加到PeerConnection中】<br>【ClientA调用PeerConnection的CreateOffer方法创建一个用于offer的SDP对象，SDP对象中保存当前音视频的相关参数。】→【ClientA通过PeerConnection的SetLocalDescription方法将该SDP对象保存起来】→【ClientA通过Signal服务器将SDP对象发送给ClientB】<br>【ClientB接收到ClientA发送过的offer SDP对象】→【通过PeerConnection的SetRemoteDescription方法将其保存起来】→【调用PeerConnection的CreateAnswer方法创建一个应答的SDP对象】→【通过PeerConnection的SetLocalDescription的方法保存该应答SDP对象】→【通过Signal服务器将该应答SDP对象发送给ClientA】<br>【ClientA接收到ClientB发送过来的应答SDP对象】→【将应答SDP对象通过PeerConnection的SetRemoteDescription方法保存起来】<br>【在SDP信息的offer/answer流程中，ClientA和ClientB已经根据SDP信息创建好相应的音频Channel和视频Channel并开启Candidate数据的收集】【Candidate数据可以简单地理解成Client端的IP地址信息（本地IP地址、公网IP地址、Relay服务端分配的地址）】<br>【当ClientA收集到Candidate信息后，PeerConnection会通过OnIceCandidate接口给ClientA发送通知，ClientA将收到的Candidate信息，通过Signal服务器发送给ClientB，ClientB通过PeerConnection的AddIceCandidate方法保存起来。同样的操作ClientB对ClientA再来一次】<br>【这样ClientA和ClientB就已经建立了音视频传输的P2P通道，ClientB接收到ClientA传送过来的音视频流，会通过PeerConnection的OnAddStream回调接口返回一个标识ClientA端音视频流的MediaStream对象，在ClientB端渲染出来即可。同样操作也适应ClientB到ClientA的音视频流的传输】</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://blog.xiaban666.com/2019/08/12/webrtc原理简述/" data-id="cjz83d1090000evfyjyib39fr" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2019/07/24/git常用操作备份/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">git常用操作备份</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 irobot<br>
+      Powered by <a href="http://blog.xiaban666.com/" target="_blank">irobot's</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/categories/Linux" class="mobile-nav-link">Linux</a>
+  
+    <a href="/categories/PHP" class="mobile-nav-link">PHP</a>
+  
+    <a href="/categories/Python" class="mobile-nav-link">Python</a>
+  
+    <a href="/categories/JS" class="mobile-nav-link">JS</a>
+  
+    <a href="/categories/IOS" class="mobile-nav-link">IOS</a>
+  
+    <a href="/categories/Android" class="mobile-nav-link">Android</a>
+  
+    <a href="/categories/Tools" class="mobile-nav-link">Tools</a>
+  
+    <a href="/categories/AI" class="mobile-nav-link">AI</a>
+  
+    <a href="/about" class="mobile-nav-link">About</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>
