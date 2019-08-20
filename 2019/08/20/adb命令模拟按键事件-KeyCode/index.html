@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>adb命令模拟按键事件 KeyCode | irobot&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="转">
+<meta name="keywords" content="IT,AI,AR,Tensorflow,Face detection,Postgresql,Mysql,Java,SpringBoot,SpringCloud">
+<meta property="og:type" content="article">
+<meta property="og:title" content="adb命令模拟按键事件 KeyCode">
+<meta property="og:url" content="http://blog.xiaban666.com/2019/08/20/adb命令模拟按键事件-KeyCode/index.html">
+<meta property="og:site_name" content="irobot&#39;s blog">
+<meta property="og:description" content="转">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-08-20T09:18:02.069Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="adb命令模拟按键事件 KeyCode">
+<meta name="twitter:description" content="转">
+  
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">irobot&#39;s blog</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">Linux/PHP/Python/Shell/ObjectC/Swift/Andorid/Delphi/.NET/NodeJS+/React+/Vue+/etc.</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/categories/Linux">Linux</a>
+        
+          <a class="main-nav-link" href="/categories/PHP">PHP</a>
+        
+          <a class="main-nav-link" href="/categories/Python">Python</a>
+        
+          <a class="main-nav-link" href="/categories/JS">JS</a>
+        
+          <a class="main-nav-link" href="/categories/IOS">IOS</a>
+        
+          <a class="main-nav-link" href="/categories/Android">Android</a>
+        
+          <a class="main-nav-link" href="/categories/Tools">Tools</a>
+        
+          <a class="main-nav-link" href="/categories/AI">AI</a>
+        
+          <a class="main-nav-link" href="/about">About</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://blog.xiaban666.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-adb命令模拟按键事件-KeyCode" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/08/20/adb命令模拟按键事件-KeyCode/" class="article-date">
+  <time datetime="2019-08-20T09:18:02.000Z" itemprop="datePublished">2019-08-20</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      adb命令模拟按键事件 KeyCode
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>转</p>
+<a id="more"></a> 
+<p>例子：</p>
+<p>//这条命令相当于按了设备的Backkey键<br>adb shell input keyevent 4   </p>
+<p> //可以解锁屏幕  </p>
+<p>adb shell input keyevent  82 </p>
+<p>//在屏幕上做划屏操作，前四个数为坐标点，后面是滑动的时间（单位毫秒）  </p>
+<p>adb shell input swipe 50 250 250 250 500 </p>
+<p>//在屏幕上点击坐标点x=50  y=250的位置。  </p>
+<p>adb shell input tap 50 250 </p>
+<p>//输入字符abc</p>
+<p>adb shell input text abc</p>
+<p>每个数字与keycode对应表如下：<br>0 –&gt;  “KEYCODE_UNKNOWN”<br>1 –&gt;  “KEYCODE_MENU”<br>2 –&gt;  “KEYCODE_SOFT_RIGHT”<br>3 –&gt;  “KEYCODE_HOME”<br>4 –&gt;  “KEYCODE_BACK”<br>5 –&gt;  “KEYCODE_CALL”<br>6 –&gt;  “KEYCODE_ENDCALL”<br>7 –&gt;  “KEYCODE_0”<br>8 –&gt;  “KEYCODE_1”<br>9 –&gt;  “KEYCODE_2”<br>10 –&gt;  “KEYCODE_3”<br>11 –&gt;  “KEYCODE_4”<br>12 –&gt;  “KEYCODE_5”<br>13 –&gt;  “KEYCODE_6”<br>14 –&gt;  “KEYCODE_7”<br>15 –&gt;  “KEYCODE_8”<br>16 –&gt;  “KEYCODE_9”<br>17 –&gt;  “KEYCODE_STAR”<br>18 –&gt;  “KEYCODE_POUND”<br>19 –&gt;  “KEYCODE_DPAD_UP”<br>20 –&gt;  “KEYCODE_DPAD_DOWN”<br>21 –&gt;  “KEYCODE_DPAD_LEFT”<br>22 –&gt;  “KEYCODE_DPAD_RIGHT”<br>23 –&gt;  “KEYCODE_DPAD_CENTER”<br>24 –&gt;  “KEYCODE_VOLUME_UP”<br>25 –&gt;  “KEYCODE_VOLUME_DOWN”<br>26 –&gt;  “KEYCODE_POWER”<br>27 –&gt;  “KEYCODE_CAMERA”<br>28 –&gt;  “KEYCODE_CLEAR”<br>29 –&gt;  “KEYCODE_A”<br>30 –&gt;  “KEYCODE_B”<br>31 –&gt;  “KEYCODE_C”<br>32 –&gt;  “KEYCODE_D”<br>33 –&gt;  “KEYCODE_E”<br>34 –&gt;  “KEYCODE_F”<br>35 –&gt;  “KEYCODE_G”<br>36 –&gt;  “KEYCODE_H”<br>37 –&gt;  “KEYCODE_I”<br>38 –&gt;  “KEYCODE_J”<br>39 –&gt;  “KEYCODE_K”<br>40 –&gt;  “KEYCODE_L”<br>41 –&gt;  “KEYCODE_M”<br>42 –&gt;  “KEYCODE_N”<br>43 –&gt;  “KEYCODE_O”<br>44 –&gt;  “KEYCODE_P”<br>45 –&gt;  “KEYCODE_Q”<br>46 –&gt;  “KEYCODE_R”<br>47 –&gt;  “KEYCODE_S”<br>48 –&gt;  “KEYCODE_T”<br>49 –&gt;  “KEYCODE_U”<br>50 –&gt;  “KEYCODE_V”<br>51 –&gt;  “KEYCODE_W”<br>52 –&gt;  “KEYCODE_X”<br>53 –&gt;  “KEYCODE_Y”<br>54 –&gt;  “KEYCODE_Z”<br>55 –&gt;  “KEYCODE_COMMA”<br>56 –&gt;  “KEYCODE_PERIOD”<br>57 –&gt;  “KEYCODE_ALT_LEFT”<br>58 –&gt;  “KEYCODE_ALT_RIGHT”<br>59 –&gt;  “KEYCODE_SHIFT_LEFT”<br>60 –&gt;  “KEYCODE_SHIFT_RIGHT”<br>61 –&gt;  “KEYCODE_TAB”<br>62 –&gt;  “KEYCODE_SPACE”<br>63 –&gt;  “KEYCODE_SYM”<br>64 –&gt;  “KEYCODE_EXPLORER”<br>65 –&gt;  “KEYCODE_ENVELOPE”<br>66 –&gt;  “KEYCODE_ENTER”<br>67 –&gt;  “KEYCODE_DEL”<br>68 –&gt;  “KEYCODE_GRAVE”<br>69 –&gt;  “KEYCODE_MINUS”<br>70 –&gt;  “KEYCODE_EQUALS”<br>71 –&gt;  “KEYCODE_LEFT_BRACKET”<br>72 –&gt;  “KEYCODE_RIGHT_BRACKET”<br>73 –&gt;  “KEYCODE_BACKSLASH”<br>74 –&gt;  “KEYCODE_SEMICOLON”<br>75 –&gt;  “KEYCODE_APOSTROPHE”<br>76 –&gt;  “KEYCODE_SLASH”<br>77 –&gt;  “KEYCODE_AT”<br>78 –&gt;  “KEYCODE_NUM”<br>79 –&gt;  “KEYCODE_HEADSETHOOK”<br>80 –&gt;  “KEYCODE_FOCUS”<br>81 –&gt;  “KEYCODE_PLUS”<br>82 –&gt;  “KEYCODE_MENU”<br>83 –&gt;  “KEYCODE_NOTIFICATION”<br>84 –&gt;  “KEYCODE_SEARCH”<br>85 –&gt;  “TAG_LAST_KEYCODE”</p>
+<h1 id="KEYCODE列表"><a href="#KEYCODE列表" class="headerlink" title="KEYCODE列表"></a>KEYCODE列表</h1><h1 id="电话键"><a href="#电话键" class="headerlink" title="电话键"></a>电话键</h1><p>KEYCODE_CALL</p>
+<p>拨号键</p>
+<p>5</p>
+<p>KEYCODE_ENDCALL</p>
+<p>挂机键</p>
+<p>6</p>
+<p>KEYCODE_HOME</p>
+<p>按键Home</p>
+<p>3</p>
+<p>KEYCODE_MENU</p>
+<p><a href="http://www.haogongju.net/tag/%E8%8F%9C%E5%8D%95" title="菜单" target="_blank" rel="noopener">菜单</a>键</p>
+<p>82</p>
+<p>KEYCODE_BACK</p>
+<p>返回键</p>
+<p>4</p>
+<p>KEYCODE_S<a href="http://www.haogongju.net/tag/EA" title="EA" target="_blank" rel="noopener">EA</a>RCH</p>
+<p><a href="http://www.haogongju.net/tag/%E6%90%9C%E7%B4%A2" title="搜索" target="_blank" rel="noopener">搜索</a>键</p>
+<p>84</p>
+<p>KEYCODE_CAMERA</p>
+<p>拍照键</p>
+<p>27</p>
+<p>KEYCODE_FOCUS</p>
+<p>拍照对焦键</p>
+<p>80</p>
+<p>KEYCODE_POWER</p>
+<p>电源键</p>
+<p>26</p>
+<p>KEYCODE_NOTIFICATION</p>
+<p>通知键</p>
+<p>83</p>
+<p>KEYCODE_MUTE</p>
+<p>话筒静音键</p>
+<p>91</p>
+<p>KEYCODE_VOLUME_MUTE</p>
+<p>扬声器静音键</p>
+<p>164</p>
+<p>KEYCODE_VOLUME_UP</p>
+<p>音量增加键</p>
+<p>24</p>
+<p>KEYCODE_VOLUME_DOWN</p>
+<p>音量减小键</p>
+<p>25</p>
+<p>====</p>
+<h1 id="控制键"><a href="#控制键" class="headerlink" title="控制键"></a>控制键</h1><p>KEYCODE_ENTER</p>
+<p>回车键</p>
+<p>66</p>
+<p>KEYCODE_ESCAPE</p>
+<p>ESC键</p>
+<p>111</p>
+<p>KEYCODE_DPAD_CENTER</p>
+<p><a href="http://www.haogongju.net/tag/%E5%AF%BC%E8%88%AA" title="导航" target="_blank" rel="noopener">导航</a>键 确定键</p>
+<p>23</p>
+<p>KEYCODE_DPAD_UP</p>
+<p>导航键 向上</p>
+<p>19</p>
+<p>KEYCODE_DPAD_DOWN</p>
+<p>导航键 向下</p>
+<p>20</p>
+<p>KEYCODE_DPAD_LEFT</p>
+<p>导航键 向左</p>
+<p>21</p>
+<p>KEYCODE_DPAD_RIGHT</p>
+<p>导航键 向右</p>
+<p>22</p>
+<p>KEYCODE_MOVE_HOME</p>
+<p>光标<a href="http://www.haogongju.net/tag/%E7%A7%BB%E5%8A%A8" title="移动" target="_blank" rel="noopener">移动</a>到开始键</p>
+<p>122</p>
+<p>KEYCODE_MOVE_END</p>
+<p>光标移动到末尾键</p>
+<p>123</p>
+<p>KEYCODE_PAGE_UP</p>
+<p>向上翻页键</p>
+<p>92</p>
+<p>KEYCODE_PAGE_DOWN</p>
+<p>向下翻页键</p>
+<p>93</p>
+<p>KEYCODE_DEL</p>
+<p>退格键</p>
+<p>67</p>
+<p>KEYCODE_FORWARD_DEL</p>
+<p>删除键</p>
+<p>112</p>
+<p>KEYCODE_<a href="http://www.haogongju.net/tag/in" title="IN" target="_blank" rel="noopener">IN</a>SERT</p>
+<p>插入键</p>
+<p>124</p>
+<p>KEYCODE_TAB</p>
+<p>Tab键</p>
+<p>61</p>
+<p>KEYCODE_NUM_LOCK</p>
+<p>小键盘锁</p>
+<p>143</p>
+<p>KEYCODE_CAPS_LOCK</p>
+<p>大写锁定键</p>
+<p>115</p>
+<p>KEYCODE_BREAK</p>
+<p>Break/Pause键</p>
+<p>121</p>
+<p>KEYCODE_SCROLL_LOCK</p>
+<p>滚动锁定键</p>
+<p>116</p>
+<p>KEYCODE_ZOOM_IN</p>
+<p>放大键</p>
+<p>168</p>
+<p>KEYCODE_ZOOM_OUT</p>
+<p>缩小键</p>
+<p>169</p>
+<p>====</p>
+<h1 id="组合键"><a href="#组合键" class="headerlink" title="组合键"></a>组合键</h1><p>KEYCODE_ALT_LEFT</p>
+<p>Alt+Left</p>
+<p>KEYCODE_ALT_RIGHT</p>
+<p>Alt+Right</p>
+<p>KEYCODE_CTRL_LEFT</p>
+<p>Control+Left</p>
+<p>KEYCODE_CTRL_RIGHT</p>
+<p>Control+Right</p>
+<p>KEYCODE_SHIFT_LEFT</p>
+<p>Shift+Left</p>
+<p>KEYCODE_SHIFT_RIGHT</p>
+<p>Shift+Right</p>
+<p>====</p>
+<h1 id="基本"><a href="#基本" class="headerlink" title="基本"></a>基本</h1><p>KEYCODE_0</p>
+<p>按键’0’</p>
+<p>7</p>
+<p>KEYCODE_1</p>
+<p>按键’1’</p>
+<p>8</p>
+<p>KEYCODE_2</p>
+<p>按键’2’</p>
+<p>9</p>
+<p>KEYCODE_3</p>
+<p>按键’3’</p>
+<p>10</p>
+<p>KEYCODE_4</p>
+<p>按键’4’</p>
+<p>11</p>
+<p>KEYCODE_5</p>
+<p>按键’5’</p>
+<p>12</p>
+<p>KEYCODE_6</p>
+<p>按键’6’</p>
+<p>13</p>
+<p>KEYCODE_7</p>
+<p>按键’7’</p>
+<p>14</p>
+<p>KEYCODE_8</p>
+<p>按键’8’</p>
+<p>15</p>
+<p>KEYCODE_9</p>
+<p>按键’9’</p>
+<p>16</p>
+<p>KEYCODE_A</p>
+<p>按键’A’</p>
+<p>29</p>
+<p>KEYCODE_B</p>
+<p>按键’B’</p>
+<p>30</p>
+<p>KEYCODE_C</p>
+<p>按键’C’</p>
+<p>31</p>
+<p>KEYCODE_D</p>
+<p>按键’D’</p>
+<p>32</p>
+<p>KEYCODE_E</p>
+<p>按键’E’</p>
+<p>33</p>
+<p>KEYCODE_F</p>
+<p>按键’F’</p>
+<p>34</p>
+<p>KEYCODE_G</p>
+<p>按键’G’</p>
+<p>35</p>
+<p>KEYCODE_H</p>
+<p>按键’H’</p>
+<p>36</p>
+<p>KEYCODE_I</p>
+<p>按键’I’</p>
+<p>37</p>
+<p>KEYCODE_J</p>
+<p>按键’J’</p>
+<p>38</p>
+<p>KEYCODE_K</p>
+<p>按键’K’</p>
+<p>39</p>
+<p>KEYCODE_L</p>
+<p>按键’L’</p>
+<p>40</p>
+<p>KEYCODE_M</p>
+<p>按键’M’</p>
+<p>41</p>
+<p>KEYCODE_N</p>
+<p>按键’N’</p>
+<p>42</p>
+<p>KEYCODE_O</p>
+<p>按键’O’</p>
+<p>43</p>
+<p>KEYCODE_P</p>
+<p>按键’P’</p>
+<p>44</p>
+<p>KEYCODE_Q</p>
+<p>按键’Q’</p>
+<p>45</p>
+<p>KEYCODE_R</p>
+<p>按键’R’</p>
+<p>46</p>
+<p>KEYCODE_S</p>
+<p>按键’S’</p>
+<p>47</p>
+<p>KEYCODE_T</p>
+<p>按键’T’</p>
+<p>48</p>
+<p>KEYCODE_U</p>
+<p>按键’U’</p>
+<p>49</p>
+<p>KEYCODE_V</p>
+<p>按键’V’</p>
+<p>50</p>
+<p>KEYCODE_W</p>
+<p>按键’W’</p>
+<p>51</p>
+<p>KEYCODE_X</p>
+<p>按键’X’</p>
+<p>52</p>
+<p>KEYCODE_Y</p>
+<p>按键’Y’</p>
+<p>53</p>
+<p>KEYCODE_Z</p>
+<p>按键’Z’</p>
+<p>54</p>
+<p>====</p>
+<h1 id="符号"><a href="#符号" class="headerlink" title="符号"></a>符号</h1><p>KEYCODE_PLUS</p>
+<p>按键’+’</p>
+<p>KEYCODE_MINUS</p>
+<p>按键’-‘</p>
+<p>KEYCODE_STAR</p>
+<p>按键’*’</p>
+<p>KEYCODE_SLASH</p>
+<p>按键’/‘</p>
+<p>KEYCODE_EQUALS</p>
+<p>按键’=’</p>
+<p>KEYCODE_AT</p>
+<p>按键‘@’</p>
+<p>KEYCODE_POUND</p>
+<p>按键’#’</p>
+<p>KEYCODE_AP<a href="http://www.haogongju.net/tag/OS" title="OS" target="_blank" rel="noopener">OS</a>TROPHE</p>
+<p>按键’’’ (单引号)</p>
+<p>KEYCODE_BACKSLASH</p>
+<p>按键’\‘</p>
+<p>KEYCODE_COMMA</p>
+<p>按键’,’</p>
+<p>KEYCODE_PERIOD</p>
+<p>按键’.’</p>
+<p>KEYCODE_LEFT_BRACKET</p>
+<p>按键’[‘</p>
+<p>KEYCODE_RIGHT_BRACKET</p>
+<p>按键’]‘</p>
+<p>KEYCODE_<a href="http://www.haogongju.net/tag/SEM" title="SEM" target="_blank" rel="noopener">SEM</a>ICOLON</p>
+<p>按键’;’</p>
+<p>KEYCODE_GRAVE</p>
+<p>按键’`’</p>
+<p>KEYCODE_SPACE</p>
+<p>空格键</p>
+<p>====</p>
+<h1 id="小键盘"><a href="#小键盘" class="headerlink" title="小键盘"></a>小键盘</h1><p>KEYCODE_NUMPAD_0</p>
+<p>小键盘按键’0’</p>
+<p>KEYCODE_NUMPAD_1</p>
+<p>小键盘按键’1’</p>
+<p>KEYCODE_NUMPAD_2</p>
+<p>小键盘按键’2’</p>
+<p>KEYCODE_NUMPAD_3</p>
+<p>小键盘按键’3’</p>
+<p>KEYCODE_NUMPAD_4</p>
+<p>小键盘按键’4’</p>
+<p>KEYCODE_NUMPAD_5</p>
+<p>小键盘按键’5’</p>
+<p>KEYCODE_NUMPAD_6</p>
+<p>小键盘按键’6’</p>
+<p>KEYCODE_NUMPAD_7</p>
+<p>小键盘按键’7’</p>
+<p>KEYCODE_NUMPAD_8</p>
+<p>小键盘按键’8’</p>
+<p>KEYCODE_NUMPAD_9</p>
+<p>小键盘按键’9’</p>
+<p>KEYCODE_NUMPAD_ADD</p>
+<p>小键盘按键’+’</p>
+<p>KEYCODE_NUMPAD_SUBTRACT</p>
+<p>小键盘按键’-‘</p>
+<p>KEYCODE_NUMPAD_MULT<a href="http://www.haogongju.net/tag/IP" title="IP" target="_blank" rel="noopener">IP</a>LY</p>
+<p>小键盘按键’*’</p>
+<p>KEYCODE_NUMPAD_DIV<a href="http://www.haogongju.net/tag/IDE" title="IDE" target="_blank" rel="noopener">IDE</a></p>
+<p>小键盘按键’/‘</p>
+<p>KEYCODE_NUMPAD_EQUALS</p>
+<p>小键盘按键’=’</p>
+<p>KEYCODE_NUMPAD_COMMA</p>
+<p>小键盘按键’,’</p>
+<p>KEYCODE_NUMPAD_DOT</p>
+<p>小键盘按键’.’</p>
+<p>KEYCODE_NUMPAD_LEFT_PAREN</p>
+<p>小键盘按键’(‘</p>
+<p>KEYCODE_NUMPAD_RIGHT_PAREN</p>
+<p>小键盘按键’)’</p>
+<p>KEYCODE_NUMPAD_ENTER</p>
+<p>小键盘按键回车</p>
+<p>====</p>
+<h1 id="功能键"><a href="#功能键" class="headerlink" title="功能键"></a>功能键</h1><p>KEYCODE_F1</p>
+<p>按键F1</p>
+<p>KEYCODE_F2</p>
+<p>按键F2</p>
+<p>KEYCODE_F3</p>
+<p>按键F3</p>
+<p>KEYCODE_F4</p>
+<p>按键F4</p>
+<p>KEYCODE_F5</p>
+<p>按键F5</p>
+<p>KEYCODE_F6</p>
+<p>按键F6</p>
+<p>KEYCODE_F7</p>
+<p>按键F7</p>
+<p>KEYCODE_F8</p>
+<p>按键F8</p>
+<p>KEYCODE_F9</p>
+<p>按键F9</p>
+<p>KEYCODE_F10</p>
+<p>按键F10</p>
+<p>KEYCODE_F11</p>
+<p>按键F11</p>
+<p>KEYCODE_F12</p>
+<p>按键F12</p>
+<hr>
+<h1 id="多媒体键"><a href="#多媒体键" class="headerlink" title="多媒体键"></a>多媒体键</h1><p>KEYCODE_<a href="http://www.haogongju.net/tag/MED" title="MED" target="_blank" rel="noopener">MED</a>IA_PLAY</p>
+<p>多媒体键 播放</p>
+<p>KEYCODE_MEDIA_STOP</p>
+<p>多媒体键 停止</p>
+<p>KEYCODE_MEDIA_PAUSE</p>
+<p>多媒体键 暂停</p>
+<p>KEYCODE_MEDIA_PLAY_PAUSE</p>
+<p>多媒体键 播放/暂停</p>
+<p>KEYCODE_MEDIA_FAST_FORWARD</p>
+<p>多媒体键 快进</p>
+<p>KEYCODE_MEDIA_REWIND</p>
+<p>多媒体键 快退</p>
+<p>KEYCODE_MEDIA_NEXT</p>
+<p>多媒体键 下一首</p>
+<p>KEYCODE_MEDIA_<a href="http://www.haogongju.net/tag/PR" title="PR" target="_blank" rel="noopener">PR</a>EVIOUS</p>
+<p>多媒体键 上一首</p>
+<p>KEYCODE_MEDIA_CLOSE</p>
+<p>多媒体键 关闭</p>
+<p>KEYCODE_MEDIA_EJECT</p>
+<p>多媒体键 弹出</p>
+<p>KEYCODE_MEDIA_RECORD</p>
+<p>多媒体键 录音</p>
+<hr>
+<h1 id="手柄按键"><a href="#手柄按键" class="headerlink" title="手柄按键"></a>手柄按键</h1><p>KEYCODE_BUTTON_1</p>
+<p>通用<a href="http://www.haogongju.net/tag/%E6%B8%B8%E6%88%8F" title="游戏" target="_blank" rel="noopener">游戏</a>手柄按钮#1</p>
+<p>KEYCODE_BUTTON_2</p>
+<p>通用游戏手柄按钮 #2</p>
+<p>KEYCODE_BUTTON_3</p>
+<p>通用游戏手柄按钮 #3</p>
+<p>KEYCODE_BUTTON_4</p>
+<p>通用游戏手柄按钮 #4</p>
+<p>KEYCODE_BUTTON_5</p>
+<p>通用游戏手柄按钮 #5</p>
+<p>KEYCODE_BUTTON_6</p>
+<p>通用游戏手柄按钮 #6</p>
+<p>KEYCODE_BUTTON_7</p>
+<p>通用游戏手柄按钮 #7</p>
+<p>KEYCODE_BUTTON_8</p>
+<p>通用游戏手柄按钮 #8</p>
+<p>KEYCODE_BUTTON_9</p>
+<p>通用游戏手柄按钮 #9</p>
+<p>KEYCODE_BUTTON_10</p>
+<p>通用游戏手柄按钮 #10</p>
+<p>KEYCODE_BUTTON_11</p>
+<p>通用游戏手柄按钮 #11</p>
+<p>KEYCODE_BUTTON_12</p>
+<p>通用游戏手柄按钮 #12</p>
+<p>KEYCODE_BUTTON_13</p>
+<p>通用游戏手柄按钮 #13</p>
+<p>KEYCODE_BUTTON_14</p>
+<p>通用游戏手柄按钮 #14</p>
+<p>KEYCODE_BUTTON_15</p>
+<p>通用游戏手柄按钮 #15</p>
+<p>KEYCODE_BUTTON_16</p>
+<p>通用游戏手柄按钮 #16</p>
+<p>KEYCODE_BUTTON_A</p>
+<p>游戏手柄按钮 A</p>
+<p>KEYCODE_BUTTON_B</p>
+<p>游戏手柄按钮 B</p>
+<p>KEYCODE_BUTTON_C</p>
+<p>游戏手柄按钮 C</p>
+<p>KEYCODE_BUTTON_X</p>
+<p>游戏手柄按钮 X</p>
+<p>KEYCODE_BUTTON_Y</p>
+<p>游戏手柄按钮 Y</p>
+<p>KEYCODE_BUTTON_Z</p>
+<p>游戏手柄按钮 Z</p>
+<p>KEYCODE_BUTTON_L1</p>
+<p>游戏手柄按钮 L1</p>
+<p>KEYCODE_BUTTON_L2</p>
+<p>游戏手柄按钮 L2</p>
+<p>KEYCODE_BUTTON_R1</p>
+<p>游戏手柄按钮 R1</p>
+<p>KEYCODE_BUTTON_R2</p>
+<p>游戏手柄按钮 R2</p>
+<p>KEYCODE_BUTTON_MODE</p>
+<p>游戏手柄按钮 Mode</p>
+<p>KEYCODE_BUTTON_SELECT</p>
+<p>游戏手柄按钮 Select</p>
+<p>KEYCODE_BUTTON_START</p>
+<p>游戏手柄按钮 Start</p>
+<p>KEYCODE_BUTTON_THUMBL</p>
+<p>Left Thumb Button</p>
+<p>KEYCODE_BUTTON_THUMBR</p>
+<p>Right Thumb Button</p>
+<hr>
+<h1 id="待查"><a href="#待查" class="headerlink" title="待查"></a>待查</h1><p>KEYCODE_NUM</p>
+<p>按键Number modifier</p>
+<p>KEYCODE_INFO</p>
+<p>按键Info</p>
+<p>KEYCODE_<a href="http://www.haogongju.net/tag/App" title="APP" target="_blank" rel="noopener">APP</a>_SW<a href="http://www.haogongju.net/tag/IT" title="IT" target="_blank" rel="noopener">IT</a>CH</p>
+<p>按键App switch</p>
+<p>KEYCODE_BOOKMARK</p>
+<p>按键Bookmark</p>
+<p>KEYCODE_AVR_INPUT</p>
+<p>按键A/V Receiver input</p>
+<p>KEYCODE_AVR_POWER</p>
+<p>按键A/V Receiver power</p>
+<p>KEYCODE_CAPTIONS</p>
+<p>按键Toggle captions</p>
+<p>KEYCODE_CHANNEL_DOWN</p>
+<p>按键Channel down</p>
+<p>KEYCODE_CHANNEL_UP</p>
+<p>按键Channel up</p>
+<p>KEYCODE_CLEAR</p>
+<p>按键Clear</p>
+<p>KEYCODE_DVR</p>
+<p>按键DVR</p>
+<p>KEYCODE_ENVELOPE</p>
+<p>按键Envelope special function</p>
+<p>KEYCODE_E<a href="http://www.haogongju.net/tag/XP" title="XP" target="_blank" rel="noopener">XP</a>LORER</p>
+<p>按键Explorer special function</p>
+<p>KEYCODE_FORWARD</p>
+<p>按键Forward</p>
+<p>KEYCODE_FORWARD_DEL</p>
+<p>按键Forward Delete</p>
+<p>KEYCODE_FUNCTION</p>
+<p>按键Function modifier</p>
+<p>KEYCODE_G<a href="http://www.haogongju.net/tag/UI" title="UI" target="_blank" rel="noopener">UI</a>DE</p>
+<p>按键Guide</p>
+<p>KEYCODE_HEADSETHOOK</p>
+<p>按键Headset Hook</p>
+<p>KEYCODE_META_LEFT</p>
+<p>按键Left Meta modifier</p>
+<p>KEYCODE_META_RIGHT</p>
+<p>按键Right Meta modifier</p>
+<p>KEYCODE_PICTSYMBOLS</p>
+<p>按键Picture Symbols modifier</p>
+<p>KEYCODE_PROG_BL<a href="http://www.haogongju.net/tag/UE" title="UE" target="_blank" rel="noopener">UE</a></p>
+<p>按键Blue “programmable”</p>
+<p>KEYCODE_PROG_GREEN</p>
+<p>按键Green “programmable”</p>
+<p>KEYCODE_PROG_RED</p>
+<p>按键Red “programmable”</p>
+<p>KEYCODE_PROG_YELLOW</p>
+<p>按键Yellow “programmable”</p>
+<p>KEYCODE_SETTINGS</p>
+<p>按键Settings</p>
+<p>KEYCODE_SOFT_LEFT</p>
+<p>按键Soft Left</p>
+<p>KEYCODE_SOFT_RIGHT</p>
+<p>按键Soft Right</p>
+<p>KEYCODE_STB_INPUT</p>
+<p>按键Set-top-box input</p>
+<p>KEYCODE_STB_POWER</p>
+<p>按键Set-top-box power</p>
+<p>KEYCODE_SWITCH_CHARSET</p>
+<p>按键Switch Charset modifier</p>
+<p>KEYCODE_SYM</p>
+<p>按键Symbol modifier</p>
+<p>KEYCODE_SYSRQ</p>
+<p>按键System Request / Print Screen</p>
+<p>KEYCODE_TV</p>
+<p>按键TV</p>
+<p>KEYCODE_TV_INPUT</p>
+<p>按键TV input</p>
+<p>KEYCODE_TV_POWER</p>
+<p>按键TV power</p>
+<p>KEYCODE_WINDOW</p>
+<p>按键Window</p>
+<p>KEYCODE_UNKNOWN</p>
+<p>未知按键</p>
+<p>=============================</p>
+<h2 id="adb如何连接mumu模拟器"><a href="#adb如何连接mumu模拟器" class="headerlink" title="adb如何连接mumu模拟器"></a>adb如何连接mumu模拟器</h2><p>【win版】<br>adb connect 127.0.0.1:7555<br>adb shell</p>
+<p>【mac版】</p>
+<p>adb kill-server &amp;&amp; adb server &amp;&amp; adb shell</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://blog.xiaban666.com/2019/08/20/adb命令模拟按键事件-KeyCode/" data-id="cjzjm9edd00001ks6otu31v3b" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2019/08/12/webrtc原理简述/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">webrtc原理简述</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 irobot<br>
+      Powered by <a href="http://blog.xiaban666.com/" target="_blank">irobot's</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/categories/Linux" class="mobile-nav-link">Linux</a>
+  
+    <a href="/categories/PHP" class="mobile-nav-link">PHP</a>
+  
+    <a href="/categories/Python" class="mobile-nav-link">Python</a>
+  
+    <a href="/categories/JS" class="mobile-nav-link">JS</a>
+  
+    <a href="/categories/IOS" class="mobile-nav-link">IOS</a>
+  
+    <a href="/categories/Android" class="mobile-nav-link">Android</a>
+  
+    <a href="/categories/Tools" class="mobile-nav-link">Tools</a>
+  
+    <a href="/categories/AI" class="mobile-nav-link">AI</a>
+  
+    <a href="/about" class="mobile-nav-link">About</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>
